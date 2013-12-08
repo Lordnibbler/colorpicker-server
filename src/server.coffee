@@ -15,7 +15,7 @@ class Server
     @_sio_configure_listener(@app)
 
   handler: (req, res) ->
-    fs.readFile __dirname + "../index.html", (err, data) ->
+    FS.readFile __dirname + "/../index.html", (err, data) ->
       if err
         res.writeHead 500
         return res.end("Error loading index.html")
