@@ -34,9 +34,18 @@ class Server
     # sio.configure =>
       # sio.set 'authorization', @_sio_authorize
 
-    # when our Client user runs `io.connect()`
+    # when Client user runs `io.connect()`
     sio.sockets.on 'connection', (socket) ->
       logger.info "socket IO server ready, connection callback"
+
+    # when Client is live-previewing color
+    sio.sockets.on 'colorChanged', (socket) ->
+      logger.info 'colorChanged event emitted'
+
+    # when Client picks a new color
+    sio.sockets.on 'colorSet', (socket) ->
+      logger.info 'colorSet event emitted'
+
 
   _sio_authorize: (handshake, callback) ->
     # if we want to do a global handshaking process
