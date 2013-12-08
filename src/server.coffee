@@ -38,14 +38,15 @@ class Server
     sio.sockets.on 'connection', (socket) ->
       logger.info "socket IO server ready, connection callback"
 
-    # when Client is live-previewing color
-    sio.sockets.on 'colorChanged', (socket) ->
-      logger.info 'colorChanged event emitted'
+      # when Client is live-previewing color
+      socket.on 'colorChanged', (data) ->
+        logger.info 'colorChanged event emitted'
+        logger.debug JSON.stringify(data, null, 2)
 
-    # when Client picks a new color
-    sio.sockets.on 'colorSet', (socket) ->
-      logger.info 'colorSet event emitted'
-
+      # when Client picks a new color
+      socket.on 'colorSet', (data) ->
+        logger.info 'colorSet event emitted'
+        logger.debug JSON.stringify(data, null, 2)
 
   _sio_authorize: (handshake, callback) ->
     # if we want to do a global handshaking process
