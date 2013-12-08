@@ -3,27 +3,24 @@
   "version": "0.0.0",
   "description": "A Node.js server for socket.io events.",
   "main": "index.js",
-
   "scripts": {
+    "start": "bin/colorpicker_server",
     "test": "mocha -w"
   },
-
   "repository": {
     "type": "git",
     "url": "git://github.com/Lordnibbler/colorpicker-server.git"
   },
-
   "author": "Ben Radler",
   "license": "BSD-2-Clause",
   "bugs": {
     "url": "https://github.com/Lordnibbler/colorpicker-server/issues"
   },
-
   "dependencies": {
     "socket.io": "~0.9.16",
-    "coffee-script": "~1.6.3"
+    "coffee-script": "~1.6.3",
+    "log": "~1.4.0"
   },
-
   "engines": {
     "node": "0.10.x"
   }
