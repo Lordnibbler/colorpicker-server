@@ -56,8 +56,8 @@ class Server
       flags: "w+"
     })
     ws.write(JSON.stringify(data, null, 2), (err, written) ->
-      # if err
-        # throw err
+      if err
+        throw err
       ws.end()
     )
 
