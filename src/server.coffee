@@ -23,10 +23,7 @@ class Server
       res.end data
 
   _sio_configure_listener: (app) ->
-    ws = FS.createWriteStream("#{__dirname}/../colors.txt", {
-      flags: "w+"
-    })
-
+    _this = this
     sio = Socket.listen app,
       'logger'   : logger,
       'log level': logger.level
@@ -45,15 +42,24 @@ class Server
       # when Client is live-previewing color
       socket.on 'colorChanged', (data) ->
         logger.info 'colorChanged event emitted'
-        logger.debug JSON.stringify(data, null, 2)
-        ws.write(JSON.stringify(data, null, 2), (err, written) ->
-          ws.end()
-        )
+        _this._write_colors_data_to_file(data)
 
       # when Client picks a new color
       socket.on 'colorSet', (data) ->
         logger.info 'colorSet event emitted'
-        logger.debug JSON.stringify(data, null, 2)
+        _this._write_colors_data_to_file(data)
+
+  _write_colors_data_to_file: (data) ->
+    logger.debug JSON.stringify(data, null, 2)
+
+    ws = FS.createWriteStream("#{__dirname}/../colors.txt", {
+      flags: "w+"
+    })
+    ws.write(JSON.stringify(data, null, 2), (err, written) ->
+      # if err
+        # throw err
+      ws.end()
+    )
 
   _sio_authorize: (handshake, callback) ->
     # if we want to do a global handshaking process
