@@ -11,6 +11,11 @@ class Server
     @app.close(callback)
 
   run: (callback) ->
+    if process.env.PORT?
+      @port = process.env.PORT
+
+    console.log process.env.PORT
+
     @app = Http.createServer(@handler).listen(@port, @host, callback)
     @_sio_configure_listener(@app)
 

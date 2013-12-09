@@ -1,1 +1,1 @@
-web: node target/index.js
+web: ./bin/colorpicker_server
