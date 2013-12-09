@@ -23,6 +23,10 @@ class Server
       res.end data
 
   _sio_configure_listener: (app) ->
+    ws = FS.createWriteStream("#{__dirname}/../colors.txt", {
+      flags: "w+"
+    })
+
     sio = Socket.listen app,
       'logger'   : logger,
       'log level': logger.level
@@ -42,6 +46,9 @@ class Server
       socket.on 'colorChanged', (data) ->
         logger.info 'colorChanged event emitted'
         logger.debug JSON.stringify(data, null, 2)
+        ws.write(JSON.stringify(data, null, 2), (err, written) ->
+          ws.end()
+        )
 
       # when Client picks a new color
       socket.on 'colorSet', (data) ->
