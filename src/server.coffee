@@ -55,7 +55,7 @@ class Server
     ws = FS.createWriteStream("#{__dirname}/../colors.txt", {
       flags: "w+"
     })
-    ws.write(JSON.stringify(data, null, 2), (err, written) ->
+    ws.write(data.color, (err, written) ->
       if err
         throw err
       ws.end()
