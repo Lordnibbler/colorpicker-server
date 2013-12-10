@@ -26,7 +26,6 @@ class Server
       res.end data
 
   _sio_configure_listener: (app) ->
-    _this = this
     sio = Socket.listen app,
       'logger'   : logger,
       'log level': logger.level
@@ -38,19 +37,16 @@ class Server
     # sio.configure =>
       # sio.set 'authorization', @_sio_authorize
 
+    save_colors = (data) =>
+      @_write_colors_data_to_file(data)
+
     # when Client user runs `io.connect()`
     sio.sockets.on 'connection', (socket) ->
-      logger.info "socket IO server ready, connection callback"
-
       # when Client is live-previewing color
-      socket.on 'colorChanged', (data) ->
-        logger.info 'colorChanged event emitted'
-        _this._write_colors_data_to_file(data)
+      socket.on 'colorChanged', save_colors
 
       # when Client picks a new color
-      socket.on 'colorSet', (data) ->
-        logger.info 'colorSet event emitted'
-        _this._write_colors_data_to_file(data)
+      socket.on 'colorSet', save_colors
 
   _write_colors_data_to_file: (data) ->
     logger.debug JSON.stringify(data, null, 2)
