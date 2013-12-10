@@ -19,7 +19,8 @@
   "dependencies": {
     "socket.io": "~0.9.16",
     "coffee-script": "~1.6.3",
-    "log": "~1.4.0"
+    "log": "~1.4.0",
+    "express": "~3.4.6"
   },
   "engines": {
     "node": "0.10.x",

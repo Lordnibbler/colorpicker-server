@@ -1,29 +1,25 @@
-Http   = require 'http'
-Socket = require 'socket.io'
-logger = require './logger'
-FS     = require 'fs'
+Http    = require 'http'
+Socket  = require 'socket.io'
+logger  = require './logger'
+FS      = require 'fs'
+express = require 'express'
+path    = require 'path'
 
 class Server
   constructor: (@host, @port, @options = {}) ->
     @url = "https://#{ @host }:#{ @port }/"
+    @app = express()
+    @app.use express.static(__dirname + "/../public")
 
   close: (callback) ->
-    @app.close(callback)
+    @httpServer.close(callback)
 
   run: (callback) ->
     if process.env.PORT?
       @port = process.env.PORT
 
-    @app = Http.createServer(@handler).listen(@port, @host, callback)
-    @_sio_configure_listener(@app)
-
-  handler: (req, res) ->
-    FS.readFile __dirname + "/../index.html", (err, data) ->
-      if err
-        res.writeHead 500
-        return res.end("Error loading index.html")
-      res.writeHead 200
-      res.end data
+    @httpServer = Http.createServer(@app).listen(@port, @host, callback);
+    @_sio_configure_listener(@httpServer)
 
   _sio_configure_listener: (app) ->
     sio = Socket.listen app,
