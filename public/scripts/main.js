@@ -5,8 +5,12 @@ $(function() {
   window.dapp = new app.SwatchAppView();
   Backbone.history.start();
 
-  // start socket.io
+  // PRODUCTION:  start socket.io on our heroku server
   var socket = io.connect("http://colorpicker.herokuapp.com");
-  // var socket = io.connect("http://192.168.2.140:1337");
+
+  // DEVELOPMENT: start socket.io locally
+  // var socket = io.connect("http://127.0.0.1:1337");
+
+  // save our connected socket inside our backbone `.dapp`
   window.dapp.socket = socket;
 });
