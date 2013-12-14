@@ -1,10 +1,11 @@
-Http    = require 'http'
-Socket  = require 'socket.io'
-logger  = require './logger'
-FS      = require 'fs'
-express = require 'express'
-path    = require 'path'
-clients = []
+Http      = require 'http'
+Socket    = require 'socket.io'
+logger    = require './logger'
+FS        = require 'fs'
+express   = require 'express'
+path      = require 'path'
+beagles   = []
+backbones = []
 
 class Server
   constructor: (@host, @port, @options = {}) ->
@@ -29,17 +30,43 @@ class Server
 
     logger.info "Configuring socket.io listener"
 
-    # when Client user runs `io.connect()`
-    sio.sockets.on 'connection', (socket) ->
-      logger.info "CLIENT CONNECTED"
-      clients.push socket
+    # when backbone.js Client runs `io.connect('http://localhost:1337/backbone')`
+    sio.of('/backbone').on('connection', (socket) ->
+      logger.info "/backbone CLIENT CONNECTED"
+      backbones.push socket
+
+      ######################################
+      # colorChanged and colorSet both
+      # writeColorDataToFile in our
+      # beaglebone client node app.
+      # backbone.js takes care of sending
+      # all 4x 1 color, or 1x 4 colors
+      ######################################
 
       # when Client is live-previewing color
       socket.on 'colorChanged', (data) ->
-        c.emit('colorChangedBeagleBone', { color: data.color }) for c in clients
+        # send colorChanged data to all beagles
+        # logger.info "emitting colorChanged to #{beagles.length} beagles"
+        beagle.emit('colorChanged', { color: data.color }) for beagle in beagles # where beagle is connected
 
       # when Client picks a new color
       socket.on 'colorSet', (data) ->
-        c.emit('colorChangedBeagleBone', { color: data.color }) for c in clients
+        # send colorSet data to all beagles
+        beagle.emit('colorSet', { color: data.color }) for beagle in beagles
+    )
+
+    # when beaglebone Client runs `io.connect('http://localhost:1337/beaglebone')`
+    # push them into the beagles array
+    sio.of('/beaglebone').on('connection', (socket) ->
+      logger.info "/beaglebone CLIENT CONNECTED"
+      beagles.push socket
+
+      # remove beaglebone client from beagles array
+      # if disconnection event occurs
+      socket.on('disconnect', (socket) ->
+        logger.info "/beaglebone CLIENT DISCONNECTED"
+        beagles.pop socket
+      )
+    )
 
 module.exports = Server
