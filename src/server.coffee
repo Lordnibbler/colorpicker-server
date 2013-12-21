@@ -17,8 +17,7 @@ class Server
     @httpServer.close(callback)
 
   run: (callback) ->
-    if process.env.PORT?
-      @port = process.env.PORT
+    @port = process.env.PORT if process.env.PORT?
 
     logger.info "starting colorpicker server at #{ @host }:#{ @port }"
     @httpServer = Http.createServer(@app).listen(@port, @host, callback);
@@ -28,6 +27,9 @@ class Server
     sio = Socket.listen app,
       'logger'   : logger,
       'log level': logger.level
+
+    # sio.configure ->
+    #   sio.set "transports", ["xhr-polling", "jsonp-polling", "htmlfile"]
 
     logger.info "Configuring socket.io listener"
 
