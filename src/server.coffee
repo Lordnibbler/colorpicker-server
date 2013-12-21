@@ -20,6 +20,7 @@ class Server
     if process.env.PORT?
       @port = process.env.PORT
 
+    logger.info "starting colorpicker server at #{ @host }:#{ @port }"
     @httpServer = Http.createServer(@app).listen(@port, @host, callback);
     @_sio_configure_listener(@httpServer)
 
