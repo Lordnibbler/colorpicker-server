@@ -49,8 +49,8 @@ $(function() {
      */
     colorSet: function() {
       // send our Node.js app the current live color data
-      if(window.dapp.socket) {
-        window.dapp.socket.emit('colorSet', {
+      if(window.socket) {
+        window.socket.emit('colorSet', {
           color: this.colorsToRgbString()
         });
       }

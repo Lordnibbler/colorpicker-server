@@ -148,7 +148,7 @@ $(function() {
 
     colorChanged: function(color) {
       // send our Node.js app the current live color data
-      window.dapp.socket.emit('colorChanged', {
+      window.socket.emit('colorChanged', {
         color: this.colorToRgbString(color)
       });
     },
