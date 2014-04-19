@@ -34,7 +34,7 @@ $(function() {
         this.$("#constraints").mousemove(_.bind(this.mousemove, this))
           .scroll(_.bind(this.scroll, this))
           .click(_.bind(this.grabColor, this))
-          .scrollTop(500);
+          .scrollTop(2000);
       }
 
       $(window).resize(_.bind(this.layout, this));
