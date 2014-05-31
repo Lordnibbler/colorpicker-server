@@ -14,7 +14,7 @@ $(function() {
     },
 
     initialize: function() {
-      app.Colors.on("add",    this.limitCollectionSize, this);
+      // app.Colors.on("add",    this.limitCollectionSize, this);
       app.Colors.on("add",    this.addOne, this);
       app.Colors.on("reset",  this.addAll, this);
       app.Colors.on("remove", this.layout, this);
@@ -119,11 +119,10 @@ $(function() {
      * Sets all lights to same color for live-preview
      */
     colorToRgbString: function(color) {
-      var rgbColors = "";
-      rgbColors += color.rgb().r + ',' + color.rgb().g + ',' + color.rgb().b + ',' + color.rgb().a + '\n';
+      var rgbColors = color.rgb().r + ',' + color.rgb().g + ',' + color.rgb().b + ',' + color.rgb().a + '\n';
 
       // TODO: make this a prototype function called .repeat()
-      return rgbColors + rgbColors + rgbColors + rgbColors;
+      return rgbColors + rgbColors + rgbColors + rgbColors + rgbColors;
     },
 
     move: function(px, py) {
