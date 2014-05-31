@@ -14,7 +14,6 @@ $(function() {
     },
 
     initialize: function() {
-      // app.Colors.on("add",    this.limitCollectionSize, this);
       app.Colors.on("add",    this.addOne, this);
       app.Colors.on("reset",  this.addAll, this);
       app.Colors.on("remove", this.layout, this);
@@ -89,20 +88,6 @@ $(function() {
       }
     },
 
-    limitCollectionSize: function(size){
-      if(app.Colors.length > (size-1)) {
-        console.log("too big");
-        app.Colors = app.Colors.slice(-size);
-      }
-    },
-
-    // limitCollectionSize: function(size) {
-    //   console.log(app.Colors.length);
-    //   if (app.Colors.length > size-1) {
-    //     app.Colors = app.Colors.first(size-1);
-    //   }
-    // },
-
     toggleheader: function(event) {
       this.$el.toggleClass("show-header");
     },
@@ -111,7 +96,6 @@ $(function() {
       app.Colors.add({
         color: new Color(this.editModel.color().rgb())
       });
-      // this.limitCollectionSize(4);
     },
 
     /**
