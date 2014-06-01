@@ -10,7 +10,8 @@ $(function() {
     startSaturation: 0,
 
     events: {
-      "click #header-tab": "toggleheader"
+      "click #header-tab": "toggleheader",
+      "click #gradient": "generateGradient"
     },
 
     initialize: function() {
@@ -174,6 +175,15 @@ $(function() {
         this.editModel.color().saturation(offset);
         this.editModel.trigger("change");
       }
+    },
+
+    /**
+     * Delegate to the router to generate a gradient
+     * based on the first Color in our app.Colors collection
+     */
+    generateGradient: function(event) {
+      app.Router.setGradientColors(app.Colors.first().hexCss().substring(1));
+      this.toggleheader();
     }
 
   });
