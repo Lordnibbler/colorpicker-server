@@ -6,6 +6,9 @@ $(function() {
   app.ColorList = Backbone.Collection.extend({
     model: app.Color,
 
+    /**
+     * add a new color object to the Colors collection
+     */
     addFromHex: function(hex) {
       var c = Color(hex);
       this.add({color: c});

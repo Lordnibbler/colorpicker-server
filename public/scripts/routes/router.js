@@ -13,6 +13,11 @@ $(function() {
       app.Colors.on("remove", this.pushColorState, this);
     },
 
+    /**
+     * builds a collection of Color models
+     * based on the params in the url
+     * ie. #00000, ff0000, ccff000
+     */
     setColors: function(param) {
       var colors = param.split(",");
 
