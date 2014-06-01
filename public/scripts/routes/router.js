@@ -51,21 +51,11 @@ $(function() {
       // send our Node.js app the current live color data
       if(window.socket) {
         window.socket.emit('colorSet', {
-          color: this.colorsToRgbString()
+          color: app.Colors.toRgbString()
         });
       }
     },
 
-    /**
-     * Converts colors to Halo's `r,g,b,a\n` format
-     */
-    colorsToRgbString: function() {
-      var rgbColors = "";
-      app.Colors.each(function(color){
-        rgbColors += color.rgb().r + ',' + color.rgb().g + ',' + color.rgb().b + ',' + color.rgb().a + '\n';
-      });
-      return rgbColors;
-    }
   });
 
   app.Router = new ColorRouter();
