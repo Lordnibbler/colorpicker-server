@@ -10,7 +10,7 @@ $(function() {
     startSaturation: 0,
 
     events: {
-      // "click #header-tab": "toggleheader"
+      "click #header-tab": "toggleheader"
     },
 
     initialize: function() {
