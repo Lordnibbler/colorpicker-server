@@ -38,6 +38,10 @@ $(function() {
           b: String("000" + parseInt(result[3], 16)).slice(-3),
           a: "000"
       } : null;
+    },
+
+    bitwiseComplement: function() {
+      return (0xffffff ^ '0x' + this.hexCss).toString(16);
     }
   });
 
