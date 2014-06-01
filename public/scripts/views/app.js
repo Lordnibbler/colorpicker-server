@@ -208,13 +208,17 @@ $(function() {
      * based on the first Color in our app.Colors collection
      */
     generateGradient: function(event) {
-      app.Router.setGradientColors(app.Colors.first().hexCss().substring(1));
-      this.toggleheader();
+      if (app.Colors.length > 0) {
+        app.Router.setGradientColors(app.Colors.first().hexCss().substring(1));
+        this.toggleheader();
+      }
     },
 
     clearColors: function(event) {
-      app.Router.clearColors();
-      this.toggleheader();
+      if (app.Colors.length > 0) {
+        app.Router.clearColors();
+        this.toggleheader();
+      }
     }
 
   });
