@@ -38,6 +38,7 @@ $(function() {
           .scrollTop(2000); // set saturation full by default
       }
 
+      // reinvoke layout method when window is resized
       $(window).resize(_.bind(this.layout, this));
     },
 
@@ -105,7 +106,11 @@ $(function() {
      * Sets all lights to same color for live-preview
      */
     colorToRgbString: function(color) {
-      var rgbColors = color.rgb().r + ',' + color.rgb().g + ',' + color.rgb().b + ',' + color.rgb().a + '\n';
+      var rgbColors =
+        color.rgb().r + ',' +
+        color.rgb().g + ',' +
+        color.rgb().b + ',' +
+        color.rgb().a + '\n';
 
       // TODO: make this a prototype function called .repeat()
       return rgbColors + rgbColors + rgbColors + rgbColors + rgbColors;
@@ -131,8 +136,10 @@ $(function() {
       this.colorChanged(this.editModel);
     },
 
+    /**
+     * send our Node.js app the current live color data
+     */
     colorChanged: function(color) {
-      // send our Node.js app the current live color data
       window.socket.emit('colorChanged', {
         color: this.colorToRgbString(color)
       });
@@ -159,6 +166,9 @@ $(function() {
       this.isTouchMoved = true;
     },
 
+    /**
+     * adds color to app.Colors collection if touch event ends
+     */
     touchend: function(event) {
       if(! this.isTouchMoved) {
         this.grabColor();
