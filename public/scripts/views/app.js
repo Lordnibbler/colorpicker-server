@@ -7,7 +7,7 @@ $(function() {
     el: "#appframe",
 
     isTouchMove: false,
-    startSaturation: 0,
+    startSaturation: 100,
 
     events: {
       "click #header-tab": "toggleheader",
@@ -19,8 +19,11 @@ $(function() {
       app.Colors.on("reset",  this.addAll, this);
       app.Colors.on("remove", this.layout, this);
 
-      this.editModel = new app.Color({h: 180, s: 50, l: 50});
+      this.editModel = new app.Color({h: 180, s: 100, l: 50});
       this.editModel.on("change", this.render, this);
+
+      // ensure touch-enabled devices have saturation === 100 by default
+      this.editModel.color().saturation(100);
 
       if('ontouchstart' in document.documentElement) {
         // if we're on a touch-enabled device
@@ -42,6 +45,9 @@ $(function() {
       $(window).resize(_.bind(this.layout, this));
     },
 
+    /**
+     * update background CSS and #edit DOM text to currently selected color in this.editModel
+     */
     render: function() {
       this.$("#edit").css({
         "background": this.editModel.hslCss()
