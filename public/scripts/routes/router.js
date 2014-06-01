@@ -103,7 +103,6 @@ $(function() {
      * Sends all current colors, in Halo `r,g,b,a\n` format
      */
     colorSet: function(colors) {
-
       if(window.socket) {
         var color = colors;
         if(colors === undefined) {
@@ -117,7 +116,7 @@ $(function() {
     },
 
     /**
-     * clears all colors and removes them from URL
+     * clears all colors and removes them from URL; issues a solid black to arduino
      */
     clearColors: function(event) {
       if (app.Colors.length > 0) {
