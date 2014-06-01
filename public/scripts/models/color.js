@@ -41,10 +41,11 @@ $(function() {
     },
 
     /**
-     * generates the hex bitwise complementary color to this color
+     * generates the 6-char hex bitwise complementary color to this color,
+     * padding with 0 if necessary
      */
     bitwiseComplement: function() {
-      return ('0xffffff' ^ '0x' + this.hexCss().substring(1)).toString(16);
+      return ('000000' + (('0xffffff' ^ '0x' + this.hexCss().substring(1)).toString(16))).slice(-6);
     }
   });
 
