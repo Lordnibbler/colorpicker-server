@@ -40,8 +40,11 @@ $(function() {
       } : null;
     },
 
+    /**
+     * generates the hex bitwise complementary color to this color
+     */
     bitwiseComplement: function() {
-      return (0xffffff ^ '0x' + this.hexCss).toString(16);
+      return ('0xffffff' ^ '0x' + this.hexCss().substring(1)).toString(16);
     }
   });
 

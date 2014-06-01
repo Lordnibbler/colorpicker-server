@@ -37,7 +37,7 @@ $(function() {
      * generates and sets a gradient as the current colors
      */
     setGradientColors: function(color) {
-      if(color.length === 6) {
+      if(color.length === 6 && app.Colors.length > 0) {
         // generate gradient based on `color`
         var modifier = (this.shadeColor(color, 20) == color ? -20 : 20);
         var array = [color];
@@ -73,6 +73,13 @@ $(function() {
       var BB = ((B.toString(16).length === 1) ? '0' + B.toString(16) : B.toString(16));
 
       return RR + GG + BB;
+    },
+
+    /**
+     * picks first color in app.Colors and generates a ramp between them
+     */
+    setColorRampColors: function() {
+      app.Colors.generateColorRamp(5);
     },
 
     /**
@@ -113,9 +120,11 @@ $(function() {
      * clears all colors and removes them from URL
      */
     clearColors: function(event) {
-      this.setColors('');
-      this.colorSet('000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000');
-      this.navigate('', {trigger: false, replace: true});
+      if (app.Colors.length > 0) {
+        this.setColors('');
+        this.colorSet('000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000');
+        this.navigate('', {trigger: false, replace: true});
+      }
     }
 
   });
