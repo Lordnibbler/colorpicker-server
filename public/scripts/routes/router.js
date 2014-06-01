@@ -93,13 +93,18 @@ $(function() {
 
     /**
      * Emits a `colorSet` event to our Node.js server
-     * Sends all 4 current colors, in Halo `r,g,b,a\n` format
+     * Sends all current colors, in Halo `r,g,b,a\n` format
      */
-    colorSet: function() {
-      // send our Node.js app the current live color data
+    colorSet: function(colors) {
+
       if(window.socket) {
+        var color = colors;
+        if(colors === undefined) {
+          color = app.Colors.toRgbString();
+        }
+
         window.socket.emit('colorSet', {
-          color: app.Colors.toRgbString()
+          color: color
         });
       }
     },
@@ -109,6 +114,7 @@ $(function() {
      */
     clearColors: function(event) {
       this.setColors('');
+      this.colorSet('000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000');
       this.navigate('', {trigger: false, replace: true});
     }
 
