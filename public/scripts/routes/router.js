@@ -104,6 +104,14 @@ $(function() {
       }
     },
 
+    /**
+     * clears all colors and removes them from URL
+     */
+    clearColors: function(event) {
+      this.setColors('');
+      this.navigate('', {trigger: false, replace: true});
+    }
+
   });
 
   app.Router = new ColorRouter();

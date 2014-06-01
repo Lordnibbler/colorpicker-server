@@ -11,7 +11,8 @@ $(function() {
 
     events: {
       "click #header-tab": "toggleheader",
-      "click #gradient": "generateGradient"
+      "click #gradient": "generateGradient",
+      "click #clear": "clearColors"
     },
 
     initialize: function() {
@@ -208,6 +209,11 @@ $(function() {
      */
     generateGradient: function(event) {
       app.Router.setGradientColors(app.Colors.first().hexCss().substring(1));
+      this.toggleheader();
+    },
+
+    clearColors: function(event) {
+      app.Router.clearColors();
       this.toggleheader();
     }
 
