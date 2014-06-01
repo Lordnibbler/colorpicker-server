@@ -57,7 +57,7 @@ $(function() {
         $(el).css({
           left: i * sliceSize,
           width: sliceSize,
-        })
+        });
       });
 
       this.$("#edit").css({
@@ -85,7 +85,7 @@ $(function() {
       this.$("#colors li:not(#edit)").remove();
       app.Colors.each(this.addOne, this);
 
-      if(app.Colors.length == 0) {
+      if(app.Colors.length === 0) {
         this.layout();
       }
     },
