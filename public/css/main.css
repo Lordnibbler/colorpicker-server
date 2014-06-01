@@ -559,10 +559,10 @@ a {
   transition: transform 0.2s ease;
 }
 #appframe.show-header {
-  -webkit-transform: translate3d(0, 500px, 0);
-  -moz-transform: translate3d(0, 500px, 0);
-  -o-transform: translate3d(0, 500px, 0);
-  transform: translate3d(0, 500px, 0);
+  -webkit-transform: translate3d(0, 325px, 0);
+  -moz-transform:    translate3d(0, 325px, 0);
+  -o-transform:      translate3d(0, 325px, 0);
+  transform:         translate3d(0, 325px, 0);
 }
 #header {
   *zoom: 1;
