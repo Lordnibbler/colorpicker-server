@@ -23,18 +23,19 @@ $(function() {
       this.editModel.on("change", this.render, this);
 
       if('ontouchstart' in document.documentElement) {
+        // if we're on a touch-enabled device
         this.$("#edit")
           .bind("touchstart",    _.bind(this.touchstart,    this))
           .bind("touchmove",     _.bind(this.touchmove,     this))
           .bind("touchend",      _.bind(this.touchend,      this))
           .bind("gesturestart",  _.bind(this.gesturestart,  this))
           .bind("gesturechange", _.bind(this.gesturechange, this));
-
       } else {
+        // no touch functionality
         this.$("#constraints").mousemove(_.bind(this.mousemove, this))
           .scroll(_.bind(this.scroll, this))
           .click(_.bind(this.grabColor, this))
-          .scrollTop(2000);
+          .scrollTop(2000); // set saturation full by default
       }
 
       $(window).resize(_.bind(this.layout, this));
@@ -164,11 +165,19 @@ $(function() {
       }
     },
 
+    /**
+     * sets the startSaturation before our gestureChange
+     * event is fired to alter the saturation of colorpicker
+     */
     gesturestart: function(event) {
       event.preventDefault();
       this.startSaturation = this.editModel.get("s");
     },
 
+    /**
+     * updates the colorpicker's saturation based on
+     * the touch pinch-to-zoom gesture's scale attr
+     */
     gesturechange: function(event) {
       if(event.originalEvent.scale) {
         var offset = Math.max(0, Math.min(100, this.startSaturation * event.originalEvent.scale));
