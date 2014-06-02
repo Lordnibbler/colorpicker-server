@@ -12,6 +12,7 @@ class Server
     @url = "https://#{ @host }:#{ @port }/"
     @app = express()
     @app.use express.static(__dirname + "/../public")
+    @app.use express.basicAuth(process.env.USER, process.env.PASSWORD) if process.env.NODE_ENV == 'production'
 
   close: (callback) ->
     @httpServer.close(callback)
