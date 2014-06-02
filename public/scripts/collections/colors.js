@@ -31,7 +31,10 @@ $(function() {
      */
     generateComplementaryColors: function(length) {
       // only works if we have 1 color in the collection
-      if (this.length === 1) {
+      if (this.length > 0) {
+        // reset to just the first color
+        this.reset(this.first());
+
         // build a rainbow spectrum based on the bitwise complement to the color in collection
         var rainbow = new Rainbow();
         rainbow.setSpectrum(this.first().hexCss(), this.first().bitwiseComplement());
