@@ -13,7 +13,7 @@ $(function() {
       "click #header-tab": "toggleheader",
       "click #gradient": "generateGradient",
       "click #clear": "clearColors",
-      "click #complement": "generateColorRamp"
+      "click #complement": "generateComplementaryColors"
     },
 
     initialize: function() {
@@ -221,8 +221,8 @@ $(function() {
     /**
      * Generates a bitwise complementary color and a ramp between them
      */
-    generateColorRamp: function(event) {
-      app.Router.setColorRampColors();
+    generateComplementaryColors: function(event) {
+      app.Router.setComplementaryColors();
       this.toggleheader();
     }
 

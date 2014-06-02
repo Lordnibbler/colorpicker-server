@@ -78,8 +78,8 @@ $(function() {
     /**
      * picks first color in app.Colors and generates a ramp between them
      */
-    setColorRampColors: function() {
-      app.Colors.generateColorRamp(5);
+    setComplementaryColors: function() {
+      app.Colors.generateComplementaryColors(5);
     },
 
     /**

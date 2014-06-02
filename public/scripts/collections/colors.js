@@ -29,7 +29,7 @@ $(function() {
      * generates a rainbow spectrum based on the bitwise complement of a single color
      * then adds them to the colors collection
      */
-    generateColorRamp: function(length) {
+    generateComplementaryColors: function(length) {
       // only works if we have 1 color in the collection
       if (this.length === 1) {
         // build a rainbow spectrum based on the bitwise complement to the color in collection
