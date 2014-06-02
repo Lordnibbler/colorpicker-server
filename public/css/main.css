@@ -625,6 +625,12 @@ a {
 #header #instructions p {
   margin: 0;
 }
+#header .panel button {
+  display: block;
+  width: 100%;
+  margin: 10px auto;
+  height: 50px;
+}
 #header-tab {
   position: absolute;
   top: 100%;

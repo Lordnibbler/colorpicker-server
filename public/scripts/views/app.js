@@ -12,7 +12,8 @@ $(function() {
     events: {
       "click #header-tab": "toggleheader",
       "click #gradient": "generateGradient",
-      "click #clear": "clearColors"
+      "click #clear": "clearColors",
+      "click #complement": "generateComplementaryColors"
     },
 
     initialize: function() {
@@ -208,17 +209,21 @@ $(function() {
      * based on the first Color in our app.Colors collection
      */
     generateGradient: function(event) {
-      if (app.Colors.length > 0) {
-        app.Router.setGradientColors(app.Colors.first().hexCss().substring(1));
-        this.toggleheader();
-      }
+      app.Router.setGradientColors(app.Colors.first().hexCss().substring(1));
+      this.toggleheader();
     },
 
     clearColors: function(event) {
-      if (app.Colors.length > 0) {
-        app.Router.clearColors();
-        this.toggleheader();
-      }
+      app.Router.clearColors();
+      this.toggleheader();
+    },
+
+    /**
+     * Generates a bitwise complementary color and a ramp between them
+     */
+    generateComplementaryColors: function(event) {
+      app.Router.setComplementaryColors();
+      this.toggleheader();
     }
 
   });

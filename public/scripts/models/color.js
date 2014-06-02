@@ -38,6 +38,14 @@ $(function() {
           b: String("000" + parseInt(result[3], 16)).slice(-3),
           a: "000"
       } : null;
+    },
+
+    /**
+     * generates the 6-char hex bitwise complementary color to this color,
+     * padding with 0 if necessary
+     */
+    bitwiseComplement: function() {
+      return ('000000' + (('0xffffff' ^ '0x' + this.hexCss().substring(1)).toString(16))).slice(-6);
     }
   });
 

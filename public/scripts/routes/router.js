@@ -37,7 +37,7 @@ $(function() {
      * generates and sets a gradient as the current colors
      */
     setGradientColors: function(color) {
-      if(color.length === 6) {
+      if(color.length === 6 && app.Colors.length > 0) {
         // generate gradient based on `color`
         var modifier = (this.shadeColor(color, 20) == color ? -20 : 20);
         var array = [color];
@@ -76,6 +76,13 @@ $(function() {
     },
 
     /**
+     * picks first color in app.Colors and generates a ramp between them
+     */
+    setComplementaryColors: function() {
+      app.Colors.generateComplementaryColors(5);
+    },
+
+    /**
      * Pushes the current Colors state to the path
      */
     pushColorState: function() {
@@ -96,7 +103,6 @@ $(function() {
      * Sends all current colors, in Halo `r,g,b,a\n` format
      */
     colorSet: function(colors) {
-
       if(window.socket) {
         var color = colors;
         if(colors === undefined) {
@@ -110,12 +116,14 @@ $(function() {
     },
 
     /**
-     * clears all colors and removes them from URL
+     * clears all colors and removes them from URL; issues a solid black to arduino
      */
     clearColors: function(event) {
-      this.setColors('');
-      this.colorSet('000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000');
-      this.navigate('', {trigger: false, replace: true});
+      if (app.Colors.length > 0) {
+        this.setColors('');
+        this.colorSet('000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000');
+        this.navigate('', {trigger: false, replace: true});
+      }
     }
 
   });
