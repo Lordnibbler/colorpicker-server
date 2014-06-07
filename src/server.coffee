@@ -15,8 +15,9 @@ class Server
     @app = express()
 
     # use basic HTTP auth and serve the /public dir as /
-    auth = express.basicAuth(process.env.USERNAME || 'foo', process.env.PASSWORD || 'bar')
-    @app.use('/', auth)
+    if process.env.NODE_ENV == 'production'
+      auth = express.basicAuth(process.env.USERNAME, process.env.PASSWORD)
+      @app.use('/', auth)
     @app.use('/', express.static(__dirname + '/../public'))
 
   # stop the server, firing callback upon success
