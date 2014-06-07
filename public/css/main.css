@@ -628,8 +628,8 @@ a {
 #header .panel button {
   display: block;
   width: 100%;
-  margin: 10px auto;
-  height: 50px;
+  margin: 8px auto;
+  height: 35px;
 }
 #header-tab {
   position: absolute;

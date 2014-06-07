@@ -130,6 +130,14 @@ $(function() {
         this.colorSet('000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000');
         this.navigate('', {trigger: false, replace: true});
       }
+    },
+
+    /**
+     * Sets all white colors
+     */
+    setWhiteColors: function(event) {
+      this.setColors('FFFFFF,FFFFFF,FFFFFF,FFFFFF,FFFFFF');
+      this.colorSet('255,255,255,255\n255,255,255,255\n255,255,255,255\n255,255,255,255\n255,255,255,255');
     }
 
   });

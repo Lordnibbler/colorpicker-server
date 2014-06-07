@@ -14,7 +14,8 @@ $(function() {
       "click #gradient": "generateGradient",
       "click #clear": "clearColors",
       "click #complement": "generateComplementaryColors",
-      "click #huecomplement": "generateHueShiftComplementaryColors"
+      "click #huecomplement": "generateHueShiftComplementaryColors",
+      "click #white": "generateWhiteColors"
     },
 
     initialize: function() {
@@ -232,6 +233,14 @@ $(function() {
      */
     generateHueShiftComplementaryColors: function(event) {
       app.Router.setHueShiftComplementaryColors();
+      this.toggleheader();
+    },
+
+    /**
+     * Generates all white colors
+     */
+    generateWhiteColors: function(event) {
+      app.Router.setWhiteColors();
       this.toggleheader();
     }
   });
