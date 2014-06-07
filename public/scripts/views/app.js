@@ -234,8 +234,5 @@ $(function() {
       app.Router.setHueShiftComplementaryColors();
       this.toggleheader();
     }
-
-
   });
-
 });

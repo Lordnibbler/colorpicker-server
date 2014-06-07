@@ -60,34 +60,29 @@ $(function() {
         // generate and add the bitwise complement to the collection
         var color = this.first();
         var bitwiseColor = Color('#' + color.bitwiseComplement());
-        console.log(color.color().hsl());
-        console.log(bitwiseColor.hsl());
 
         // calculate the amount of hue to add on each iteration
         // by getting the difference of hue between complementary
         // colors divided by the number of steps we want it to take
         var hAmountToAdd = Math.abs(color.color().hsl().h - bitwiseColor.hsl().h) / (length-1);
+        var lAmountToAdd = Math.abs(color.color().hsl().l - bitwiseColor.hsl().l) / (length-1);
 
         // if we should be shrinking hue, negate hAmountToAdd
         if (color.color().hsl().h > bitwiseColor.hsl().h) hAmountToAdd = -hAmountToAdd;
+        if (color.color().hsl().l > bitwiseColor.hsl().l) lAmountToAdd = -lAmountToAdd;
 
         // for length of the ramp -1, add the next color at the respective index i
         for (var i = 1; i < length; i++) {
-          console.log("adding " + (color.color().hsl().h + (hAmountToAdd * i)))
-
           this.add({
             color: Color({
               h: color.color().hsl().h + (hAmountToAdd * i),
-              s: color.color().hsl().s,
+              s: color.color().hsl().s + (lAmountToAdd * i),
               l: color.color().hsl().l
             })
           });
         }
-        console.log(this.first().color().hsl());
-        console.log(this.last().color().hsl());
       }
     }
-
   });
 
   // Global color collection
