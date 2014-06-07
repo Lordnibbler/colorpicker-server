@@ -1,1 +1,1 @@
-web: ./bin/colorpicker_server
+web: coffee app.coffee

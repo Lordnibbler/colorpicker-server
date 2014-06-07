@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "A Node.js server for socket.io events.",
   "scripts": {
-    "start": "bin/colorpicker_server",
+    "start": "nodemon app.coffee",
     "test": "mocha -w"
   },
   "repository": {

@@ -8,11 +8,19 @@ beagles   = []
 backbones = []
 
 class Server
+  # set up the express application, including routes and middlewares
+  #
   constructor: (@host, @port, @options = {}) ->
     @url = "https://#{ @host }:#{ @port }/"
     @app = express()
-    @app.use express.static(__dirname + "/../public")
 
+    # use basic HTTP auth and serve the /public dir as /
+    auth = express.basicAuth(process.env.USERNAME || 'foo', process.env.PASSWORD || 'bar')
+    @app.use('/', auth)
+    @app.use('/', express.static(__dirname + '/../public'))
+
+  # stop the server, firing callback upon success
+  #
   close: (callback) ->
     @httpServer.close(callback)
 
@@ -23,6 +31,12 @@ class Server
     @httpServer = Http.createServer(@app).listen(@port, @host, callback);
     @_sio_configure_listener(@httpServer)
 
+  # sets up the socket.io sockets and namespaces
+  # @note
+  #   colorChanged and colorSet both writeColorDataToFile in our
+  #   beaglebone client node app. backbone.js takes care of sending
+  #   5x1 color, or 5 individual colors
+  #
   _sio_configure_listener: (app) ->
     sio = Socket.listen app,
       'logger'   : logger,
@@ -37,14 +51,6 @@ class Server
     sio.of('/backbone').on('connection', (socket) ->
       logger.info "/backbone CLIENT CONNECTED"
       backbones.push socket
-
-      ######################################
-      # colorChanged and colorSet both
-      # writeColorDataToFile in our
-      # beaglebone client node app.
-      # backbone.js takes care of sending
-      # all 4x 1 color, or 1x 4 colors
-      ######################################
 
       # when Client is live-previewing color
       socket.on 'colorChanged', (data) ->
