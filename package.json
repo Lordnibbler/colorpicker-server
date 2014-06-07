@@ -23,6 +23,7 @@
     "log": "~1.4.0",
     "express": "~3.4.6",
     "express3-handlebars": "0.4.x",
+    "redis": "*",
     "bower": "*",
     "grunt-sass": "~0.14.0"
   },
