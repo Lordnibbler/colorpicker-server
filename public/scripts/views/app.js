@@ -13,7 +13,8 @@ $(function() {
       "click #header-tab": "toggleheader",
       "click #gradient": "generateGradient",
       "click #clear": "clearColors",
-      "click #complement": "generateComplementaryColors"
+      "click #complement": "generateComplementaryColors",
+      "click #huecomplement": "generateHueShiftComplementaryColors"
     },
 
     initialize: function() {
@@ -224,7 +225,16 @@ $(function() {
     generateComplementaryColors: function(event) {
       app.Router.setComplementaryColors();
       this.toggleheader();
+    },
+
+    /**
+     * Generates a bitwise complementary color and a hue shift between them
+     */
+    generateHueShiftComplementaryColors: function(event) {
+      app.Router.setHueShiftComplementaryColors();
+      this.toggleheader();
     }
+
 
   });
 

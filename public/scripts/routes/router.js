@@ -5,7 +5,6 @@ $(function() {
 
   var ColorRouter = Backbone.Router.extend({
     routes: {
-      "gradient/:color": 'setGradientColors',
       "*colors": "setColors"
     },
 
@@ -80,6 +79,13 @@ $(function() {
      */
     setComplementaryColors: function() {
       app.Colors.generateComplementaryColors(5);
+    },
+
+    /**
+     * picks first color in app.Colors and generates a hue-shifting ramp between them
+     */
+    setHueShiftComplementaryColors: function() {
+      app.Colors.generateHueShiftComplementaryColors(5);
     },
 
     /**
