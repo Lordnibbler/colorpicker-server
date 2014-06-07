@@ -31,6 +31,7 @@ class Server
     logger.info "starting colorpicker server at #{ @host }:#{ @port }"
     @httpServer = Http.createServer(@app).listen(@port, @host, callback);
     @_sio_configure_listener(@httpServer)
+    return @httpServer
 
   # sets up the socket.io sockets and namespaces
   # @note
