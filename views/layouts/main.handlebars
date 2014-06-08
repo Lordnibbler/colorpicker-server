@@ -25,16 +25,17 @@
 
     {{{ body }}}
 
-    <!-- build:js(assets) scripts/scripts.js -->
-    <!-- Vendor -->
+    <!-- build:js(assets) scripts/vendor.js -->
     <script src='/bower_components/jquery/jquery.min.js'></script>
     <script src='/bower_components/underscore/underscore-min.js'></script>
     <script src='/bower_components/backbone/backbone-min.js'></script>
     <script src='/scripts/vendor/color.min.js'></script>
     <script src='/scripts/vendor/rainbowvis.js'></script>
+    <!-- endbuild -->
+
     <script src='/socket.io/socket.io.js'></script>
 
-    <!-- colorpicker backbone app -->
+    <!-- build:js(assets) scripts/app.js -->
     <script src='/scripts/models/color.js'></script>
     <script src='/scripts/collections/colors.js'></script>
     <script src='/scripts/views/color.js'></script>
