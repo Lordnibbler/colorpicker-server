@@ -94,10 +94,12 @@ module.exports = function (grunt) {
         express: {
             options: {
               // Override defaults here
+              opts: ['node_modules/coffee-script/bin/coffee'],
+              port: 1337
             },
             dev: {
                 options: {
-                    script: 'app.js'
+                    script: 'app.coffee'
                 }
             }
         },
@@ -105,7 +107,7 @@ module.exports = function (grunt) {
         // Open Config
         open: {
             site: {
-                path: 'http://localhost:3000',
+                path: 'http://localhost:1337',
                 app: 'Google Chrome'
             },
             editor: {
