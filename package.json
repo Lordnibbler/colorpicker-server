@@ -20,12 +20,16 @@
     "coffee-script": "~1.7",
     "log": "~1.4.0",
     "express": "~3.4.6",
-    "express3-handlebars": "0.4.x"
+    "express3-handlebars": "0.4.x",
+    "grunt": "~0.4.1",
+    "load-grunt-tasks": "~0.1.0",
+    "time-grunt": "~0.1.1"
   },
   "devDependencies": {
     "mocha": "*",
     "chai": "*",
     "grunt": "~0.4.1",
+    "grunt-cli": "*",
     "grunt-contrib-copy": "~0.4.1",
     "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-uglify": "~0.2.0",

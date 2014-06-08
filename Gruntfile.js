@@ -268,10 +268,23 @@ module.exports = function (grunt) {
         'express:dev',
         'watch'
     ]);
-    
+
 
     // Build
     grunt.registerTask('build', 'Build production ready assets and views.', [
+        'clean:dist',
+        'concurrent:dist',
+        'useminPrepare',
+        'imagemin',
+        'concat',
+        'cssmin',
+        'uglify',
+        'copy:dist',
+        'rev',
+        'usemin',
+    ]);
+
+    grunt.registerTask('heroku:production', [
         'clean:dist',
         'concurrent:dist',
         'useminPrepare',
