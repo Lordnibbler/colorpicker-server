@@ -1,2 +1,5 @@
-node_modules/*
+node_modules
+.tmp
+.sass-cache
+assets/bower_components
 colors.txt

@@ -4,21 +4,55 @@ logger    = require './logger'
 FS        = require 'fs'
 express   = require 'express'
 path      = require 'path'
+exphbs    = require 'express3-handlebars'
 beagles   = []
 backbones = []
 
 class Server
-  # set up the express application, including routes and middlewares
+  # set up the express application, including assets, routes and middlewares
   #
   constructor: (@host, @port, @options = {}) ->
     @url = "https://#{ @host }:#{ @port }/"
     @app = express()
 
-    # use basic HTTP auth and serve the /public dir as /
+    # use basic HTTP auth if production
     if process.env.NODE_ENV == 'production'
-      auth = express.basicAuth(process.env.USERNAME, process.env.PASSWORD)
+      auth = express.basicAuth(process.env.USERNAME || 'foo', process.env.PASSWORD || 'bar')
       @app.use('/', auth)
-    @app.use('/', express.static(__dirname + '/../public'))
+
+      # Set the default layout and locate layouts and partials
+      @app.engine('handlebars', exphbs(
+        defaultLayout: 'main',
+        layoutsDir: 'dist/views/layouts/',
+        partialsDir: 'dist/views/partials/'
+      ))
+
+      # Locate the views
+      @app.set('views', __dirname + '/../dist/views')
+
+      # Locate the assets
+      @app.use(express.static(__dirname + '/../dist/assets'))
+    else
+      # Default Layout and locate layouts and partials
+      @app.engine('handlebars', exphbs(
+        defaultLayout: 'main',
+        layoutsDir: 'views/layouts/',
+        partialsDir: 'views/partials/'
+      ))
+
+      # Locate the views
+      @app.set('views', __dirname + '/../views')
+
+      # Locate the assets
+      @app.use(express.static(__dirname + '/../assets'))
+
+    # Set Handlebars
+    @app.set 'view engine', 'handlebars'
+
+    # routes
+    @app.get '/', (request, response, next) ->
+      response.render 'index'
+
 
   # stop the server, firing callback upon success
   #
