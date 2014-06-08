@@ -3,3 +3,4 @@ node_modules
 .sass-cache
 assets/bower_components
 colors.txt
+dist
