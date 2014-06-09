@@ -48,7 +48,11 @@
     "grunt-svgmin": "~0.2.0",
     "grunt-concurrent": "~0.3.0",
     "load-grunt-tasks": "~0.1.0",
-    "time-grunt": "~0.1.1"
+    "time-grunt": "~0.1.1",
+    "karma": "~0.12.16",
+    "karma-jasmine": "~0.1.5",
+    "phantomjs": "1.9.7-5",
+    "karma-phantomjs-launcher": "0.1.4"
   },
   "engines": {
     "node": "0.10.28",
