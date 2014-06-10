@@ -29,6 +29,10 @@ app.Color = (function(Backbone, $) {
       return this.color().hexString();
     },
 
+    /**
+     * @return An object representation of rgba values for the current
+     * this.color(), padded with 0's to ensure length of 3
+     */
     rgb: function() {
       var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(this.hexCss());
       return result ? {
