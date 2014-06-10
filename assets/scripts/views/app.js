@@ -1,9 +1,9 @@
+"use strict";
 var app = app || {};
 
-$(function() {
-  "use strict";
-
-  app.SwatchAppView = Backbone.View.extend({
+app.SwatchAppView = (function(Backbone, $){
+  // build the view
+  var View = Backbone.View.extend({
     el: "#appframe",
 
     isTouchMove: false,
@@ -244,4 +244,9 @@ $(function() {
       this.toggleheader();
     }
   });
-});
+
+  // revealing module design pattern
+  // so we can start the app in main.js
+  return View;
+
+})(Backbone, jQuery);

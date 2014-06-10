@@ -1,9 +1,8 @@
+"use strict";
 var app = app || {};
 
-$(function() {
-  "use strict";
-
-  app.Color = Backbone.Model.extend({
+app.Color = (function(Backbone, $) {
+  var View = Backbone.Model.extend({
     defaults: {
       color: new Color()
     },
@@ -49,4 +48,6 @@ $(function() {
     }
   });
 
-});
+  return View;
+
+})(Backbone, jQuery);

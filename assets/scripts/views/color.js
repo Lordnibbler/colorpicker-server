@@ -1,15 +1,13 @@
+"use strict";
 var app = app || {};
 
-$(function() {
-  "use strict";
+app.ColorView = (function(Backbone, $){
 
-  app.ColorView = Backbone.View.extend({
+  var View = Backbone.View.extend({
 
     tagName: "li",
     className: "swatch",
-
     template: _.template( $("#template-color").html() ),
-
     isIncrementing: false,
 
     events: {
@@ -116,4 +114,7 @@ $(function() {
       });
     }
   });
-});
+
+  return View;
+
+})(Backbone, jQuery);

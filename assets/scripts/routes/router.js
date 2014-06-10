@@ -1,9 +1,8 @@
+"use strict";
 var app = app || {};
 
-$(function() {
-  "use strict";
-
-  var ColorRouter = Backbone.Router.extend({
+app.ColorRouter = (function(Backbone, $, _) {
+  var Router = Backbone.Router.extend({
     routes: {
       "*colors": "setColors"
     },
@@ -142,5 +141,8 @@ $(function() {
 
   });
 
-  app.Router = new ColorRouter();
-});
+  app.Router = new Router();
+
+  return Router;
+
+})(Backbone, jQuery, _);

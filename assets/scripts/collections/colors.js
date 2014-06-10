@@ -1,9 +1,10 @@
+"use strict";
 var app = app || {};
 
-$(function() {
-  "use strict";
+app.ColorList = (function(Backbone, $){
 
-  app.ColorList = Backbone.Collection.extend({
+  var Collection = Backbone.Collection.extend({
+
     model: app.Color,
 
     /**
@@ -86,5 +87,7 @@ $(function() {
   });
 
   // Global color collection
-  app.Colors = new app.ColorList();
-});
+  app.Colors = new Collection();
+
+  return Collection;
+})(Backbone, jQuery);
