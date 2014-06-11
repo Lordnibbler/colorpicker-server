@@ -4,7 +4,7 @@
   "description": "A Node.js server for socket.io events.",
   "scripts": {
     "start": "nodemon app.coffee",
-    "test": "mocha -w"
+    "test": "mocha test/src/*.coffee && karma start --single-run"
   },
   "repository": {
     "type": "git",
@@ -50,6 +50,7 @@
     "load-grunt-tasks": "~0.1.0",
     "time-grunt": "~0.1.1",
     "karma": "~0.12.16",
+    "karma-cli": "*",
     "karma-jasmine": "~0.1.5",
     "phantomjs": "1.9.7-5",
     "karma-phantomjs-launcher": "0.1.4"
