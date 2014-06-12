@@ -47,7 +47,7 @@ describe('Color model', function() {
   describe('generateComplementaryColors()', function () {
     it('generates a rainbowvis.js spectrum between color and its complement', function() {
       app.Colors.addFromHex('#00adeb');
-      app.Colors.generateComplementaryColors(5);
+      app.Colors.setComplementaryColors(5);
       var colors = { 0: '#00ADEB', 1: '#4096B5', 2: '#808080', 3: '#BF694A', 4: '#FF5214' }
       for (var i = 0; i < colors.length; i++) expect(app.Colors.at(i).hexCss()).to.eql(colors[i]);
     });
@@ -56,7 +56,7 @@ describe('Color model', function() {
   describe('generateHueShiftComplementaryColors()', function () {
     it('generates a hue-complement spectrum between color and its complement', function() {
       app.Colors.addFromHex('#00adeb');
-      app.Colors.generateHueShiftComplementaryColors(5);
+      app.Colors.setHueShiftComplementaryColors(5);
       var colors = { 0: '#00ADEB', 1: '#00ED79', 2: '#34EF00', 3: '#EDF200', 4: '#F43A00' }
       for (var i = 0; i < colors.length; i++) expect(app.Colors.at(i).hexCss()).to.eql(colors[i]);
     });

@@ -59,19 +59,19 @@ describe('Color model', function() {
     describe('setComplementaryColors()', function() {
       beforeEach(function() {
         // spy on setColors method so we can ensure it is called
-        sinon.spy(app.Colors, 'generateComplementaryColors');
+        sinon.spy(app.Colors, 'setComplementaryColors');
       });
 
 
       it('picks first color in app.Colors and generates a ramp between them', function() {
         app.Colors.addFromHex('#00adeb');
         app.Router.setComplementaryColors();
-        expect(app.Colors.generateComplementaryColors.calledOnce).to.eql(true);
+        expect(app.Colors.setComplementaryColors.calledOnce).to.eql(true);
       });
 
       afterEach(function() {
         // remove the sinon spy
-        app.Colors.generateComplementaryColors.restore();
+        app.Colors.setComplementaryColors.restore();
       });
     });
 

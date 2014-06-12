@@ -35,14 +35,14 @@ var Router = Backbone.Router.extend({
    * picks first color in app.Colors and generates a ramp between them
    */
   setComplementaryColors: function() {
-    app.Colors.generateComplementaryColors(5);
+    app.Colors.setComplementaryColors(5);
   },
 
   /**
    * picks first color in app.Colors and generates a hue-shifting ramp between them
    */
   setHueShiftComplementaryColors: function() {
-    app.Colors.generateHueShiftComplementaryColors(5);
+    app.Colors.setHueShiftComplementaryColors(5);
   },
 
   /**

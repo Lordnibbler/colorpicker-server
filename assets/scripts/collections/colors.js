@@ -47,7 +47,7 @@ var Collection = Backbone.Collection.extend({
    * generates a rainbow spectrum based on the bitwise complement of a single color
    * then adds them to the colors collection
    */
-  generateComplementaryColors: function(length) {
+  setComplementaryColors: function(length) {
     // only works if we have 1 color in the collection
     if (this.length > 0) {
       // reset to just the first color
@@ -66,10 +66,10 @@ var Collection = Backbone.Collection.extend({
   },
 
   /**
-   * generates a hue shift based on the bitwise complement of a single color
+   * sets a hue shift based on the bitwise complement of a single color
    * then adds them to the colors collection
    */
-  generateHueShiftComplementaryColors: function(length) {
+  setHueShiftComplementaryColors: function(length) {
     // only works if we have at least 1 color in the collection
     if (this.length > 0) {
       // reset to just the first color
