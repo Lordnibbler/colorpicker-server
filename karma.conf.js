@@ -16,8 +16,8 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'assets/bower_components/jquery/jquery.min.js',
-      'assets/bower_components/underscore/underscore-min.js',
-      'assets/bower_components/backbone/backbone-min.js',
+      'assets/bower_components/underscore/underscore.js',
+      'assets/bower_components/backbone/backbone.js',
       'assets/scripts/vendor/color.min.js',
       'assets/scripts/vendor/rainbowvis.js',
       'http://localhost:9876/socket.io/socket.io.js',

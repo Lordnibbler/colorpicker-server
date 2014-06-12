@@ -18,7 +18,7 @@ app.ColorRouter = (function(Backbone, $, _) {
      * ie. #00000, ff0000, ccff000
      */
     setColors: function(param) {
-      var colors = param.split(",");
+      var colors = (param ? param.split(",") : {})
 
       colors = _.reject(colors, function(color) {
         return color.length == 0;
