@@ -6,6 +6,24 @@ var Collection = Backbone.Collection.extend({
   model: app.Color,
 
   /**
+   * builds a collection of Color models
+   * based on the colors string
+   * @param '00ADEB,00ED79,34EF00,EDF200,F43A00,'
+   */
+  setColors: function(colors) {
+    colors = _.reject(colors, function(color) {
+      return color.length == 0;
+    });
+
+    this.reset();
+
+    var _this = this;
+    _.each(colors, function(color) {
+      _this.addFromHex("#" + color);
+    });
+  },
+
+  /**
    * add a new color object to the Colors collection
    */
   addFromHex: function(hex, index) {
@@ -82,7 +100,53 @@ var Collection = Backbone.Collection.extend({
         });
       }
     }
+  },
+
+  /**
+   * generates and sets a gradient as the current colors
+   * @param color a hex string with no #
+   * @example setGradientColors('00adeb', 5);
+   */
+  setGradientColors: function(color, length) {
+    // generate gradient array based on color and length vars
+    var modifier = (this.shadeColor(color, 20) == color ? -20 : 20);
+    var array = [color];
+    for(var i = 0; i < (length-1); i++) {
+      array.push(this.shadeColor(array[i], modifier));
+    }
+    array.push('');
+
+    // use existing setColors function to push colors to the router
+    this.setColors(array);
+  },
+
+  /**
+   * TODO: move to color.js or helper library
+   * shades (lightens/darkens) a hex color,
+   * @param color a 6 character hex code string
+   * @param percent any signed integer
+   * @example shadeColor('00adeb', 50);
+   */
+  shadeColor: function(color, percent) {
+    var R = parseInt(color.substring(0, 2), 16);
+    var G = parseInt(color.substring(2, 4), 16);
+    var B = parseInt(color.substring(4, 6), 16);
+
+    R = parseInt(R * (100 + percent) / 100);
+    G = parseInt(G * (100 + percent) / 100);
+    B = parseInt(B * (100 + percent) / 100);
+
+    R = (R < 255) ? R : 255;
+    G = (G < 255) ? G : 255;
+    B = (B < 255) ? B : 255;
+
+    var RR = ((R.toString(16).length === 1) ? '0' + R.toString(16) : R.toString(16));
+    var GG = ((G.toString(16).length === 1) ? '0' + G.toString(16) : G.toString(16));
+    var BB = ((B.toString(16).length === 1) ? '0' + B.toString(16) : B.toString(16));
+
+    return RR + GG + BB;
   }
+
 });
 
 // Global color collection

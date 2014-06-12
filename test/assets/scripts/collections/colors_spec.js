@@ -11,6 +11,14 @@ describe('Color model', function() {
     });
   });
 
+  describe('setColors()', function() {
+    it('builds a collection of Color models based on the colors string', function() {
+      var colors = '00ADEB,00ED79,34EF00,EDF200,F43A00,'.split(",");
+      app.Colors.setColors(colors);
+      expect(app.Colors.length).to.eql(5);
+    });
+  });
+
   describe('addFromHex()', function () {
     it('adds a color model from hex', function() {
       expect(app.Colors.length).to.eql(0);
@@ -51,6 +59,24 @@ describe('Color model', function() {
       app.Colors.generateHueShiftComplementaryColors(5);
       var colors = { 0: '#00ADEB', 1: '#00ED79', 2: '#34EF00', 3: '#EDF200', 4: '#F43A00' }
       for (var i = 0; i < colors.length; i++) expect(app.Colors.at(i).hexCss()).to.eql(colors[i]);
+    });
+  });
+
+  describe('setGradientColors()', function() {
+    it('generates and sets a gradient as the current app.Colors', function() {
+      app.Colors.setGradientColors('00adeb', 5);
+      var colors = {  0: '00ADEB', 1: '00CFFF', 2: '00F8FF', 3: '00FFFF', 4: '00FFFF' };
+      for (var i = 0; i < colors.length; i++) expect(app.Colors.at(i).hexCss()).to.eql(colors[i]);
+    });
+  });
+
+  describe('shadeColor()', function() {
+    it('lightens a hex color', function() {
+      expect(app.Colors.shadeColor('00adeb', 50)).to.eql('00ffff');
+    });
+
+    it('darkens a hex color', function() {
+      expect(app.Colors.shadeColor('00adeb', -50)).to.eql('005675');
     });
   });
 
