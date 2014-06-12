@@ -10,7 +10,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine'],
+    frameworks: ['mocha', 'chai'],
 
 
     // list of files / patterns to load in the browser
@@ -21,8 +21,6 @@ module.exports = function(config) {
       'assets/scripts/vendor/color.min.js',
       'assets/scripts/vendor/rainbowvis.js',
       'http://localhost:9876/socket.io/socket.io.js',
-
-      'test/main.js',
 
       'assets/scripts/models/color.js',
       'assets/scripts/collections/colors.js',
