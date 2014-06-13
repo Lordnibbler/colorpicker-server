@@ -178,28 +178,33 @@ describe('Router', function() {
 
   describe('setWhiteColors()', function() {
     beforeEach(function() {
-      for(var i = 0; i < 3; i++) app.Colors.addFromHex('#00adeb');
-
-      // spy on methods so we can ensure they're called
       sinon.spy(app.Router, 'setColors');
-      sinon.spy(app.Router, 'colorSet');
+      sinon.spy(app.Router, 'colorSet')
+
+      window.socket = {
+        emit: function(key, object) {
+          return true;
+        }
+      };
+      sinon.spy(window.socket, 'emit');
     });
 
     it('invokes the clear methods, and navigates to no colors', function() {
       app.Router.setWhiteColors();
-
       expect(app.Router.setColors.calledOnce).to.eql(true);
       expect(app.Router.setColors.getCall(0).args[0]).to.eql('FFFFFF,FFFFFF,FFFFFF,FFFFFF,FFFFFF');
 
-      // TODO: why are these failing? wtf
-      expect(app.Router.colorSet.calledOnce).to.eql(true);
-      expect(app.Router.colorSet.getCall(0).args[0]).to
-        .eql('255,255,255,255\n255,255,255,255\n255,255,255,255\n255,255,255,255\n255,255,255,255');
+      expect(app.Router.colorSet.callCount).to.eql(6);
+      expect(app.Router.colorSet.getCall(5).args[0])
+        .to.eql('255,255,255,255\n255,255,255,255\n255,255,255,255\n255,255,255,255\n255,255,255,255');
+
+      expect(window.socket.emit.callCount).to.eql(6);
     });
 
     afterEach(function() {
       app.Router.setColors.restore();
       app.Router.colorSet.restore();
+      window.socket.emit.restore();
     });
   });
 

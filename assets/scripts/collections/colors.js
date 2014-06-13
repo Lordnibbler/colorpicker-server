@@ -16,7 +16,6 @@ var Collection = Backbone.Collection.extend({
     });
 
     this.reset();
-
     var _this = this;
     _.each(colors, function(color) {
       _this.addFromHex("#" + color);
@@ -28,7 +27,6 @@ var Collection = Backbone.Collection.extend({
    */
   addFromHex: function(hex, index) {
     var c = Color(hex);
-    // this.add({color: c, at: 0});
     index ? this.add({ color: c }, { at: index }) : this.add({color: c});
   },
 

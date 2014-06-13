@@ -77,11 +77,9 @@ var Router = Backbone.Router.extend({
    * clears all colors and removes them from URL; issues a solid black to arduino
    */
   clearColors: function(event) {
-    if (app.Colors.length > 0) {
-      this.setColors('');
-      this.colorSet('000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000');
-      this.navigate('', {trigger: false, replace: true});
-    }
+    this.setColors('');
+    this.colorSet('000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000');
+    this.navigate('', {trigger: false, replace: true});
   },
 
   /**
