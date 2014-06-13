@@ -1,4 +1,4 @@
-describe('Color model', function() {
+describe('Colors collection', function() {
 
   beforeEach(function() {
     // empty the collection before each test
