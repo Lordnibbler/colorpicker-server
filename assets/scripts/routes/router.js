@@ -67,11 +67,8 @@ var Router = Backbone.Router.extend({
    */
   colorSet: function(colors) {
     if(window.socket) {
-      var color = colors;
-      if(colors === undefined) color = app.Colors.toRgbString();
-
       window.socket.emit('colorSet', {
-        color: color
+        color: (colors || app.Colors.toRgbString())
       });
     }
   },
