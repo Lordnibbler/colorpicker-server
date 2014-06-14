@@ -25,7 +25,8 @@ module.exports = function(config) {
 
       'assets/scripts/models/color.js',
       'assets/scripts/collections/colors.js',
-      // 'assets/scripts/views/color.js',
+      'assets/scripts/templates/color.js',
+      'assets/scripts/views/color.js',
       'assets/scripts/routes/router.js',
       'assets/scripts/views/app.js',
       // 'assets/scripts/main.js',
