@@ -87,4 +87,28 @@ describe('views/color_spec.js', function () {
     });
   });
 
+  describe('toggleDetails', function() {
+    it('')
+  });
+
+  describe('changeColorRgb', function() {
+    it('')
+  });
+
+  describe('changeColorHsl', function() {
+    it('')
+  });
+
+  describe('incrementValue', function() {
+    it('')
+  });
+
+  describe('decrementValue', function() {
+    it('')
+  });
+
+  describe('repeater', function() {
+    it('')
+  });
+
 });
