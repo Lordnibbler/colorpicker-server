@@ -47,7 +47,7 @@ app.ColorView = Backbone.View.extend({
   },
 
   destroy: function(event) {
-    event.preventDefault();
+    if (event) event.preventDefault();
     this.model.destroy();
   },
 
@@ -59,7 +59,7 @@ app.ColorView = Backbone.View.extend({
   },
 
   toggleDetails: function(event) {
-    event.preventDefault();
+    if (event) event.preventDefault();
     this.$el.toggleClass("show-details");
   },
 
@@ -67,9 +67,8 @@ app.ColorView = Backbone.View.extend({
     var r = this.$('[data-type="red"]').val(),
         g = this.$('[data-type="green"]').val(),
         b = this.$('[data-type="blue"]').val();
-    this.model.color().red(r)
-      .green(g)
-      .blue(b);
+
+    this.model.color().red(r).green(g).blue(b);
     this.model.trigger("change");
   },
 

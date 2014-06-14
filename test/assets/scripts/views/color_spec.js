@@ -5,7 +5,7 @@ describe('views/color_spec.js', function () {
 
   beforeEach(function() {
     app.Colors.reset();
-    app.Colors.addFromHex('#00adeb');
+    app.Colors.addFromHex('#ccccff');
     color = app.Colors.first();
     View = new app.ColorView({model: color});
   });
@@ -37,6 +37,54 @@ describe('views/color_spec.js', function () {
     });
   });
 
+  describe('render', function() {
+    beforeEach(function() {
+      View.render();
+    });
 
+    it('has the correct nodeName', function() {
+      expect(View.el.nodeName).to.eql('LI');
+    });
+
+    it('has the correct template rendered', function() {
+      expect(View.$el.find('.color')).to.have.length(1);
+      expect(View.$el.find('.details')).to.have.length(1);
+      expect(View.$el.find('.color .info .rgb h2').text()).to.eql('#CCCCFF');
+    });
+
+    it('sets correct background CSS', function() {
+      expect(View.$el.find('.color').css('backgroundColor')).to.eql(View.model.color().rgbString());
+    });
+
+    it('adds CSS class .light if color\'s lightness > 50', function() {
+      expect(View.model.color().lightness()).to.be.above(50);
+      expect(View.$el.attr('class')).to.match(/light/i);
+    });
+  });
+
+  describe('destroy', function() {
+    it('destroys the model', function() {
+      expect(app.Colors.length).to.eql(1);
+      View.destroy();
+      expect(app.Colors.length).to.eql(0);
+    });
+  });
+
+  describe('setupRemove', function() {
+    it('sets the css class', function() {
+      expect(View.$el.attr('class')).to.not.match(/destroyed/i);
+      View.setupRemove();
+      expect(View.$el.attr('class')).to.match(/destroyed/i);
+    });
+  });
+
+  describe('toggleDetails', function() {
+    it('sets the css class', function() {
+      View.toggleDetails();
+      expect(View.$el.attr('class')).to.match(/show-details/i);
+      View.toggleDetails();
+      expect(View.$el.attr('class')).to.not.match(/show-details/i);
+    });
+  });
 
 });
