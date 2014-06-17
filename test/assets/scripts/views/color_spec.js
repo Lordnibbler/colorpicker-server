@@ -1,7 +1,6 @@
 describe('views/color_spec.js', function () {
 
-  var View;
-  var color;
+  var View, color;
 
   beforeEach(function() {
     app.Colors.reset();

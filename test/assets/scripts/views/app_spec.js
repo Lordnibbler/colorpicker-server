@@ -1,12 +1,9 @@
 describe('views/app.js', function() {
 
-  var View;
-  var color;
+  var View, color;
 
   beforeEach(function() {
     app.Colors.reset();
-    // app.Colors.addFromHex('#ccccff');
-    // color = app.Colors.first();
     View = new app.SwatchAppView();
   });
 
@@ -44,10 +41,34 @@ describe('views/app.js', function() {
       expect(View.editModel.color().hsl()).to.eql({h: 0, s: 100, l: 0});
     });
 
-    it('', function() {
-
+    describe('with ontouchstart available', function() {
+      it('binds to the appropriate touch events');
     });
 
+    describe('with no touch functionality', function() {
+      it('binds to the appropriate mouse events', function() {
+        console.log(View.$el.selector)
+      });
+    });
+
+    it('binds to the window resize event');
   });
 
+  describe('render', function() {
+    beforeEach(function() {
+      View.render();
+    });
+
+    it('sets the edit swatch background CSS color to the editModel\'s HSL', function() {
+
+      console.log(View.editModel.color().hsl());
+      console.log(View.editModel.color().hslString());
+
+      View.editModel.color({h:100, s:0, l:100});
+
+      console.log(View.editModel.color().hsl());
+      console.log(View.editModel.color().hslString());
+
+    });
+  });
 });

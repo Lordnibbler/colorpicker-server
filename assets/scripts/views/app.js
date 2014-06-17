@@ -38,7 +38,8 @@ app.SwatchAppView = Backbone.View.extend({
         .bind("gesturechange", _.bind(this.gesturechange, this));
     } else {
       // no touch functionality
-      this.$("#constraints").mousemove(_.bind(this.mousemove, this))
+      this.$("#constraints")
+        .mousemove(_.bind(this.mousemove, this))
         .scroll(_.bind(this.scroll, this))
         .click(_.bind(this.grabColor, this))
         .scrollTop(2000); // set saturation full by default
