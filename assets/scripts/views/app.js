@@ -22,11 +22,8 @@ app.SwatchAppView = Backbone.View.extend({
     app.Colors.on("reset",  this.addAll, this);
     app.Colors.on("remove", this.layout, this);
 
-    this.editModel = new app.Color({h: 180, s: 100, l: 50});
+    this.editModel = new app.Color({color: new Color({h: 0, s: 100, l: 0})});
     this.editModel.on("change", this.render, this);
-
-    // ensure touch-enabled devices have saturation === 100 by default
-    this.editModel.color().saturation(100);
 
     if('ontouchstart' in document.documentElement) {
       // if we're on a touch-enabled device
