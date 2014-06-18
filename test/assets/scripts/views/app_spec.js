@@ -46,9 +46,7 @@ describe('views/app.js', function() {
     });
 
     describe('with no touch functionality', function() {
-      it('binds to the appropriate mouse events', function() {
-        console.log(View.$el.selector)
-      });
+      it('binds to the appropriate mouse events');
     });
 
     it('binds to the window resize event');
@@ -56,19 +54,25 @@ describe('views/app.js', function() {
 
   describe('render', function() {
     beforeEach(function() {
-      View.render();
+      // make a dummy fixture to test with
+      View = new app.SwatchAppView({el: '<div id="appframe"><div id="edit"><h2></h2></div></div>'});
     });
 
     it('sets the edit swatch background CSS color to the editModel\'s HSL', function() {
+      expect(View.$('#edit').css('background-color')).to.eql('');
 
-      console.log(View.editModel.color().hsl());
-      console.log(View.editModel.color().hslString());
+      // update the color
+      View.editModel = new app.Color({color: new Color({r: 0, g: 0, b: 0})});
+      View.render();
+      expect(View.$('#edit').css('background-color')).to.eql(View.editModel.color().rgbString());
+    });
 
-      View.editModel.color({h:100, s:0, l:100});
+    it('sets the #edit h2\'s HTML to the HEX color code', function() {
+      expect(View.$('#edit h2').html()).to.eql('');
 
-      console.log(View.editModel.color().hsl());
-      console.log(View.editModel.color().hslString());
-
+      View.editModel = new app.Color({color: new Color({r:25, g: 50, b: 75})});
+      View.render();
+      expect(View.$('#edit h2').html()).to.eql(View.editModel.hexCss());
     });
   });
 });
