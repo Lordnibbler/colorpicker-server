@@ -46,7 +46,16 @@ describe('views/app.js', function() {
     });
 
     describe('with no touch functionality', function() {
-      it('binds to the appropriate mouse events');
+      beforeEach(function() {
+        View = new app.SwatchAppView({el: '<div id="appframe"><div id="constraints"></div></div>'});
+      });
+
+      it('binds to the appropriate mouse events', function() {
+        // console.log(View.$('#constraints'));
+        // console.log(View.$('#constraints')._events);
+        // console.log($(window).data('events'));
+        // console.log($._data($(window), 'events'));
+      });
     });
 
     it('binds to the window resize event');
