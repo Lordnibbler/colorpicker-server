@@ -84,4 +84,24 @@ describe('views/app.js', function() {
       expect(View.$('#edit h2').html()).to.eql(View.editModel.hexCss());
     });
   });
+
+  describe('layout', function() {
+    beforeEach(function() {
+      View = new app.SwatchAppView({
+        el: '<div id="appframe"><ul id="colors"><li id="edit" class="swatch"></li><li class="swatch"></li></ul></div>'
+      });
+      View.layout();
+    });
+
+    it('applies left and width CSS to each color .swatch', function() {
+      View.$('#colors .swatch:not(#edit):not(.destroyed)').each(function(i, el) {
+        expect($(el).css('left')).to.eql('0px');
+        expect($(el).css('width')).to.eql('200px');
+      });
+    });
+
+    it('applies left to the #edit (picker) <li>', function() {
+      expect(View.$('#edit').css('left')).to.eql('0px');
+    });
+  });
 });
