@@ -73,6 +73,11 @@ app.SwatchAppView = Backbone.View.extend({
     });
   },
 
+  /**
+   * add a new colorView (views/color.js),
+   * append its element to the dom, and
+   * update the CSS
+   */
   addOne: function(color) {
     var view = new app.ColorView({model: color});
     this.$("#colors").append(view.render().el);

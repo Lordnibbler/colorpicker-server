@@ -104,4 +104,34 @@ describe('views/app.js', function() {
       expect(View.$('#edit').css('left')).to.eql('0px');
     });
   });
+
+  describe('addOne', function() {
+    beforeEach(function() {
+      View = new app.SwatchAppView({
+        el: '<div id="appframe"><ul id="colors"><li id="edit" class="swatch"></li></ul></div>'
+      });
+    });
+
+    // describe('event', function() {
+    //   beforeEach(function() {
+    //     sinon.spy(View, 'addOne');
+    //   });
+    //
+    //   it('is called when the app.Colors.add event is triggered', function() {
+    //     // add a new color to colors collection to trigger addOne()
+    //     app.Colors.addFromHex('#00adeb');
+    //
+    //     expect(View.addOne.callCount).to.eql(true);
+    //   });
+    //
+    //   afterEach(function() {
+    //     View.addOne.restore();
+    //   });
+    // });
+
+    it('appends a new color to #colors and sets view element\'s CSS left and width', function() {
+      View.addOne(new app.Color({color: new Color({r:25, g: 50, b: 75})}));
+      expect(View.$("#colors .swatch .color").attr('style')).to.include('background-color: rgb(25, 51, 76)');
+    });
+  });
 });
