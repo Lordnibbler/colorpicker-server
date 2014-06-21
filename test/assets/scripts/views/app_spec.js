@@ -305,7 +305,7 @@ describe('views/app.js', function() {
       View.isTouchMoved = false;
     });
 
-    it('invokes event.preventDefault', function() {
+    it('invokes view.Move and sets isTouchmoved === true', function() {
       expect(View.isTouchMoved).to.eql(false);
       View.touchmove(event);
       expect(View.move.callCount).to.eql(1);
@@ -317,6 +317,26 @@ describe('views/app.js', function() {
     afterEach(function() {
       View.move.restore();
     });
-  })
+  });
 
+  describe('touchend', function() {
+    beforeEach(function() {
+      View = new app.SwatchAppView({
+        el: '<div id="appframe"><ul id="colors"><li id="edit" class="swatch"></li></ul></div>'
+      });
+      View.editModel = new app.Color({color: new Color({r: 0, g: 0, b: 0})});
+      sinon.spy(View, 'grabColor');
+      View.isTouchMoved = false;
+    });
+
+    it('invokes event.preventDefault', function() {
+      expect(View.isTouchMoved).to.eql(false);
+      View.touchend();
+      expect(View.grabColor.callCount).to.eql(1);
+    });
+
+    afterEach(function() {
+      View.grabColor.restore();
+    });
+  });
 });
