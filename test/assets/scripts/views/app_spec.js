@@ -291,5 +291,32 @@ describe('views/app.js', function() {
     afterEach(function() {
       event.preventDefault.restore();
     });
+  });
+
+  describe('touchmove', function() {
+    var event = { originalEvent: { touches: [{pageX: 10, pageY: 50}]} };
+
+    beforeEach(function() {
+      View = new app.SwatchAppView({
+        el: '<div id="appframe"><ul id="colors"><li id="edit" class="swatch"></li></ul></div>'
+      });
+      View.editModel = new app.Color({color: new Color({r: 0, g: 0, b: 0})});
+      sinon.spy(View, 'move');
+      View.isTouchMoved = false;
+    });
+
+    it('invokes event.preventDefault', function() {
+      expect(View.isTouchMoved).to.eql(false);
+      View.touchmove(event);
+      expect(View.move.callCount).to.eql(1);
+      expect(View.move.getCall(0).args[0]).to.eql(10);
+      expect(View.move.getCall(0).args[1]).to.eql(50);
+      expect(View.isTouchMoved).to.eql(true);
+    });
+
+    afterEach(function() {
+      View.move.restore();
+    });
   })
+
 });
