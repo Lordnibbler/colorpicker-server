@@ -185,4 +185,19 @@ describe('views/app.js', function() {
       View.layout.restore();
     });
   });
+
+  describe('toggleheader', function() {
+    beforeEach(function() {
+      // add a view with some .swatch elements
+      View = new app.SwatchAppView({
+        el: '<div id="appframe"><ul id="colors"><li id="edit" class="swatch"></li><li class="swatch"></li><li class="swatch"></li></ul></div>'
+      });
+    });
+
+    it('toggles the class on and off', function() {
+      expect(View.$el.hasClass('show-header')).to.eql(false);
+      View.toggleheader();
+      expect(View.$el.hasClass('show-header')).to.eql(true);
+    });
+  });
 });

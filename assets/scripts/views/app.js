@@ -94,6 +94,11 @@ app.SwatchAppView = Backbone.View.extend({
     }, this), 0);
   },
 
+  /**
+   * Remove all li.color except for #edit
+   * Invoke this.addOne for each color in the colors collection
+   * Reset the layout if the collection is empty.
+   */
   addAll: function() {
     this.$("#colors li:not(#edit)").remove();
     app.Colors.each(this.addOne, this);
@@ -103,6 +108,9 @@ app.SwatchAppView = Backbone.View.extend({
     }
   },
 
+  /**
+   * Toggles the .show-header class on our view's element
+   */
   toggleheader: function(event) {
     this.$el.toggleClass("show-header");
   },
