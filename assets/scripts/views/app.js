@@ -124,21 +124,6 @@ app.SwatchAppView = Backbone.View.extend({
     });
   },
 
-  /**
-   * Converts colors to Halo's `r,g,b,a\n` format
-   * Sets all lights to same color for live-preview
-   */
-  colorToRgbString: function(color) {
-    var rgbColors =
-      color.rgb().r + ',' +
-      color.rgb().g + ',' +
-      color.rgb().b + ',' +
-      color.rgb().a + '\n';
-
-    // TODO: make this a prototype function called .repeat()
-    return rgbColors + rgbColors + rgbColors + rgbColors + rgbColors;
-  },
-
   move: function(px, py) {
     var editEl = this.$("#edit"),
         w      = editEl.width(),
@@ -155,7 +140,6 @@ app.SwatchAppView = Backbone.View.extend({
 
     this.editModel.color().hue(hue).lightness(lit);
     this.editModel.trigger("change");
-
     this.colorChanged(this.editModel);
   },
 
@@ -164,7 +148,7 @@ app.SwatchAppView = Backbone.View.extend({
    */
   colorChanged: function(color) {
     window.socket.emit('colorChanged', {
-      color: this.colorToRgbString(color)
+      color: color.toRgbString()
     });
   },
 

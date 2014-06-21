@@ -51,4 +51,10 @@ describe('Color model', function() {
     });
   });
 
+  describe('toRgbString', function() {
+    it('returns the Halo r,g,b,a\n format', function() {
+      var color = new app.Color({color: new Color('#983897')});
+      expect(color.toRgbString()).to.eql('152,056,151,000\n152,056,151,000\n152,056,151,000\n152,056,151,000\n152,056,151,000\n');
+    });
+  });
 });

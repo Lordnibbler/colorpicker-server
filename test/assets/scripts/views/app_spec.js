@@ -217,4 +217,8 @@ describe('views/app.js', function() {
       expect(app.Colors.first().color().rgb()).to.eql({r:25, g: 50, b: 75});
     });
   });
+
+  describe('', function() {
+    it('')
+  });
 });

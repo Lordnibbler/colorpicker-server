@@ -49,6 +49,21 @@ app.Color = (function(Backbone, $) {
      */
     bitwiseComplement: function() {
       return ('000000' + (('0xffffff' ^ '0x' + this.hexCss().substring(1)).toString(16))).slice(-6);
+    },
+
+    /**
+     * Converts color to Halo's `r,g,b,a\n` format
+     * Sets all lights to same color for live-preview
+     */
+    toRgbString: function() {
+      var rgbColors =
+        this.rgb().r + ',' +
+        this.rgb().g + ',' +
+        this.rgb().b + ',' +
+        this.rgb().a + '\n';
+
+      // TODO: make this a prototype function called .repeat()
+      return rgbColors + rgbColors + rgbColors + rgbColors + rgbColors;
     }
   });
 
