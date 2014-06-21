@@ -115,6 +115,9 @@ app.SwatchAppView = Backbone.View.extend({
     this.$el.toggleClass("show-header");
   },
 
+  /**
+   * Adds a color to the colors collection with the editModel's current rgb
+   */
   grabColor: function(event) {
     app.Colors.add({
       color: new Color(this.editModel.color().rgb())

@@ -200,4 +200,21 @@ describe('views/app.js', function() {
       expect(View.$el.hasClass('show-header')).to.eql(true);
     });
   });
+
+  describe('grabColor', function() {
+    beforeEach(function() {
+      // add a view with some .swatch elements
+      View = new app.SwatchAppView({
+        el: '<div id="appframe"><ul id="colors"><li id="edit" class="swatch"></li><li class="swatch"></li><li class="swatch"></li></ul></div>'
+      });
+    });
+
+    it('adds a new color to the colors collection with the view\'s editModel color', function() {
+      expect(app.Colors.length).to.eql(0);
+      View.editModel = new app.Color({color: new Color({r:25, g: 50, b: 75})});
+      View.grabColor();
+      expect(app.Colors.length).to.eql(1);
+      expect(app.Colors.first().color().rgb()).to.eql({r:25, g: 50, b: 75});
+    });
+  });
 });
