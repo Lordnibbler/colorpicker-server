@@ -112,26 +112,77 @@ describe('views/app.js', function() {
       });
     });
 
-    // describe('event', function() {
-    //   beforeEach(function() {
-    //     sinon.spy(View, 'addOne');
-    //   });
-    //
-    //   it('is called when the app.Colors.add event is triggered', function() {
-    //     // add a new color to colors collection to trigger addOne()
-    //     app.Colors.addFromHex('#00adeb');
-    //
-    //     expect(View.addOne.callCount).to.eql(true);
-    //   });
-    //
-    //   afterEach(function() {
-    //     View.addOne.restore();
-    //   });
-    // });
+    describe('event', function() {
+      // beforeEach(function() {
+      //   window.socket = {
+      //     emit: function(key, object) {
+      //       return true;
+      //     }
+      //   };
+      //   sinon.spy(window.socket, 'emit');
+      //   sinon.spy(View, "addOne");
+      // });
+      //
+      // it('is called when the app.Colors.add event is triggered', function() {
+      //   // TODO: why is the View.addOne method not invoked? it has to be
+      //   //
+      //   // add a new color to colors collection to trigger addOne()
+      //   // console.log(View.$el)
+      //   app.Colors.add({
+      //     color: new Color({r:25, g: 50, b: 75})
+      //   });
+      //   // console.log(View.$el)
+      //   // console.log(View.addOne.callCount);
+      //   // console.log(window.socket.emit.callCount);
+      //   // console.log(app.Colors._events.add[0].callback());
+      // });
+      //
+      // afterEach(function() {
+      //   // console.log(View.addOne.callCount);
+      //
+      //   View.addOne.restore();
+      //   window.socket.emit.restore();
+      // });
+    });
 
     it('appends a new color to #colors and sets view element\'s CSS left and width', function() {
       View.addOne(new app.Color({color: new Color({r:25, g: 50, b: 75})}));
       expect(View.$("#colors .swatch .color").attr('style')).to.include('background-color: rgb(25, 51, 76)');
+    });
+  });
+
+  describe('addAll', function() {
+    beforeEach(function() {
+      // add some colors to the collection
+      for(var i = 0; i < 3; i++) app.Colors.addFromHex('#00adeb');
+
+      // add a view with some .swatch elements
+      View = new app.SwatchAppView({
+        el: '<div id="appframe"><ul id="colors"><li id="edit" class="swatch"></li><li class="swatch"></li><li class="swatch"></li></ul></div>'
+      });
+
+    });
+
+    it('removes any existing color objects from the DOM', function() {
+      expect(View.$el.find('#colors li:not(#edit)').length).to.eql(2);
+      View.addAll()
+      expect(View.$el.find('#colors li:not(#edit)').length).to.eql(3);
+    });
+
+    it('invokes addOne(color) for each app.Colors', function() {
+      sinon.spy(View, 'addOne');
+      View.addAll();
+      expect(View.addOne.callCount).to.eql(3);
+      View.addOne.restore();
+    });
+
+    it('invokes this.layout() (reset layout) if there are app.Colors is empty', function() {
+      app.Colors.reset();
+      sinon.spy(View, 'layout');
+      expect(app.Colors.length).to.eql(0);
+      View.addAll();
+      expect(View.layout.callCount).to.eql(1);
+      View.layout.restore();
     });
   });
 });
