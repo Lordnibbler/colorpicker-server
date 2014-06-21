@@ -235,8 +235,20 @@ describe('views/app.js', function() {
   });
 
   describe('scroll', function() {
-    it('updates the color\'s saturation based on the scrollTop() attribute', function() {
+    beforeEach(function() {
+      // add a view with some .swatch elements
+      View = new app.SwatchAppView({
+        el: '<div id="appframe"><ul id="colors"><li id="edit" class="swatch"><div id="constraints"><div></div></div></li><li class="swatch"></li><li class="swatch"></li></ul></div>'
+      });
 
+      // set saturation high so it thinks we've scrolled
+      View.editModel = new app.Color({color: new Color({r: 0, g: 0, b: 0}).saturation(100)});
+    });
+
+    it('updates the color\'s saturation based on the scrollTop() attribute', function() {
+      expect(View.editModel.color().saturation()).to.eql(100);
+      View.scroll();
+      expect(View.editModel.color().saturation()).to.eql(0);
     });
   });
 });
