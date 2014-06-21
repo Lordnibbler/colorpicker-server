@@ -272,4 +272,24 @@ describe('views/app.js', function() {
       View.move.restore();
     })
   });
+
+  describe('touchstart', function() {
+    var event = { preventDefault: function() { return true; } };
+
+    beforeEach(function() {
+      sinon.spy(event, 'preventDefault');
+      View.isTouchMoved = true;
+    });
+
+    it('invokes event.preventDefault', function() {
+      expect(View.isTouchMoved).to.eql(true);
+      View.touchstart(event);
+      expect(event.preventDefault.callCount).to.eql(1);
+      expect(View.isTouchMoved).to.eql(false);
+    });
+
+    afterEach(function() {
+      event.preventDefault.restore();
+    });
+  })
 });
