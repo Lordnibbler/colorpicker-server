@@ -236,7 +236,7 @@ describe('views/app.js', function() {
 
   describe('scroll', function() {
     beforeEach(function() {
-      // add a view with some .swatch elements
+      // add a view with some .swatch elements and a #constraints div
       View = new app.SwatchAppView({
         el: '<div id="appframe"><ul id="colors"><li id="edit" class="swatch"><div id="constraints"><div></div></div></li><li class="swatch"></li><li class="swatch"></li></ul></div>'
       });
@@ -250,5 +250,26 @@ describe('views/app.js', function() {
       View.scroll();
       expect(View.editModel.color().saturation()).to.eql(0);
     });
+  });
+
+  describe('mousemove', function() {
+    beforeEach(function() {
+      View = new app.SwatchAppView({
+        el: '<div id="appframe"><ul id="colors"><li id="edit" class="swatch"></li></ul></div>'
+      });
+      View.editModel = new app.Color({color: new Color({r: 0, g: 0, b: 0})});
+      sinon.spy(View, 'move');
+    });
+
+    it('invokes this.move() with the px and py', function() {
+      View.mousemove({ pageX: 1, pageY: 2});
+      expect(View.move.callCount).to.eql(1);
+      expect(View.move.getCall(0).args[0]).to.eql(1);
+      expect(View.move.getCall(0).args[1]).to.eql(2);
+    });
+
+    afterEach(function() {
+      View.move.restore();
+    })
   });
 });
