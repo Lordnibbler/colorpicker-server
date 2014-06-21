@@ -152,22 +152,31 @@ app.SwatchAppView = Backbone.View.extend({
     this.editModel.trigger("change");
   },
 
+  /**
+   * fire a call to this.move() every time mousemove is called
+   */
   mousemove: function(event) {
     this.move(event.pageX, event.pageY);
   },
 
+  /**
+   * when touch starts, dont move the page around; instead set isTouchMoved = false
+   */
   touchstart: function(event) {
     event.preventDefault();
     this.isTouchMoved = false;
   },
 
+  /**
+   * fire a call to this.move() every time touchmove is called
+   */
   touchmove: function(event) {
     this.move(event.originalEvent.touches[0].pageX, event.originalEvent.touches[0].pageY);
     this.isTouchMoved = true;
   },
 
   /**
-   * adds color to app.Colors collection if touch event ends
+   * adds color to app.Colors collection if touch event ends (stopped dragging)
    */
   touchend: function(event) {
     if(! this.isTouchMoved) {
