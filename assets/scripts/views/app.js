@@ -137,19 +137,12 @@ app.SwatchAppView = Backbone.View.extend({
 
     hue = Math.floor(x / w * 360),
     lit = Math.floor(y / h * 100);
-
     this.editModel.color().hue(hue).lightness(lit);
     this.editModel.trigger("change");
-    this.colorChanged(this.editModel);
-  },
 
-  /**
-   * send our Node.js app the current live color data
-   */
-  colorChanged: function(color) {
-    window.socket.emit('colorChanged', {
-      color: color.toRgbString()
-    });
+    // send colors via socket
+    // TODO: hook into the editModel change event
+    this.editModel.colorChanged();
   },
 
   scroll: function(event) {

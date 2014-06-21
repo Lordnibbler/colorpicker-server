@@ -218,7 +218,19 @@ describe('views/app.js', function() {
     });
   });
 
-  describe('', function() {
-    it('')
+  describe('move', function() {
+    beforeEach(function() {
+      // add a view with some .swatch elements
+      View = new app.SwatchAppView({
+        el: '<div id="appframe"><ul id="colors"><li id="edit" class="swatch"></li><li class="swatch"></li><li class="swatch"></li></ul></div>'
+      });
+      View.editModel = new app.Color({color: new Color({r:25, g: 50, b: 75})});
+    });
+
+    it('correctly adjusts the color\'s hue and lightness', function() {
+      // console.log(View.editModel.color().values);
+      // View.move(1000,50);
+      // console.log(View.editModel.color().values);
+    });
   });
 });

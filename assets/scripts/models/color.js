@@ -64,6 +64,15 @@ app.Color = (function(Backbone, $) {
 
       // TODO: make this a prototype function called .repeat()
       return rgbColors + rgbColors + rgbColors + rgbColors + rgbColors;
+    },
+
+    /**
+     * send our Node.js app the current live color data
+     */
+    colorChanged: function() {
+      window.socket.emit('colorChanged', {
+        color: this.toRgbString()
+      });
     }
   });
 

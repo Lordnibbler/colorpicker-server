@@ -57,4 +57,27 @@ describe('Color model', function() {
       expect(color.toRgbString()).to.eql('152,056,151,000\n152,056,151,000\n152,056,151,000\n152,056,151,000\n152,056,151,000\n');
     });
   });
+
+  describe('colorChanged', function() {
+    beforeEach(function () {
+      window.socket = {
+        emit: function(event, object) {
+          return true;
+        }
+      };
+      sinon.spy(window.socket, 'emit');
+    });
+
+    it('emits a colorChanged event', function() {
+      var color = new app.Color({color: new Color('#983897')});
+      color.colorChanged();
+      expect(window.socket.emit.callCount).to.eql(1);
+      expect(window.socket.emit.getCall(0).args[0]).to.eql('colorChanged');
+      expect(window.socket.emit.getCall(0).args[1]['color']).to.match(/152\,056\,151\,000\n/);
+    });
+
+    afterEach(function() {
+      window.socket.emit.restore();
+    });
+  });
 });
