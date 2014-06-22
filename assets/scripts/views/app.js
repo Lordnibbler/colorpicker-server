@@ -190,7 +190,7 @@ app.SwatchAppView = Backbone.View.extend({
    */
   gesturestart: function(event) {
     event.preventDefault();
-    this.startSaturation = this.editModel.get("s");
+    this.startSaturation = this.editModel.color().saturation();
   },
 
   /**

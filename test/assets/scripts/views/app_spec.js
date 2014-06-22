@@ -339,4 +339,29 @@ describe('views/app.js', function() {
       View.grabColor.restore();
     });
   });
+
+  describe('gesturestart', function() {
+    var event = { preventDefault: function() { return true; } };
+
+    beforeEach(function() {
+      sinon.spy(event, 'preventDefault');
+      View = new app.SwatchAppView({
+        startSaturation: 100,
+        el: '<div id="appframe"><ul id="colors"><li id="edit" class="swatch"></li></ul></div>'
+      });
+      View.startSaturation = 100;
+      View.editModel = new app.Color({color: new Color('#00adeb').saturation(5)});
+    });
+
+    it('invokes event.preventDefault and updates startSaturation', function() {
+      expect(View.startSaturation).to.eql(100);
+      View.gesturestart(event);
+      expect(event.preventDefault.callCount).to.eql(1);
+      expect(View.startSaturation).to.eql(5);
+    });
+
+    afterEach(function() {
+      event.preventDefault.restore();
+    });
+  });
 });
