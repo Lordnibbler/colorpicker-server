@@ -419,4 +419,57 @@ describe('views/app.js', function() {
     });
   });
 
+  describe('generateComplementaryColors', function() {
+    beforeEach(function() {
+      sinon.spy(app.Router, 'setComplementaryColors');
+      sinon.spy(View, 'toggleheader');
+    });
+
+    it('invokes the Router.clearColors method', function() {
+      View.generateComplementaryColors();
+      expect(View.toggleheader.calledOnce).to.eql(true);
+      expect(app.Router.setComplementaryColors.callCount).to.eql(1);
+    });
+
+    afterEach(function() {
+      app.Router.setComplementaryColors.restore();
+      View.toggleheader.restore();
+    });
+  });
+
+  describe('generateHueShiftComplementaryColors', function() {
+    beforeEach(function() {
+      sinon.spy(app.Router, 'setHueShiftComplementaryColors');
+      sinon.spy(View, 'toggleheader');
+    });
+
+    it('invokes the Router.clearColors method', function() {
+      View.generateHueShiftComplementaryColors();
+      expect(View.toggleheader.calledOnce).to.eql(true);
+      expect(app.Router.setHueShiftComplementaryColors.callCount).to.eql(1);
+    });
+
+    afterEach(function() {
+      app.Router.setHueShiftComplementaryColors.restore();
+      View.toggleheader.restore();
+    });
+  });
+
+  describe('generateWhiteColors', function() {
+    beforeEach(function() {
+      sinon.spy(app.Router, 'setWhiteColors');
+      sinon.spy(View, 'toggleheader');
+    });
+
+    it('invokes the Router.clearColors method', function() {
+      View.generateWhiteColors();
+      expect(View.toggleheader.calledOnce).to.eql(true);
+      expect(app.Router.setWhiteColors.callCount).to.eql(1);
+    });
+
+    afterEach(function() {
+      app.Router.setWhiteColors.restore();
+      View.toggleheader.restore();
+    });
+  });
 });
