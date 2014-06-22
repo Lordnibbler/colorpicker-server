@@ -380,4 +380,19 @@ describe('views/app.js', function() {
       expect(View.editModel.color().saturation()).to.eql(50);
     });
   });
+
+  describe('generateGradient', function() {
+    beforeEach(function() {
+      sinon.spy(app.Router, 'setGradientColors');
+      sinon.spy(View, 'toggleheader');
+      app.Colors.addFromHex('#00adeb');
+    });
+
+    it('invokes the Router.setGradientColors method', function() {
+      View.generateGradient();
+      expect(View.toggleheader.calledOnce).to.eql(true);
+      expect(app.Router.setGradientColors.callCount).to.eql(1);
+      expect(app.Router.setGradientColors.getCall(0).args[0]).to.eql('00ADEB');
+    });
+  });
 });
