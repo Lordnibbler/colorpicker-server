@@ -91,7 +91,7 @@ class Server
       # when Client is live-previewing color
       socket.on 'colorChanged', (data) ->
         # send colorChanged data to all beagles
-        # logger.info "emitting colorChanged to #{beagles.length} beagles"
+        logger.info "emitting colorChanged to #{beagles.length} beagles"
         beagle.emit('colorChanged', { color: data.color }) for beagle in beagles # where beagle is connected
 
       # when Client picks a new color
