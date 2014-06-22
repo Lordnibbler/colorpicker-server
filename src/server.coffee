@@ -5,10 +5,11 @@ FS        = require 'fs'
 express   = require 'express'
 path      = require 'path'
 exphbs    = require 'express3-handlebars'
-beagles   = []
-backbones = []
 
 class Server
+  beagles:   []
+  backbones: []
+
   # set up the express application, including assets, routes and middlewares
   #
   constructor: (@host, @port, @options = {}) ->
@@ -84,34 +85,33 @@ class Server
     logger.info "Configuring socket.io listener"
 
     # when backbone.js Client runs `io.connect('http://localhost:1337/backbone')`
-    sio.of('/backbone').on('connection', (socket) ->
-      logger.info "/backbone CLIENT CONNECTED"
-      backbones.push socket
+    sio.of('/backbone').on 'connection', (socket) =>
+      logger.info "/backbone client connected"
+      @backbones.push socket
 
       # when Client is live-previewing color
-      socket.on 'colorChanged', (data) ->
+      socket.on 'colorChanged', (data) =>
         # send colorChanged data to all beagles
-        logger.info "emitting colorChanged to #{beagles.length} beagles"
-        beagle.emit('colorChanged', { color: data.color }) for beagle in beagles # where beagle is connected
+        logger.info "emitting colorChanged to #{@beagles.length} beagles"
+        beagle.emit('colorChanged', { color: data.color }) for beagle in @beagles # where beagle is connected
 
       # when Client picks a new color
-      socket.on 'colorSet', (data) ->
-        # send colorSet data to all beagles
-        beagle.emit('colorSet', { color: data.color }) for beagle in beagles
-    )
+      socket.on 'colorSet', (data) =>
+        # send colorSet data to all @beagles
+        beagle.emit('colorSet', { color: data.color }) for beagle in @beagles
+
 
     # when beaglebone Client runs `io.connect('http://localhost:1337/beaglebone')`
-    # push them into the beagles array
-    sio.of('/beaglebone').on('connection', (socket) ->
-      logger.info "/beaglebone CLIENT CONNECTED"
-      beagles.push socket
+    # push them into the @beagles array
+    sio.of('/beaglebone').on 'connection', (socket) =>
+      logger.info "/beaglebone client connected"
+      @beagles.push socket
 
-      # remove beaglebone client from beagles array
+      # remove beaglebone client from @beagles array
       # if disconnection event occurs
-      socket.on('disconnect', (socket) ->
-        logger.info "/beaglebone CLIENT DISCONNECTED"
-        beagles.pop socket
-      )
-    )
+      socket.on 'disconnect', (socket) =>
+        logger.info "/beaglebone client disconnected"
+        @beagles.pop socket
+
 
 module.exports = Server

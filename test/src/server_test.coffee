@@ -5,7 +5,7 @@ logger     = require '../../src/logger'
 testServer = require '../support/test_server'
 
 describe 'Server', ->
-  beforeEach ->
+  before ->
     # build a test server, but don't run it yet
     @server = new Server config.server.host, config.server.port
 
@@ -44,22 +44,38 @@ describe 'Server', ->
         @.close(->)
       )
 
-describe 'websockets', ->
-  describe 'backbone', ->
-    @backboneClient = undefined
-    @beagleClient   = undefined
-
+  describe '_sio_configure_listener', ->
     before (done) ->
-      @server = new Server(config.server.host, config.server.port).run(done)
+      # fire up a Node.js server
+      @server = new Server(config.server.host, config.server.port)
+      @server.run(done)
+
+      # ensure our beagles/backbones arrays are empty
+      @server.beagles.length.should.eql 0
+      @server.backbones.length.should.eql 0
 
     after (done) ->
       @server.close(done())
 
     before (done) ->
-      @backboneClient = new testServer('/backbone', done)
+      cb = =>
+        # ensure our backbone socket was pushed into the backbones array
+        @server.backbones.length.should.eql 1
+        done()
+
+      # connect a test backbone client to the /backbone namespace
+      @backboneClient = new testServer('/backbone', cb)
+
 
     before (done) ->
-      @beagleClient = new testServer('/beaglebone', done)
+      # connect a test beaglebone client to the /beaglebone namespace
+      cb = =>
+        # ensure our beagle socket was pushed into the beagles array
+        @server.beagles.length.should.eql 1
+        done()
+
+      # connect a test backbone client to the /backbone namespace
+      @beagleClient = new testServer('/beaglebone', cb)
 
     after (done) ->
       @backboneClient.stop(done)
