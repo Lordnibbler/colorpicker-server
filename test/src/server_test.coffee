@@ -1,23 +1,24 @@
-Server   = require '../../src/server'
-config   = require '../../src/config'
-sinon    = require 'sinon'
-ioClient = require 'socket.io-client'
+Server     = require '../../src/server'
+config     = require '../../src/config'
+logger     = require '../../src/logger'
+# sinon      = require 'sinon'
+testServer = require '../support/test_server'
 
 describe 'Server', ->
-  beforeEach (done) ->
+  beforeEach ->
     # build a test server, but don't run it yet
     @server = new Server config.server.host, config.server.port
-    done()
-  describe "constructor", ->
-    it "should return a server object with host, port, cert, and key", ->
+
+  describe 'constructor', ->
+    it "returns a server object with host, port, cert, and key", ->
       @server.host.should.eql(config.server.host)
       @server.port.should.eql(config.server.port)
 
-    it 'should return a server object with a valid @url', ->
+    it 'returns a server object with a valid @url', ->
       @server.url.should.eql("https://#{ config.server.host }:#{ config.server.port }/")
 
-  describe "run", ->
-    it "should create an HTTPS server", ->
+  describe 'run', ->
+    it 'creates an HTTPS server', ->
       # run a new server, firing callback() when successful
       @server.run(->
         true.should.eql true
@@ -49,25 +50,37 @@ describe 'websockets', ->
     @beagleClient   = undefined
 
     before (done) ->
-      @server = new Server(config.server.host, config.server.port).run(done())
+      @server = new Server(config.server.host, config.server.port).run(done)
 
     after (done) ->
       @server.close(done())
 
+    before (done) ->
+      @backboneClient = new testServer('/backbone', done)
+
+    before (done) ->
+      @beagleClient = new testServer('/beaglebone', done)
+
+    after (done) ->
+      @backboneClient.stop(done)
+
+    after (done) ->
+      @beagleClient.stop(done)
+
     describe 'colorChanged', ->
-      beforeEach ->
-        # connect test clients to the server's backbone and beaglebone sockets
-        socketURL = 'http://' + config.server.host + ':' + (config.server.port or 5000)
-        options =
-          transports: ['websockets']
-          'force new connection': true
-        @backboneClient = ioClient.connect(socketURL + '/backbone', options)
-        @beagleClient   = ioClient.connect(socketURL + '/beaglebone', options)
-        @beagleClient.socket.on 'colorChanged', (data) => console.log('colorChanged!!!')
+      it 'relays a colorChanged event to the beagle', (done) ->
+        color = '152,056,151,000\n'
+        @beagleClient.socket.on 'colorChanged', (data) =>
+          data.color.should.eql(color)
+          done()
 
-      afterEach ->
-        @backboneClient.disconnect()
-        @beagleClient.disconnect()
+        @backboneClient.socket.emit('colorChanged', color: color)
 
-      it 'relays a colorChanged event to the beagle', ->
-        @backboneClient.socket.emit('colorChanged', 'foobar')
+    describe 'colorSet', ->
+      it 'relays a colorSet event to the beagle', (done) ->
+        color = '255,255,255,255\n255,255,255,255\n255,255,255,255\n255,255,255,255\n255,255,255,255'
+        @beagleClient.socket.on 'colorSet', (data) =>
+          data.color.should.eql(color)
+          done()
+
+        @backboneClient.socket.emit('colorSet', color: color)
