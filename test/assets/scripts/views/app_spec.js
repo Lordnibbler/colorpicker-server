@@ -346,7 +346,6 @@ describe('views/app.js', function() {
     beforeEach(function() {
       sinon.spy(event, 'preventDefault');
       View = new app.SwatchAppView({
-        startSaturation: 100,
         el: '<div id="appframe"><ul id="colors"><li id="edit" class="swatch"></li></ul></div>'
       });
       View.startSaturation = 100;
@@ -362,6 +361,23 @@ describe('views/app.js', function() {
 
     afterEach(function() {
       event.preventDefault.restore();
+    });
+  });
+
+  describe('gesturechange', function() {
+    var event = { originalEvent: { scale: 0.5 } };
+
+    beforeEach(function() {
+      View = new app.SwatchAppView({
+        el: '<div id="appframe"><ul id="colors"><li id="edit" class="swatch"></li></ul></div>'
+      });
+      View.editModel = new app.Color({color: new Color('#00adeb').saturation(5)});
+    });
+
+    it('changes the editModel\'s saturation', function() {
+      expect(View.editModel.color().saturation()).to.eql(5);
+      View.gesturechange(event);
+      expect(View.editModel.color().saturation()).to.eql(50);
     });
   });
 });
