@@ -394,5 +394,29 @@ describe('views/app.js', function() {
       expect(app.Router.setGradientColors.callCount).to.eql(1);
       expect(app.Router.setGradientColors.getCall(0).args[0]).to.eql('00ADEB');
     });
+
+    afterEach(function() {
+      app.Router.setGradientColors.restore();
+      View.toggleheader.restore();
+    });
   });
+
+  describe('clearColors', function() {
+    beforeEach(function() {
+      sinon.spy(app.Router, 'clearColors');
+      sinon.spy(View, 'toggleheader');
+    });
+
+    it('invokes the Router.clearColors method', function() {
+      View.clearColors();
+      expect(View.toggleheader.calledOnce).to.eql(true);
+      expect(app.Router.clearColors.callCount).to.eql(1);
+    });
+
+    afterEach(function() {
+      app.Router.clearColors.restore();
+      View.toggleheader.restore();
+    });
+  });
+
 });
