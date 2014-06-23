@@ -66,6 +66,8 @@ describe 'Server', ->
       # connect a test backbone client to the /backbone namespace
       @backboneClient = new testServer('/backbone', cb)
 
+    after (done) ->
+      @backboneClient.stop(done)
 
     before (done) ->
       # connect a test beaglebone client to the /beaglebone namespace
@@ -76,9 +78,6 @@ describe 'Server', ->
 
       # connect a test backbone client to the /backbone namespace
       @beagleClient = new testServer('/beaglebone', cb)
-
-    after (done) ->
-      @backboneClient.stop(done)
 
     after (done) ->
       @beagleClient.stop(done)
