@@ -25,6 +25,7 @@ app.SwatchAppView = Backbone.View.extend({
     this.editModel = new app.Color({color: new Color({h: 0, s: 100, l: 0})});
     this.editModel.on("change", this.render, this);
 
+    // bind the following events to our local override methods (this.)
     if('ontouchstart' in document.documentElement) {
       // if we're on a touch-enabled device
       this.$("#edit")
