@@ -4,7 +4,8 @@
   "description": "A Node.js server for socket.io events.",
   "scripts": {
     "start": "nodemon app.coffee",
-    "test": "mocha test/src/*.coffee && karma start --single-run"
+    "test": "mocha test/src/*.coffee && karma start --single-run",
+    "postinstall": "./node_modules/bower/bin/bower install && ./node_modules/grunt-cli/bin/grunt build"
   },
   "repository": {
     "type": "git",
