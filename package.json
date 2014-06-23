@@ -22,9 +22,7 @@
     "log": "~1.4.0",
     "express": "~3.4.6",
     "express3-handlebars": "0.4.x",
-    "grunt": "~0.4.1",
-    "load-grunt-tasks": "~0.1.0",
-    "time-grunt": "~0.1.1"
+    "bower": "*"
   },
   "devDependencies": {
     "mocha": "*",
