@@ -7,14 +7,68 @@ module.exports = (grunt) ->
   require("load-grunt-tasks") grunt
   grunt.initConfig
 
-    # Watch Config
-    watch:
-      files: ["views/**/*"]
-      options:
-        livereload: true
+    # grunt nodemon setup: https://github.com/ChrisWren/grunt-nodemon#advanced-usage
+    concurrent:
+      dev:
+        tasks: [
+          "nodemon"
+          # "node-inspector" # might want to add this back
+          "watch"
+        ]
+        options:
+          logConcurrentOutput: true
+      dist: [
+        "copy:styles"
+        "copy:fonts"
+        "svgmin"
+        "htmlmin"
+      ]
 
+
+    nodemon:
+      dev:
+        script: "app.coffee"
+        options:
+          # nodeArgs: ["--debug"]
+          env:
+            PORT: "1337"
+
+          # omit this property if you aren't serving HTML files and
+          # don't want to open a browser tab on start
+          callback: (nodemon) ->
+            nodemon.on "log", (event) ->
+              console.log event.colour
+              return
+
+            # # opens browser on initial server start
+            # nodemon.on "config:update", ->
+            #
+            #   # Delay before server listens on port
+            #   setTimeout (->
+            #     require("open") "http://localhost:5455"
+            #     return
+            #   ), 1000
+            #   return
+
+            # refreshes browser when server reboots
+            nodemon.on "restart", ->
+
+              # Delay before server listens on port
+              setTimeout (->
+                require("fs").writeFileSync ".rebooted", "rebooted"
+                return
+              ), 1000
+              return
+
+            return
+
+    watch:
+      server:
+        files: [".rebooted"]
+        options:
+          livereload: true
       scripts:
-        files: ["assets/scripts/**/*.js"]
+        files: ["assets/scripts/**/*.js", "src/**/*.coffee"]
 
       css:
         files: ["assets/styles/**/*.css"]
@@ -25,17 +79,6 @@ module.exports = (grunt) ->
 
       images:
         files: ["assets/images/**/*.{png,jpg,jpeg,webp}"]
-
-      express:
-        files: [
-          "app.js"
-          "!**/node_modules/**"
-          "!Gruntfile.js"
-        ]
-        tasks: ["express:dev"]
-        options:
-          nospawn: true # Without this option specified express won't be reloaded
-
 
     # Clean Config
     clean:
@@ -104,7 +147,7 @@ module.exports = (grunt) ->
 
       editor:
         path: "./"
-        app: ""
+        app: "atom"
 
 
     # Rev Config
@@ -241,25 +284,16 @@ module.exports = (grunt) ->
         src: ['assets/font/**']
         dest: 'dist/'
 
-    # Concurrent Config
-    concurrent:
-      dist: [
-        "copy:styles"
-        "copy:fonts"
-        "svgmin"
-        "htmlmin"
-      ]
-
 
   # Register Tasks
   # Workon
   grunt.registerTask "workon", "Start working on this project.", [
-    "jshint"
+    # "jshint"
     "sass:dev"
-    "express:dev"
-    "open:site"
-    "open:editor"
-    "watch"
+    # "express:dev"
+    # "open:site"
+    # "open:editor"
+    "nodemon"
   ]
 
   # Restart

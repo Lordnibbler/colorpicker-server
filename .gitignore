@@ -4,3 +4,4 @@ node_modules
 assets/bower_components
 colors.txt
 dist
+.rebooted

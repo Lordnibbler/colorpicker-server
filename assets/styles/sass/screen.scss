@@ -3,20 +3,12 @@
     SCREEN.CSS
 \*------------------------------------*/
 
-
-
-
-
 /**
  * Setup
  */
 @import "../../bower_components/bourbon/app/assets/stylesheets/bourbon";
 @import "vars";
 @import "mixins";  // Custom mixins
-
-
-
-
 
 /**
  * She’s all yours, cap’n... Begin importing your stuff here.
@@ -30,3 +22,10 @@
 @import "ui/buttons";
 @import "ui/footer";
 @import "ui/helpers";
+
+/**
+ * Colorpicker styles
+ */
+@import "colorpicker/normalize";
+@import "colorpicker/font-awesome";
+@import "colorpicker/main";
