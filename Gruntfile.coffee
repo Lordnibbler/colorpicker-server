@@ -23,7 +23,13 @@ module.exports = (grunt) ->
         "svgmin"
         "htmlmin"
       ]
-
+      test:
+        tasks: [
+          "karma:unit"
+          "watch:mocha"
+        ]
+        options:
+          logConcurrentOutput: true
 
     nodemon:
       dev:
@@ -80,6 +86,28 @@ module.exports = (grunt) ->
       images:
         files: ["assets/images/**/*.{png,jpg,jpeg,webp}"]
 
+      mocha:
+        options:
+          spawn: false # faster reloading
+        files: "test/src/**/*.coffee"
+        tasks: ['mochaTest:test']
+
+    karma:
+      unit:
+        configFile: 'karma.conf.js'
+        autoWatch: true
+
+    mochaTest:
+      test:
+        options:
+          clearRequireCache: true # for spawn: false tests (https://github.com/pghalliday/grunt-mocha-test#running-in-permanent-environments-like-watch)
+          reporter: 'spec'
+          require: ['coffee-script/register', 'test/test_helper.coffee']
+          recursive: true
+          timeout: 5000
+        src: ['test/src/**/*.coffee']
+
+
     # Clean Config
     clean:
       dist:
@@ -94,7 +122,6 @@ module.exports = (grunt) ->
 
       server: [".tmp"]
 
-
     # Hint Config
     jshint:
       options:
@@ -106,7 +133,6 @@ module.exports = (grunt) ->
         "!assets/scripts/vendor/*"
         "test/spec/**/*.js"
       ]
-
 
     # Sass Config
     sass:
