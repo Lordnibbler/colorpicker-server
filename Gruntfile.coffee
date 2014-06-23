@@ -83,7 +83,6 @@ module.exports = (grunt) ->
           ext: ".css"
         ]
 
-
     # Express Config
     express:
       options:
@@ -237,11 +236,16 @@ module.exports = (grunt) ->
         dest: ".tmp/styles/"
         src: "{,*/}*.css"
 
+      fonts:
+        expand: true
+        src: ['assets/font/**']
+        dest: 'dist/'
 
     # Concurrent Config
     concurrent:
       dist: [
         "copy:styles"
+        "copy:fonts"
         "svgmin"
         "htmlmin"
       ]
@@ -266,18 +270,6 @@ module.exports = (grunt) ->
 
   # Build
   grunt.registerTask "build", "Build production ready assets and views.", [
-    "clean:dist"
-    "concurrent:dist"
-    "useminPrepare"
-    "imagemin"
-    "concat"
-    "cssmin"
-    "uglify"
-    "copy:dist"
-    "rev"
-    "usemin"
-  ]
-  grunt.registerTask "heroku:production", [
     "clean:dist"
     "concurrent:dist"
     "useminPrepare"
