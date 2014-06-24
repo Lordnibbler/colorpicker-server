@@ -29,11 +29,11 @@ app.SwatchAppView = Backbone.View.extend({
     if('ontouchstart' in document.documentElement) {
       // if we're on a touch-enabled device
       this.$("#edit")
-        .bind("touchstart",    _.bind(this.touchstart,    this))
-        .bind("touchmove",     _.bind(this.touchmove,     this))
-        .bind("touchend",      _.bind(this.touchend,      this))
-        .bind("gesturestart",  _.bind(this.gesturestart,  this))
-        .bind("gesturechange", _.bind(this.gesturechange, this));
+        .on("touchstart",    _.bind(this.touchstart,    this))
+        .on("touchmove",     _.bind(this.touchmove,     this))
+        .on("touchend",      _.bind(this.touchend,      this))
+        .on("gesturestart",  _.bind(this.gesturestart,  this))
+        .on("gesturechange", _.bind(this.gesturechange, this));
     } else {
       // no touch functionality
       this.$("#constraints")

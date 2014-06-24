@@ -1,4 +1,4 @@
 {
   "verbose": true,
-  "ignore": ["node_modules/*", "assets/styles/**/*"]
+  "ignore": ["node_modules/*", "assets/**/*"]
 }
