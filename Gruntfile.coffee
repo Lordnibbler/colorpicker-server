@@ -132,22 +132,32 @@ module.exports = (grunt) ->
         "test/spec/**/*.js"
       ]
 
-    sass:
-      options:
-        cacheLocation: ".tmp/.sass-cache"
+    # sass:
+    #   options:
+    #     cacheLocation: ".tmp/.sass-cache"
 
-      dev:
-        options:
-          style: "expanded"
-          lineComments: true
+    #   dev:
+    #     options:
+    #       style: "expanded"
+    #       lineComments: true
 
-        files: [
-          expand: true
-          cwd: "assets/styles/sass"
-          dest: "assets/styles"
-          src: ["screen.scss"]
-          ext: ".css"
-        ]
+    #     files: [
+    #       expand: true
+    #       cwd: "assets/styles/sass"
+    #       dest: "assets/styles"
+    #       src: ["screen.scss"]
+    #       ext: ".css"
+    #     ]
+
+    sass:                            # task
+      dev:                           # another target
+        # options:                     # dictionary of render options
+          # sourceMap: true
+        files:
+          'assets/styles/screen.css': 'assets/styles/sass/screen.scss'
+      # dist:                          # target
+        # files:                       # dictionary of files
+          # 'assets/styles/screen.css': 'assets/styles/screen.scss'    # 'destination': 'source'
 
     express:
       options:
