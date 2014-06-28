@@ -263,8 +263,8 @@ module.exports = (grunt) ->
         NODE_ENV: "PRODUCTION"
 
     preprocess:
-      env:
-        src: "./assets/scripts/main.js"
+      js:
+        src: "./assets/scripts/main_preprocess.js"
         dest: "./assets/scripts/main.js"
 
     # Put files not handled in other tasks here
@@ -308,13 +308,13 @@ module.exports = (grunt) ->
   # Register Tasks
   grunt.registerTask "dev", "Start our development environment", [
     "env:dev"
-    "preprocess:env"
+    "preprocess:js"
     "concurrent:dev"
   ]
 
   grunt.registerTask "build", "Build production ready assets and views.", [
     "env:prod"
-    "preprocess"
+    "preprocess:js"
     "clean:dist"
     "concurrent:dist"
     "useminPrepare"
