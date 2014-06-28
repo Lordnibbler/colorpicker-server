@@ -107,8 +107,6 @@ module.exports = (grunt) ->
           timeout: 5000
         src: ['test/src/**/*.coffee']
 
-
-    # Clean Config
     clean:
       dist:
         files: [
@@ -122,7 +120,6 @@ module.exports = (grunt) ->
 
       server: [".tmp"]
 
-    # Hint Config
     jshint:
       options:
         jshintrc: ".jshintrc"
@@ -134,7 +131,6 @@ module.exports = (grunt) ->
         "test/spec/**/*.js"
       ]
 
-    # Sass Config
     sass:
       options:
         cacheLocation: ".tmp/.sass-cache"
@@ -152,7 +148,6 @@ module.exports = (grunt) ->
           ext: ".css"
         ]
 
-    # Express Config
     express:
       options:
 
@@ -164,8 +159,6 @@ module.exports = (grunt) ->
         options:
           script: "app.coffee"
 
-
-    # Open Config
     open:
       site:
         path: "http://localhost:1337"
@@ -175,8 +168,6 @@ module.exports = (grunt) ->
         path: "./"
         app: "atom"
 
-
-    # Rev Config
     rev:
       dist:
         files:
@@ -187,8 +178,6 @@ module.exports = (grunt) ->
             "dist/assets/styles/fonts/**/*.*"
           ]
 
-
-    # Usemin Config
     useminPrepare:
       options:
         dest: "dist/assets"
@@ -209,8 +198,6 @@ module.exports = (grunt) ->
       ]
       css: ["dist/assets/styles/{,*/}*.css"]
 
-
-    # Imagemin Config
     imagemin:
       dist:
         files: [
@@ -220,8 +207,6 @@ module.exports = (grunt) ->
           dest: "dist/assets/images"
         ]
 
-
-    # SVGmin Config
     svgmin:
       dist:
         files: [
@@ -231,8 +216,6 @@ module.exports = (grunt) ->
           dest: "dist/assets/images"
         ]
 
-
-    # CSSmin config
     cssmin: {}
 
     # This task is pre-configured if you do not wish to use Usemin
@@ -249,8 +232,7 @@ module.exports = (grunt) ->
     #         ]
     #     }
     # }
-
-    # HTML Config
+    #
     htmlmin:
       dist:
         options: {}
@@ -271,8 +253,20 @@ module.exports = (grunt) ->
           dest: "dist/assets"
         ]
 
+    env:
+      options: {}
 
-    # Copy Config
+      dev:
+        NODE_ENV: "DEVELOPMENT"
+
+      prod:
+        NODE_ENV: "PRODUCTION"
+
+    preprocess:
+      env:
+        src: "./assets/scripts/main.js"
+        dest: "./assets/scripts/main.js"
+
     # Put files not handled in other tasks here
     copy:
       dist:
@@ -312,24 +306,15 @@ module.exports = (grunt) ->
 
 
   # Register Tasks
-  # Workon
-  grunt.registerTask "workon", "Start working on this project.", [
-    # "jshint"
-    "sass:dev"
-    # "express:dev"
-    # "open:site"
-    # "open:editor"
-    "nodemon"
+  grunt.registerTask "dev", "Start our development environment", [
+    "env:dev"
+    "preprocess:env"
+    "concurrent:dev"
   ]
 
-  # Restart
-  grunt.registerTask "restart", "Restart the server.", [
-    "express:dev"
-    "watch"
-  ]
-
-  # Build
   grunt.registerTask "build", "Build production ready assets and views.", [
+    "env:prod"
+    "preprocess"
     "clean:dist"
     "concurrent:dist"
     "useminPrepare"

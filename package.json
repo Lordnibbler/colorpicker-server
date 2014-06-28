@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "A Node.js server for socket.io events.",
   "scripts": {
-    "start": "grunt concurrent:dev",
+    "start": "grunt dev",
     "test": "grunt concurrent:test",
     "postinstall": "./node_modules/bower/bin/bower install && ./node_modules/grunt-cli/bin/grunt build"
   },
@@ -59,7 +59,9 @@
     "sinon": "~1.10.2",
     "grunt-nodemon": "~0.2.1",
     "grunt-karma": "~0.8.3",
-    "grunt-mocha-test": "~0.11.0"
+    "grunt-mocha-test": "~0.11.0",
+    "grunt-env": "~0.4.1",
+    "grunt-preprocess": "~4.0.0"
   },
   "engines": {
     "node": "0.10.29",

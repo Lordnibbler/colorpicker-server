@@ -1,13 +1,15 @@
 var app = app || {};
 
 $(function() {
-  // TODO: use grunt to choose the correct URI here
-
   // PRODUCTION:  start socket.io on our heroku server
+  // @if NODE_ENV='PRODUCTION'
   var socket = io.connect("http://colorpicker.herokuapp.com/backbone");
+  // @endif
 
   // DEVELOPMENT: start socket.io locally
-  // var socket = io.connect("http://127.0.0.1/backbone");
+  // @if NODE_ENV='DEVELOPMENT'
+  var socket = io.connect("http://127.0.0.1/backbone");
+  // @endif
 
   // save our connected socket inside our backbone `.dapp`
   window.socket = socket;
