@@ -4,17 +4,37 @@ var app = app || {};
 app.SwatchAppView = Backbone.View.extend({
 
   el: "#appframe",
-
   isTouchMove: false,
   startSaturation: 100,
 
-  events: {
-    "click #header-tab": "toggleheader",
-    "click #gradient": "generateGradient",
-    "click #clear": "clearColors",
-    "click #complement": "generateComplementaryColors",
-    "click #huecomplement": "generateHueShiftComplementaryColors",
-    "click #white": "generateWhiteColors"
+  events: function() {
+    var eventsHash = {
+      // all events, regardless of mobile or not
+      "click #header-tab": "toggleheader",
+      "click #gradient": "generateGradient",
+      "click #clear": "clearColors",
+      "click #complement": "generateComplementaryColors",
+      "click #huecomplement": "generateHueShiftComplementaryColors",
+      "click #white": "generateWhiteColors"
+    };
+
+    // bind the following events to our local override methods (this.)
+    if('ontouchstart' in document.documentElement) {
+      _.extend(eventsHash, {
+        "touchstart #edit": "touchstart",
+        "touchmove #edit": "touchmove",
+        "touchend #edit": "touchend",
+        "gesturestart #edit": "gesturestart",
+        "gesturechange #edit": "gesturechange"
+      });
+    } else {
+      _.extend(eventsHash, {
+        "mousemove #constraints": "mousemove",
+        "click #constraints": "grabColor"
+      });
+    }
+
+    return eventsHash;
   },
 
   initialize: function() {
@@ -25,21 +45,12 @@ app.SwatchAppView = Backbone.View.extend({
     this.editModel = new app.Color({color: new Color({h: 0, s: 100, l: 0})});
     this.editModel.on("change", this.render, this);
 
-    // bind the following events to our local override methods (this.)
-    if('ontouchstart' in document.documentElement) {
-      // if we're on a touch-enabled device
-      this.$("#edit")
-        .on("touchstart",    _.bind(this.touchstart,    this))
-        .on("touchmove",     _.bind(this.touchmove,     this))
-        .on("touchend",      _.bind(this.touchend,      this))
-        .on("gesturestart",  _.bind(this.gesturestart,  this))
-        .on("gesturechange", _.bind(this.gesturechange, this));
-    } else {
-      // no touch functionality
+    // no touch functionality
+    if(!('ontouchstart' in document.documentElement)) {
+      // scroll events dont bubble so we must attach a handler directly
+      // https://github.com/jashkenas/backbone/issues/2978
       this.$("#constraints")
-        .mousemove(_.bind(this.mousemove, this))
         .scroll(_.bind(this.scroll, this))
-        .click(_.bind(this.grabColor, this))
         .scrollTop(2000); // set saturation full by default
     }
 

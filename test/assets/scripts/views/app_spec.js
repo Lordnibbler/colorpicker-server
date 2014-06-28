@@ -17,12 +17,12 @@ describe('views/app.js', function() {
 
   describe('events', function() {
     it('has the correct events', function() {
-      expect(View.events['click #header-tab']).to.eql('toggleheader');
-      expect(View.events['click #gradient']).to.eql('generateGradient');
-      expect(View.events['click #clear']).to.eql('clearColors');
-      expect(View.events['click #complement']).to.eql('generateComplementaryColors');
-      expect(View.events['click #huecomplement']).to.eql('generateHueShiftComplementaryColors');
-      expect(View.events['click #white']).to.eql('generateWhiteColors');
+      expect(View.events()['click #header-tab']).to.eql('toggleheader');
+      expect(View.events()['click #gradient']).to.eql('generateGradient');
+      expect(View.events()['click #clear']).to.eql('clearColors');
+      expect(View.events()['click #complement']).to.eql('generateComplementaryColors');
+      expect(View.events()['click #huecomplement']).to.eql('generateHueShiftComplementaryColors');
+      expect(View.events()['click #white']).to.eql('generateWhiteColors');
     });
   });
 
