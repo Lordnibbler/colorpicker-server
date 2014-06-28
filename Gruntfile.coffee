@@ -18,6 +18,7 @@ module.exports = (grunt) ->
         options:
           logConcurrentOutput: true
       dist: [
+        "sass:dev"
         "copy:styles"
         "copy:fonts"
         "svgmin"
