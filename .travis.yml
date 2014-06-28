@@ -1,8 +1,12 @@
 language: node_js
 node_js:
   - "0.10.28"
+before_install:
+  - npm install -g bower
+  - bower install
 script:
-  - mocha -R dot
+  - "mocha -R dot test/src/*.coffee && karma start --single-run"
+
 env:
   - NODE_ENV=test
 cache:

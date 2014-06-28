@@ -1,0 +1,3307 @@
+@charset "UTF-8";
+/*------------------------------------*\
+    SCREEN.CSS
+\*------------------------------------*/
+/**
+ * Setup
+ */
+/*------------------------------------*\
+    VARS.SCSS
+\*------------------------------------*/
+/**
+ * OBJECTS-AND-ABSTRACTIONS
+ * OVERRIDES
+ * CUSTOM
+    ^ COLORS
+    ^ FONTS
+    ^ CUSTOM FONT MIXINS
+*/
+/**
+ * Any variables you find set in inuit.css’ `_vars.scss` that you do not wish to
+ * keep, simply redefine here. This means that if inuit.css, for example, sets
+ * your `$base-font-size` at 16px and you wish it to be 14px, simply redeclare
+ * that variable in this file. inuit.css ignores its own variables in favour of
+ * using your own, so you can completely modify how inuit.css works without ever
+ * having to alter the framework itself.
+ */
+/*------------------------------------*\
+    $OBJECTS-AND-ABSTRACTIONS
+\*------------------------------------*/
+/**
+ * All of inuit.css’ objects and abstractions are initially turned off by
+ * default. This means that you start any project with as little as possible,
+ * and introducing objects and abstractions is as simple as switching the
+ * following variables to `true`.
+ */
+/*------------------------------------*\
+    $OVERRIDES
+\*------------------------------------*/
+/**
+ * Place any variables that should override inuit.css’ defaults here.
+ */
+/**
+ * Other overrides to inuit
+ */
+/* line 85, sass/_vars.scss */
+label {
+  cursor: default !important;
+}
+
+/* line 86, sass/_vars.scss */
+.form-fields input[type=text] {
+  cursor: text;
+}
+
+/* line 87, sass/_vars.scss */
+.check-list label {
+  cursor: pointer !important;
+}
+
+/*------------------------------------*\
+    $CUSTOM
+\*------------------------------------*/
+/**
+ * Place any of your own variables that sit on top of inuit.css here.
+ */
+/**
+ * ^COLORS 
+ */
+/**
+ * ^FONTS
+ */
+/**
+ * ^CUSTOM FONT MIXINS 
+ */
+/*------------------------------------*\
+    $CONTENTS
+\*------------------------------------*/
+/**
+ * MIXINS
+*/
+/*------------------------------------*\
+    $MIXINS
+\*------------------------------------*/
+/**
+ * She’s all yours, cap’n... Begin importing your stuff here.
+ */
+/**
+ * Colorpicker styles
+ */
+/*! normalize.css v1.1.0 | MIT License | git.io/normalize */
+/* ==========================================================================
+   HTML5 display definitions
+   ========================================================================== */
+/**
+ * Correct `block` display not defined in IE 6/7/8/9 and Firefox 3.
+ */
+/* line 11, sass/colorpicker/normalize.scss */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+  display: block;
+}
+
+/**
+ * Correct `inline-block` display not defined in IE 6/7/8/9 and Firefox 3.
+ */
+/* line 30, sass/colorpicker/normalize.scss */
+audio,
+canvas,
+video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+
+/**
+ * Prevent modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+/* line 43, sass/colorpicker/normalize.scss */
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+/**
+ * Address styling not present in IE 7/8/9, Firefox 3, and Safari 4.
+ * Known issue: no IE 6 support.
+ */
+/* line 53, sass/colorpicker/normalize.scss */
+[hidden] {
+  display: none;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+/**
+ * 1. Correct text resizing oddly in IE 6/7 when body `font-size` is set using
+ *    `em` units.
+ * 2. Prevent iOS text size adjust after orientation change, without disabling
+ *    user zoom.
+ */
+/* line 68, sass/colorpicker/normalize.scss */
+html {
+  font-size: 100%;
+  /* 1 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */
+  -ms-text-size-adjust: 100%;
+  /* 2 */
+}
+
+/**
+ * Address `font-family` inconsistency between `textarea` and other form
+ * elements.
+ */
+/* line 79, sass/colorpicker/normalize.scss */
+html,
+button,
+input,
+select,
+textarea {
+  font-family: sans-serif;
+}
+
+/**
+ * Address margins handled incorrectly in IE 6/7.
+ */
+/* line 91, sass/colorpicker/normalize.scss */
+body {
+  margin: 0;
+}
+
+/* ==========================================================================
+   Links
+   ========================================================================== */
+/**
+ * Address `outline` inconsistency between Chrome and other browsers.
+ */
+/* line 103, sass/colorpicker/normalize.scss */
+a:focus {
+  outline: thin dotted;
+}
+
+/**
+ * Improve readability when focused and also mouse hovered in all browsers.
+ */
+/* line 111, sass/colorpicker/normalize.scss */
+a:active,
+a:hover {
+  outline: 0;
+}
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+/**
+ * Address font sizes and margins set differently in IE 6/7.
+ * Address font sizes within `section` and `article` in Firefox 4+, Safari 5,
+ * and Chrome.
+ */
+/* line 126, sass/colorpicker/normalize.scss */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/* line 131, sass/colorpicker/normalize.scss */
+h2 {
+  font-size: 1.5em;
+  margin: 0.83em 0;
+}
+
+/* line 136, sass/colorpicker/normalize.scss */
+h3 {
+  font-size: 1.17em;
+  margin: 1em 0;
+}
+
+/* line 141, sass/colorpicker/normalize.scss */
+h4 {
+  font-size: 1em;
+  margin: 1.33em 0;
+}
+
+/* line 146, sass/colorpicker/normalize.scss */
+h5 {
+  font-size: 0.83em;
+  margin: 1.67em 0;
+}
+
+/* line 151, sass/colorpicker/normalize.scss */
+h6 {
+  font-size: 0.67em;
+  margin: 2.33em 0;
+}
+
+/**
+ * Address styling not present in IE 7/8/9, Safari 5, and Chrome.
+ */
+/* line 160, sass/colorpicker/normalize.scss */
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+/**
+ * Address style set to `bolder` in Firefox 3+, Safari 4/5, and Chrome.
+ */
+/* line 168, sass/colorpicker/normalize.scss */
+b,
+strong {
+  font-weight: bold;
+}
+
+/* line 173, sass/colorpicker/normalize.scss */
+blockquote {
+  margin: 1em 40px;
+}
+
+/**
+ * Address styling not present in Safari 5 and Chrome.
+ */
+/* line 181, sass/colorpicker/normalize.scss */
+dfn {
+  font-style: italic;
+}
+
+/**
+ * Address differences between Firefox and other browsers.
+ * Known issue: no IE 6/7 normalization.
+ */
+/* line 190, sass/colorpicker/normalize.scss */
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+}
+
+/**
+ * Address styling not present in IE 6/7/8/9.
+ */
+/* line 200, sass/colorpicker/normalize.scss */
+mark {
+  background: #ff0;
+  color: #000;
+}
+
+/**
+ * Address margins set differently in IE 6/7.
+ */
+/* line 209, sass/colorpicker/normalize.scss */
+p,
+pre {
+  margin: 1em 0;
+}
+
+/**
+ * Correct font family set oddly in IE 6, Safari 4/5, and Chrome.
+ */
+/* line 218, sass/colorpicker/normalize.scss */
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, serif;
+  _font-family: 'courier new', monospace;
+  font-size: 1em;
+}
+
+/**
+ * Improve readability of pre-formatted text in all browsers.
+ */
+/* line 231, sass/colorpicker/normalize.scss */
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/**
+ * Address CSS quotes not supported in IE 6/7.
+ */
+/* line 241, sass/colorpicker/normalize.scss */
+q {
+  quotes: none;
+}
+
+/**
+ * Address `quotes` property not supported in Safari 4.
+ */
+/* line 249, sass/colorpicker/normalize.scss */
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+/* line 259, sass/colorpicker/normalize.scss */
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+/* line 267, sass/colorpicker/normalize.scss */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+/* line 275, sass/colorpicker/normalize.scss */
+sup {
+  top: -0.5em;
+}
+
+/* line 279, sass/colorpicker/normalize.scss */
+sub {
+  bottom: -0.25em;
+}
+
+/* ==========================================================================
+   Lists
+   ========================================================================== */
+/**
+ * Address margins set differently in IE 6/7.
+ */
+/* line 291, sass/colorpicker/normalize.scss */
+dl,
+menu,
+ol,
+ul {
+  margin: 1em 0;
+}
+
+/* line 298, sass/colorpicker/normalize.scss */
+dd {
+  margin: 0 0 0 40px;
+}
+
+/**
+ * Address paddings set differently in IE 6/7.
+ */
+/* line 306, sass/colorpicker/normalize.scss */
+menu,
+ol,
+ul {
+  padding: 0 0 0 40px;
+}
+
+/**
+ * Correct list images handled incorrectly in IE 7.
+ */
+/* line 316, sass/colorpicker/normalize.scss */
+nav ul,
+nav ol {
+  list-style: none;
+  list-style-image: none;
+}
+
+/* ==========================================================================
+   Embedded content
+   ========================================================================== */
+/**
+ * 1. Remove border when inside `a` element in IE 6/7/8/9 and Firefox 3.
+ * 2. Improve image quality when scaled in IE 7.
+ */
+/* line 331, sass/colorpicker/normalize.scss */
+img {
+  border: 0;
+  /* 1 */
+  -ms-interpolation-mode: bicubic;
+  /* 2 */
+}
+
+/**
+ * Correct overflow displayed oddly in IE 9.
+ */
+/* line 340, sass/colorpicker/normalize.scss */
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   Figures
+   ========================================================================== */
+/**
+ * Address margin not present in IE 6/7/8/9, Safari 5, and Opera 11.
+ */
+/* line 352, sass/colorpicker/normalize.scss */
+figure {
+  margin: 0;
+}
+
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+/**
+ * Correct margin displayed oddly in IE 6/7.
+ */
+/* line 364, sass/colorpicker/normalize.scss */
+form {
+  margin: 0;
+}
+
+/**
+ * Define consistent border, margin, and padding.
+ */
+/* line 372, sass/colorpicker/normalize.scss */
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+/**
+ * 1. Correct color not being inherited in IE 6/7/8/9.
+ * 2. Correct text not wrapping in Firefox 3.
+ * 3. Correct alignment displayed oddly in IE 6/7.
+ */
+/* line 384, sass/colorpicker/normalize.scss */
+legend {
+  border: 0;
+  /* 1 */
+  padding: 0;
+  white-space: normal;
+  /* 2 */
+  *margin-left: -7px;
+  /* 3 */
+}
+
+/**
+ * 1. Correct font size not being inherited in all browsers.
+ * 2. Address margins set differently in IE 6/7, Firefox 3+, Safari 5,
+ *    and Chrome.
+ * 3. Improve appearance and consistency in all browsers.
+ */
+/* line 398, sass/colorpicker/normalize.scss */
+button,
+input,
+select,
+textarea {
+  font-size: 100%;
+  /* 1 */
+  margin: 0;
+  /* 2 */
+  vertical-align: baseline;
+  /* 3 */
+  *vertical-align: middle;
+  /* 3 */
+}
+
+/**
+ * Address Firefox 3+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+/* line 413, sass/colorpicker/normalize.scss */
+button,
+input {
+  line-height: normal;
+}
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Chrome, Safari 5+, and IE 6+.
+ * Correct `select` style inheritance in Firefox 4+ and Opera.
+ */
+/* line 425, sass/colorpicker/normalize.scss */
+button,
+select {
+  text-transform: none;
+}
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ * 4. Remove inner spacing in IE 7 without affecting normal text inputs.
+ *    Known issue: inner spacing remains in IE 6.
+ */
+/* line 440, sass/colorpicker/normalize.scss */
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  /* 2 */
+  cursor: pointer;
+  /* 3 */
+  *overflow: visible;
+  /* 4 */
+}
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+/* line 453, sass/colorpicker/normalize.scss */
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+/**
+ * 1. Address box sizing set to content-box in IE 8/9.
+ * 2. Remove excess padding in IE 8/9.
+ * 3. Remove excess padding in IE 7.
+ *    Known issue: excess padding remains in IE 6.
+ */
+/* line 465, sass/colorpicker/normalize.scss */
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  /* 1 */
+  padding: 0;
+  /* 2 */
+  *height: 13px;
+  /* 3 */
+  *width: 13px;
+  /* 3 */
+}
+
+/**
+ * 1. Address `appearance` set to `searchfield` in Safari 5 and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari 5 and Chrome
+ *    (include `-moz` to future-proof).
+ */
+/* line 479, sass/colorpicker/normalize.scss */
+input[type="search"] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  /* 2 */
+  box-sizing: content-box;
+}
+
+/**
+ * Remove inner padding and search cancel button in Safari 5 and Chrome
+ * on OS X.
+ */
+/* line 491, sass/colorpicker/normalize.scss */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * Remove inner padding and border in Firefox 3+.
+ */
+/* line 500, sass/colorpicker/normalize.scss */
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/**
+ * 1. Remove default vertical scrollbar in IE 6/7/8/9.
+ * 2. Improve readability and alignment in all browsers.
+ */
+/* line 511, sass/colorpicker/normalize.scss */
+textarea {
+  overflow: auto;
+  /* 1 */
+  vertical-align: top;
+  /* 2 */
+}
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+/**
+ * Remove most spacing between table cells.
+ */
+/* line 524, sass/colorpicker/normalize.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/*!
+ *  Font Awesome 3.0.2
+ *  the iconic font designed for use with Twitter Bootstrap
+ *  -------------------------------------------------------
+ *  The full suite of pictographic icons, examples, and documentation
+ *  can be found at: http://fortawesome.github.com/Font-Awesome/
+ *
+ *  License
+ *  -------------------------------------------------------
+ *  - The Font Awesome font is licensed under the SIL Open Font License - http://scripts.sil.org/OFL
+ *  - Font Awesome CSS, LESS, and SASS files are licensed under the MIT License -
+ *    http://opensource.org/licenses/mit-license.html
+ *  - The Font Awesome pictograms are licensed under the CC BY 3.0 License - http://creativecommons.org/licenses/by/3.0/
+ *  - Attribution is no longer required in Font Awesome 3.0, but much appreciated:
+ *    "Font Awesome by Dave Gandy - http://fortawesome.github.com/Font-Awesome"
+
+ *  Contact
+ *  -------------------------------------------------------
+ *  Email: dave@davegandy.com
+ *  Twitter: http://twitter.com/fortaweso_me
+ *  Work: Lead Product Designer @ http://kyruus.com
+ */
+@font-face {
+  font-family: 'FontAwesome';
+  src: url("../../font/fontawesome-webfont-v=3.0.1.eot");
+  src: url("../../font/fontawesome-webfont-.eot#iefix&v=3.0.1") format("embedded-opentype"), url("../../font/fontawesome-webfont-v=3.0.1.woff") format("woff"), url("../../font/fontawesome-webfont-v=3.0.1.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+/*  Font Awesome styles
+    ------------------------------------------------------- */
+/* line 34, sass/colorpicker/font-awesome.scss */
+[class^="icon-"],
+[class*=" icon-"] {
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  -webkit-font-smoothing: antialiased;
+  /* sprites.less reset */
+  display: inline;
+  width: auto;
+  height: auto;
+  line-height: normal;
+  vertical-align: baseline;
+  background-image: none;
+  background-position: 0% 0%;
+  background-repeat: repeat;
+  margin-top: 0;
+}
+
+/* more sprites.less reset */
+/* line 54, sass/colorpicker/font-awesome.scss */
+.icon-white,
+.nav-pills > .active > a > [class^="icon-"],
+.nav-pills > .active > a > [class*=" icon-"],
+.nav-list > .active > a > [class^="icon-"],
+.nav-list > .active > a > [class*=" icon-"],
+.navbar-inverse .nav > .active > a > [class^="icon-"],
+.navbar-inverse .nav > .active > a > [class*=" icon-"],
+.dropdown-menu > li > a:hover > [class^="icon-"],
+.dropdown-menu > li > a:hover > [class*=" icon-"],
+.dropdown-menu > .active > a > [class^="icon-"],
+.dropdown-menu > .active > a > [class*=" icon-"],
+.dropdown-submenu:hover > a > [class^="icon-"],
+.dropdown-submenu:hover > a > [class*=" icon-"] {
+  background-image: none;
+}
+
+/* line 69, sass/colorpicker/font-awesome.scss */
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  text-decoration: inherit;
+  display: inline-block;
+  speak: none;
+}
+
+/* makes sure icons active on rollover in links */
+/* line 76, sass/colorpicker/font-awesome.scss */
+a [class^="icon-"],
+a [class*=" icon-"] {
+  display: inline-block;
+}
+
+/* makes the font 33% larger relative to the icon container */
+/* line 81, sass/colorpicker/font-awesome.scss */
+.icon-large:before {
+  vertical-align: -10%;
+  font-size: 1.3333333333333333em;
+}
+
+/* line 85, sass/colorpicker/font-awesome.scss */
+.btn [class^="icon-"],
+.nav [class^="icon-"],
+.btn [class*=" icon-"],
+.nav [class*=" icon-"] {
+  display: inline;
+  /* keeps button heights with and without icons the same */
+}
+
+/* line 93, sass/colorpicker/font-awesome.scss */
+.btn [class^="icon-"].icon-large,
+.nav [class^="icon-"].icon-large,
+.btn [class*=" icon-"].icon-large,
+.nav [class*=" icon-"].icon-large {
+  line-height: .9em;
+}
+
+/* line 99, sass/colorpicker/font-awesome.scss */
+.btn [class^="icon-"].icon-spin,
+.nav [class^="icon-"].icon-spin,
+.btn [class*=" icon-"].icon-spin,
+.nav [class*=" icon-"].icon-spin {
+  display: inline-block;
+}
+
+/* line 105, sass/colorpicker/font-awesome.scss */
+.nav-tabs [class^="icon-"],
+.nav-pills [class^="icon-"],
+.nav-tabs [class*=" icon-"],
+.nav-pills [class*=" icon-"] {
+  /* keeps button heights with and without icons the same */
+}
+
+/* line 112, sass/colorpicker/font-awesome.scss */
+.nav-tabs [class^="icon-"],
+.nav-pills [class^="icon-"],
+.nav-tabs [class*=" icon-"],
+.nav-pills [class*=" icon-"],
+.nav-tabs [class^="icon-"].icon-large,
+.nav-pills [class^="icon-"].icon-large,
+.nav-tabs [class*=" icon-"].icon-large,
+.nav-pills [class*=" icon-"].icon-large {
+  line-height: .9em;
+}
+
+/* line 122, sass/colorpicker/font-awesome.scss */
+li [class^="icon-"],
+.nav li [class^="icon-"],
+li [class*=" icon-"],
+.nav li [class*=" icon-"] {
+  display: inline-block;
+  width: 1.25em;
+  text-align: center;
+}
+
+/* line 130, sass/colorpicker/font-awesome.scss */
+li [class^="icon-"].icon-large,
+.nav li [class^="icon-"].icon-large,
+li [class*=" icon-"].icon-large,
+.nav li [class*=" icon-"].icon-large {
+  /* increased font size for icon-large */
+  width: 1.5625em;
+}
+
+/* line 138, sass/colorpicker/font-awesome.scss */
+ul.icons {
+  list-style-type: none;
+  text-indent: -0.75em;
+}
+
+/* line 142, sass/colorpicker/font-awesome.scss */
+ul.icons li [class^="icon-"],
+ul.icons li [class*=" icon-"] {
+  width: .75em;
+}
+
+/* line 146, sass/colorpicker/font-awesome.scss */
+.icon-muted {
+  color: #eeeeee;
+}
+
+/* line 149, sass/colorpicker/font-awesome.scss */
+.icon-border {
+  border: solid 1px #eeeeee;
+  padding: .2em .25em .15em;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+/* line 156, sass/colorpicker/font-awesome.scss */
+.icon-2x {
+  font-size: 2em;
+}
+
+/* line 159, sass/colorpicker/font-awesome.scss */
+.icon-2x.icon-border {
+  border-width: 2px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+/* line 165, sass/colorpicker/font-awesome.scss */
+.icon-3x {
+  font-size: 3em;
+}
+
+/* line 168, sass/colorpicker/font-awesome.scss */
+.icon-3x.icon-border {
+  border-width: 3px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+/* line 174, sass/colorpicker/font-awesome.scss */
+.icon-4x {
+  font-size: 4em;
+}
+
+/* line 177, sass/colorpicker/font-awesome.scss */
+.icon-4x.icon-border {
+  border-width: 4px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+}
+
+/* line 183, sass/colorpicker/font-awesome.scss */
+.pull-right {
+  float: right;
+}
+
+/* line 186, sass/colorpicker/font-awesome.scss */
+.pull-left {
+  float: left;
+}
+
+/* line 189, sass/colorpicker/font-awesome.scss */
+[class^="icon-"].pull-left,
+[class*=" icon-"].pull-left {
+  margin-right: .3em;
+}
+
+/* line 193, sass/colorpicker/font-awesome.scss */
+[class^="icon-"].pull-right,
+[class*=" icon-"].pull-right {
+  margin-left: .3em;
+}
+
+/* line 197, sass/colorpicker/font-awesome.scss */
+.btn [class^="icon-"].pull-left.icon-2x,
+.btn [class*=" icon-"].pull-left.icon-2x,
+.btn [class^="icon-"].pull-right.icon-2x,
+.btn [class*=" icon-"].pull-right.icon-2x {
+  margin-top: .18em;
+}
+
+/* line 203, sass/colorpicker/font-awesome.scss */
+.btn [class^="icon-"].icon-spin.icon-large,
+.btn [class*=" icon-"].icon-spin.icon-large {
+  line-height: .8em;
+}
+
+/* line 207, sass/colorpicker/font-awesome.scss */
+.btn.btn-small [class^="icon-"].pull-left.icon-2x,
+.btn.btn-small [class*=" icon-"].pull-left.icon-2x,
+.btn.btn-small [class^="icon-"].pull-right.icon-2x,
+.btn.btn-small [class*=" icon-"].pull-right.icon-2x {
+  margin-top: .25em;
+}
+
+/* line 213, sass/colorpicker/font-awesome.scss */
+.btn.btn-large [class^="icon-"],
+.btn.btn-large [class*=" icon-"] {
+  margin-top: 0;
+}
+
+/* line 217, sass/colorpicker/font-awesome.scss */
+.btn.btn-large [class^="icon-"].pull-left.icon-2x,
+.btn.btn-large [class*=" icon-"].pull-left.icon-2x,
+.btn.btn-large [class^="icon-"].pull-right.icon-2x,
+.btn.btn-large [class*=" icon-"].pull-right.icon-2x {
+  margin-top: .05em;
+}
+
+/* line 223, sass/colorpicker/font-awesome.scss */
+.btn.btn-large [class^="icon-"].pull-left.icon-2x,
+.btn.btn-large [class*=" icon-"].pull-left.icon-2x {
+  margin-right: .2em;
+}
+
+/* line 227, sass/colorpicker/font-awesome.scss */
+.btn.btn-large [class^="icon-"].pull-right.icon-2x,
+.btn.btn-large [class*=" icon-"].pull-right.icon-2x {
+  margin-left: .2em;
+}
+
+/* line 231, sass/colorpicker/font-awesome.scss */
+.icon-spin {
+  display: inline-block;
+  -moz-animation: spin 2s infinite linear;
+  -o-animation: spin 2s infinite linear;
+  -webkit-animation: spin 2s infinite linear;
+  animation: spin 2s infinite linear;
+}
+
+@-moz-keyframes spin {
+  /* line 239, sass/colorpicker/font-awesome.scss */
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+
+  /* line 240, sass/colorpicker/font-awesome.scss */
+  100% {
+    -moz-transform: rotate(359deg);
+  }
+}
+@-webkit-keyframes spin {
+  /* line 243, sass/colorpicker/font-awesome.scss */
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+
+  /* line 244, sass/colorpicker/font-awesome.scss */
+  100% {
+    -webkit-transform: rotate(359deg);
+  }
+}
+@-o-keyframes spin {
+  /* line 247, sass/colorpicker/font-awesome.scss */
+  0% {
+    -o-transform: rotate(0deg);
+  }
+
+  /* line 248, sass/colorpicker/font-awesome.scss */
+  100% {
+    -o-transform: rotate(359deg);
+  }
+}
+@-ms-keyframes spin {
+  /* line 251, sass/colorpicker/font-awesome.scss */
+  0% {
+    -ms-transform: rotate(0deg);
+  }
+
+  /* line 252, sass/colorpicker/font-awesome.scss */
+  100% {
+    -ms-transform: rotate(359deg);
+  }
+}
+@keyframes spin {
+  /* line 255, sass/colorpicker/font-awesome.scss */
+  0% {
+    transform: rotate(0deg);
+  }
+
+  /* line 256, sass/colorpicker/font-awesome.scss */
+  100% {
+    transform: rotate(359deg);
+  }
+}
+@-moz-document url-prefix() {
+  /* line 259, sass/colorpicker/font-awesome.scss */
+  .icon-spin {
+    height: .9em;
+  }
+
+  /* line 262, sass/colorpicker/font-awesome.scss */
+  .btn .icon-spin {
+    height: auto;
+  }
+
+  /* line 265, sass/colorpicker/font-awesome.scss */
+  .icon-spin.icon-large {
+    height: 1.25em;
+  }
+
+  /* line 268, sass/colorpicker/font-awesome.scss */
+  .btn .icon-spin.icon-large {
+    height: .75em;
+  }
+}
+/*  Font Awesome uses the Unicode Private Use Area (PUA) to ensure screen
+    readers do not read off random characters that represent icons */
+/* line 274, sass/colorpicker/font-awesome.scss */
+.icon-glass:before {
+  content: "\f000";
+}
+
+/* line 275, sass/colorpicker/font-awesome.scss */
+.icon-music:before {
+  content: "\f001";
+}
+
+/* line 276, sass/colorpicker/font-awesome.scss */
+.icon-search:before {
+  content: "\f002";
+}
+
+/* line 277, sass/colorpicker/font-awesome.scss */
+.icon-envelope:before {
+  content: "\f003";
+}
+
+/* line 278, sass/colorpicker/font-awesome.scss */
+.icon-heart:before {
+  content: "\f004";
+}
+
+/* line 279, sass/colorpicker/font-awesome.scss */
+.icon-star:before {
+  content: "\f005";
+}
+
+/* line 280, sass/colorpicker/font-awesome.scss */
+.icon-star-empty:before {
+  content: "\f006";
+}
+
+/* line 281, sass/colorpicker/font-awesome.scss */
+.icon-user:before {
+  content: "\f007";
+}
+
+/* line 282, sass/colorpicker/font-awesome.scss */
+.icon-film:before {
+  content: "\f008";
+}
+
+/* line 283, sass/colorpicker/font-awesome.scss */
+.icon-th-large:before {
+  content: "\f009";
+}
+
+/* line 284, sass/colorpicker/font-awesome.scss */
+.icon-th:before {
+  content: "\f00a";
+}
+
+/* line 285, sass/colorpicker/font-awesome.scss */
+.icon-th-list:before {
+  content: "\f00b";
+}
+
+/* line 286, sass/colorpicker/font-awesome.scss */
+.icon-ok:before {
+  content: "\f00c";
+}
+
+/* line 287, sass/colorpicker/font-awesome.scss */
+.icon-remove:before {
+  content: "\f00d";
+}
+
+/* line 288, sass/colorpicker/font-awesome.scss */
+.icon-zoom-in:before {
+  content: "\f00e";
+}
+
+/* line 290, sass/colorpicker/font-awesome.scss */
+.icon-zoom-out:before {
+  content: "\f010";
+}
+
+/* line 291, sass/colorpicker/font-awesome.scss */
+.icon-off:before {
+  content: "\f011";
+}
+
+/* line 292, sass/colorpicker/font-awesome.scss */
+.icon-signal:before {
+  content: "\f012";
+}
+
+/* line 293, sass/colorpicker/font-awesome.scss */
+.icon-cog:before {
+  content: "\f013";
+}
+
+/* line 294, sass/colorpicker/font-awesome.scss */
+.icon-trash:before {
+  content: "\f014";
+}
+
+/* line 295, sass/colorpicker/font-awesome.scss */
+.icon-home:before {
+  content: "\f015";
+}
+
+/* line 296, sass/colorpicker/font-awesome.scss */
+.icon-file:before {
+  content: "\f016";
+}
+
+/* line 297, sass/colorpicker/font-awesome.scss */
+.icon-time:before {
+  content: "\f017";
+}
+
+/* line 298, sass/colorpicker/font-awesome.scss */
+.icon-road:before {
+  content: "\f018";
+}
+
+/* line 299, sass/colorpicker/font-awesome.scss */
+.icon-download-alt:before {
+  content: "\f019";
+}
+
+/* line 300, sass/colorpicker/font-awesome.scss */
+.icon-download:before {
+  content: "\f01a";
+}
+
+/* line 301, sass/colorpicker/font-awesome.scss */
+.icon-upload:before {
+  content: "\f01b";
+}
+
+/* line 302, sass/colorpicker/font-awesome.scss */
+.icon-inbox:before {
+  content: "\f01c";
+}
+
+/* line 303, sass/colorpicker/font-awesome.scss */
+.icon-play-circle:before {
+  content: "\f01d";
+}
+
+/* line 304, sass/colorpicker/font-awesome.scss */
+.icon-repeat:before {
+  content: "\f01e";
+}
+
+/* \f020 doesn't work in Safari. all shifted one down */
+/* line 307, sass/colorpicker/font-awesome.scss */
+.icon-refresh:before {
+  content: "\f021";
+}
+
+/* line 308, sass/colorpicker/font-awesome.scss */
+.icon-list-alt:before {
+  content: "\f022";
+}
+
+/* line 309, sass/colorpicker/font-awesome.scss */
+.icon-lock:before {
+  content: "\f023";
+}
+
+/* line 310, sass/colorpicker/font-awesome.scss */
+.icon-flag:before {
+  content: "\f024";
+}
+
+/* line 311, sass/colorpicker/font-awesome.scss */
+.icon-headphones:before {
+  content: "\f025";
+}
+
+/* line 312, sass/colorpicker/font-awesome.scss */
+.icon-volume-off:before {
+  content: "\f026";
+}
+
+/* line 313, sass/colorpicker/font-awesome.scss */
+.icon-volume-down:before {
+  content: "\f027";
+}
+
+/* line 314, sass/colorpicker/font-awesome.scss */
+.icon-volume-up:before {
+  content: "\f028";
+}
+
+/* line 315, sass/colorpicker/font-awesome.scss */
+.icon-qrcode:before {
+  content: "\f029";
+}
+
+/* line 316, sass/colorpicker/font-awesome.scss */
+.icon-barcode:before {
+  content: "\f02a";
+}
+
+/* line 317, sass/colorpicker/font-awesome.scss */
+.icon-tag:before {
+  content: "\f02b";
+}
+
+/* line 318, sass/colorpicker/font-awesome.scss */
+.icon-tags:before {
+  content: "\f02c";
+}
+
+/* line 319, sass/colorpicker/font-awesome.scss */
+.icon-book:before {
+  content: "\f02d";
+}
+
+/* line 320, sass/colorpicker/font-awesome.scss */
+.icon-bookmark:before {
+  content: "\f02e";
+}
+
+/* line 321, sass/colorpicker/font-awesome.scss */
+.icon-print:before {
+  content: "\f02f";
+}
+
+/* line 323, sass/colorpicker/font-awesome.scss */
+.icon-camera:before {
+  content: "\f030";
+}
+
+/* line 324, sass/colorpicker/font-awesome.scss */
+.icon-font:before {
+  content: "\f031";
+}
+
+/* line 325, sass/colorpicker/font-awesome.scss */
+.icon-bold:before {
+  content: "\f032";
+}
+
+/* line 326, sass/colorpicker/font-awesome.scss */
+.icon-italic:before {
+  content: "\f033";
+}
+
+/* line 327, sass/colorpicker/font-awesome.scss */
+.icon-text-height:before {
+  content: "\f034";
+}
+
+/* line 328, sass/colorpicker/font-awesome.scss */
+.icon-text-width:before {
+  content: "\f035";
+}
+
+/* line 329, sass/colorpicker/font-awesome.scss */
+.icon-align-left:before {
+  content: "\f036";
+}
+
+/* line 330, sass/colorpicker/font-awesome.scss */
+.icon-align-center:before {
+  content: "\f037";
+}
+
+/* line 331, sass/colorpicker/font-awesome.scss */
+.icon-align-right:before {
+  content: "\f038";
+}
+
+/* line 332, sass/colorpicker/font-awesome.scss */
+.icon-align-justify:before {
+  content: "\f039";
+}
+
+/* line 333, sass/colorpicker/font-awesome.scss */
+.icon-list:before {
+  content: "\f03a";
+}
+
+/* line 334, sass/colorpicker/font-awesome.scss */
+.icon-indent-left:before {
+  content: "\f03b";
+}
+
+/* line 335, sass/colorpicker/font-awesome.scss */
+.icon-indent-right:before {
+  content: "\f03c";
+}
+
+/* line 336, sass/colorpicker/font-awesome.scss */
+.icon-facetime-video:before {
+  content: "\f03d";
+}
+
+/* line 337, sass/colorpicker/font-awesome.scss */
+.icon-picture:before {
+  content: "\f03e";
+}
+
+/* line 339, sass/colorpicker/font-awesome.scss */
+.icon-pencil:before {
+  content: "\f040";
+}
+
+/* line 340, sass/colorpicker/font-awesome.scss */
+.icon-map-marker:before {
+  content: "\f041";
+}
+
+/* line 341, sass/colorpicker/font-awesome.scss */
+.icon-adjust:before {
+  content: "\f042";
+}
+
+/* line 342, sass/colorpicker/font-awesome.scss */
+.icon-tint:before {
+  content: "\f043";
+}
+
+/* line 343, sass/colorpicker/font-awesome.scss */
+.icon-edit:before {
+  content: "\f044";
+}
+
+/* line 344, sass/colorpicker/font-awesome.scss */
+.icon-share:before {
+  content: "\f045";
+}
+
+/* line 345, sass/colorpicker/font-awesome.scss */
+.icon-check:before {
+  content: "\f046";
+}
+
+/* line 346, sass/colorpicker/font-awesome.scss */
+.icon-move:before {
+  content: "\f047";
+}
+
+/* line 347, sass/colorpicker/font-awesome.scss */
+.icon-step-backward:before {
+  content: "\f048";
+}
+
+/* line 348, sass/colorpicker/font-awesome.scss */
+.icon-fast-backward:before {
+  content: "\f049";
+}
+
+/* line 349, sass/colorpicker/font-awesome.scss */
+.icon-backward:before {
+  content: "\f04a";
+}
+
+/* line 350, sass/colorpicker/font-awesome.scss */
+.icon-play:before {
+  content: "\f04b";
+}
+
+/* line 351, sass/colorpicker/font-awesome.scss */
+.icon-pause:before {
+  content: "\f04c";
+}
+
+/* line 352, sass/colorpicker/font-awesome.scss */
+.icon-stop:before {
+  content: "\f04d";
+}
+
+/* line 353, sass/colorpicker/font-awesome.scss */
+.icon-forward:before {
+  content: "\f04e";
+}
+
+/* line 355, sass/colorpicker/font-awesome.scss */
+.icon-fast-forward:before {
+  content: "\f050";
+}
+
+/* line 356, sass/colorpicker/font-awesome.scss */
+.icon-step-forward:before {
+  content: "\f051";
+}
+
+/* line 357, sass/colorpicker/font-awesome.scss */
+.icon-eject:before {
+  content: "\f052";
+}
+
+/* line 358, sass/colorpicker/font-awesome.scss */
+.icon-chevron-left:before {
+  content: "\f053";
+}
+
+/* line 359, sass/colorpicker/font-awesome.scss */
+.icon-chevron-right:before {
+  content: "\f054";
+}
+
+/* line 360, sass/colorpicker/font-awesome.scss */
+.icon-plus-sign:before {
+  content: "\f055";
+}
+
+/* line 361, sass/colorpicker/font-awesome.scss */
+.icon-minus-sign:before {
+  content: "\f056";
+}
+
+/* line 362, sass/colorpicker/font-awesome.scss */
+.icon-remove-sign:before {
+  content: "\f057";
+}
+
+/* line 363, sass/colorpicker/font-awesome.scss */
+.icon-ok-sign:before {
+  content: "\f058";
+}
+
+/* line 364, sass/colorpicker/font-awesome.scss */
+.icon-question-sign:before {
+  content: "\f059";
+}
+
+/* line 365, sass/colorpicker/font-awesome.scss */
+.icon-info-sign:before {
+  content: "\f05a";
+}
+
+/* line 366, sass/colorpicker/font-awesome.scss */
+.icon-screenshot:before {
+  content: "\f05b";
+}
+
+/* line 367, sass/colorpicker/font-awesome.scss */
+.icon-remove-circle:before {
+  content: "\f05c";
+}
+
+/* line 368, sass/colorpicker/font-awesome.scss */
+.icon-ok-circle:before {
+  content: "\f05d";
+}
+
+/* line 369, sass/colorpicker/font-awesome.scss */
+.icon-ban-circle:before {
+  content: "\f05e";
+}
+
+/* line 371, sass/colorpicker/font-awesome.scss */
+.icon-arrow-left:before {
+  content: "\f060";
+}
+
+/* line 372, sass/colorpicker/font-awesome.scss */
+.icon-arrow-right:before {
+  content: "\f061";
+}
+
+/* line 373, sass/colorpicker/font-awesome.scss */
+.icon-arrow-up:before {
+  content: "\f062";
+}
+
+/* line 374, sass/colorpicker/font-awesome.scss */
+.icon-arrow-down:before {
+  content: "\f063";
+}
+
+/* line 375, sass/colorpicker/font-awesome.scss */
+.icon-share-alt:before {
+  content: "\f064";
+}
+
+/* line 376, sass/colorpicker/font-awesome.scss */
+.icon-resize-full:before {
+  content: "\f065";
+}
+
+/* line 377, sass/colorpicker/font-awesome.scss */
+.icon-resize-small:before {
+  content: "\f066";
+}
+
+/* line 378, sass/colorpicker/font-awesome.scss */
+.icon-plus:before {
+  content: "\f067";
+}
+
+/* line 379, sass/colorpicker/font-awesome.scss */
+.icon-minus:before {
+  content: "\f068";
+}
+
+/* line 380, sass/colorpicker/font-awesome.scss */
+.icon-asterisk:before {
+  content: "\f069";
+}
+
+/* line 381, sass/colorpicker/font-awesome.scss */
+.icon-exclamation-sign:before {
+  content: "\f06a";
+}
+
+/* line 382, sass/colorpicker/font-awesome.scss */
+.icon-gift:before {
+  content: "\f06b";
+}
+
+/* line 383, sass/colorpicker/font-awesome.scss */
+.icon-leaf:before {
+  content: "\f06c";
+}
+
+/* line 384, sass/colorpicker/font-awesome.scss */
+.icon-fire:before {
+  content: "\f06d";
+}
+
+/* line 385, sass/colorpicker/font-awesome.scss */
+.icon-eye-open:before {
+  content: "\f06e";
+}
+
+/* line 387, sass/colorpicker/font-awesome.scss */
+.icon-eye-close:before {
+  content: "\f070";
+}
+
+/* line 388, sass/colorpicker/font-awesome.scss */
+.icon-warning-sign:before {
+  content: "\f071";
+}
+
+/* line 389, sass/colorpicker/font-awesome.scss */
+.icon-plane:before {
+  content: "\f072";
+}
+
+/* line 390, sass/colorpicker/font-awesome.scss */
+.icon-calendar:before {
+  content: "\f073";
+}
+
+/* line 391, sass/colorpicker/font-awesome.scss */
+.icon-random:before {
+  content: "\f074";
+}
+
+/* line 392, sass/colorpicker/font-awesome.scss */
+.icon-comment:before {
+  content: "\f075";
+}
+
+/* line 393, sass/colorpicker/font-awesome.scss */
+.icon-magnet:before {
+  content: "\f076";
+}
+
+/* line 394, sass/colorpicker/font-awesome.scss */
+.icon-chevron-up:before {
+  content: "\f077";
+}
+
+/* line 395, sass/colorpicker/font-awesome.scss */
+.icon-chevron-down:before {
+  content: "\f078";
+}
+
+/* line 396, sass/colorpicker/font-awesome.scss */
+.icon-retweet:before {
+  content: "\f079";
+}
+
+/* line 397, sass/colorpicker/font-awesome.scss */
+.icon-shopping-cart:before {
+  content: "\f07a";
+}
+
+/* line 398, sass/colorpicker/font-awesome.scss */
+.icon-folder-close:before {
+  content: "\f07b";
+}
+
+/* line 399, sass/colorpicker/font-awesome.scss */
+.icon-folder-open:before {
+  content: "\f07c";
+}
+
+/* line 400, sass/colorpicker/font-awesome.scss */
+.icon-resize-vertical:before {
+  content: "\f07d";
+}
+
+/* line 401, sass/colorpicker/font-awesome.scss */
+.icon-resize-horizontal:before {
+  content: "\f07e";
+}
+
+/* line 403, sass/colorpicker/font-awesome.scss */
+.icon-bar-chart:before {
+  content: "\f080";
+}
+
+/* line 404, sass/colorpicker/font-awesome.scss */
+.icon-twitter-sign:before {
+  content: "\f081";
+}
+
+/* line 405, sass/colorpicker/font-awesome.scss */
+.icon-facebook-sign:before {
+  content: "\f082";
+}
+
+/* line 406, sass/colorpicker/font-awesome.scss */
+.icon-camera-retro:before {
+  content: "\f083";
+}
+
+/* line 407, sass/colorpicker/font-awesome.scss */
+.icon-key:before {
+  content: "\f084";
+}
+
+/* line 408, sass/colorpicker/font-awesome.scss */
+.icon-cogs:before {
+  content: "\f085";
+}
+
+/* line 409, sass/colorpicker/font-awesome.scss */
+.icon-comments:before {
+  content: "\f086";
+}
+
+/* line 410, sass/colorpicker/font-awesome.scss */
+.icon-thumbs-up:before {
+  content: "\f087";
+}
+
+/* line 411, sass/colorpicker/font-awesome.scss */
+.icon-thumbs-down:before {
+  content: "\f088";
+}
+
+/* line 412, sass/colorpicker/font-awesome.scss */
+.icon-star-half:before {
+  content: "\f089";
+}
+
+/* line 413, sass/colorpicker/font-awesome.scss */
+.icon-heart-empty:before {
+  content: "\f08a";
+}
+
+/* line 414, sass/colorpicker/font-awesome.scss */
+.icon-signout:before {
+  content: "\f08b";
+}
+
+/* line 415, sass/colorpicker/font-awesome.scss */
+.icon-linkedin-sign:before {
+  content: "\f08c";
+}
+
+/* line 416, sass/colorpicker/font-awesome.scss */
+.icon-pushpin:before {
+  content: "\f08d";
+}
+
+/* line 417, sass/colorpicker/font-awesome.scss */
+.icon-external-link:before {
+  content: "\f08e";
+}
+
+/* line 419, sass/colorpicker/font-awesome.scss */
+.icon-signin:before {
+  content: "\f090";
+}
+
+/* line 420, sass/colorpicker/font-awesome.scss */
+.icon-trophy:before {
+  content: "\f091";
+}
+
+/* line 421, sass/colorpicker/font-awesome.scss */
+.icon-github-sign:before {
+  content: "\f092";
+}
+
+/* line 422, sass/colorpicker/font-awesome.scss */
+.icon-upload-alt:before {
+  content: "\f093";
+}
+
+/* line 423, sass/colorpicker/font-awesome.scss */
+.icon-lemon:before {
+  content: "\f094";
+}
+
+/* line 424, sass/colorpicker/font-awesome.scss */
+.icon-phone:before {
+  content: "\f095";
+}
+
+/* line 425, sass/colorpicker/font-awesome.scss */
+.icon-check-empty:before {
+  content: "\f096";
+}
+
+/* line 426, sass/colorpicker/font-awesome.scss */
+.icon-bookmark-empty:before {
+  content: "\f097";
+}
+
+/* line 427, sass/colorpicker/font-awesome.scss */
+.icon-phone-sign:before {
+  content: "\f098";
+}
+
+/* line 428, sass/colorpicker/font-awesome.scss */
+.icon-twitter:before {
+  content: "\f099";
+}
+
+/* line 429, sass/colorpicker/font-awesome.scss */
+.icon-facebook:before {
+  content: "\f09a";
+}
+
+/* line 430, sass/colorpicker/font-awesome.scss */
+.icon-github:before {
+  content: "\f09b";
+}
+
+/* line 431, sass/colorpicker/font-awesome.scss */
+.icon-unlock:before {
+  content: "\f09c";
+}
+
+/* line 432, sass/colorpicker/font-awesome.scss */
+.icon-credit-card:before {
+  content: "\f09d";
+}
+
+/* line 433, sass/colorpicker/font-awesome.scss */
+.icon-rss:before {
+  content: "\f09e";
+}
+
+/* line 435, sass/colorpicker/font-awesome.scss */
+.icon-hdd:before {
+  content: "\f0a0";
+}
+
+/* line 436, sass/colorpicker/font-awesome.scss */
+.icon-bullhorn:before {
+  content: "\f0a1";
+}
+
+/* line 437, sass/colorpicker/font-awesome.scss */
+.icon-bell:before {
+  content: "\f0a2";
+}
+
+/* line 438, sass/colorpicker/font-awesome.scss */
+.icon-certificate:before {
+  content: "\f0a3";
+}
+
+/* line 439, sass/colorpicker/font-awesome.scss */
+.icon-hand-right:before {
+  content: "\f0a4";
+}
+
+/* line 440, sass/colorpicker/font-awesome.scss */
+.icon-hand-left:before {
+  content: "\f0a5";
+}
+
+/* line 441, sass/colorpicker/font-awesome.scss */
+.icon-hand-up:before {
+  content: "\f0a6";
+}
+
+/* line 442, sass/colorpicker/font-awesome.scss */
+.icon-hand-down:before {
+  content: "\f0a7";
+}
+
+/* line 443, sass/colorpicker/font-awesome.scss */
+.icon-circle-arrow-left:before {
+  content: "\f0a8";
+}
+
+/* line 444, sass/colorpicker/font-awesome.scss */
+.icon-circle-arrow-right:before {
+  content: "\f0a9";
+}
+
+/* line 445, sass/colorpicker/font-awesome.scss */
+.icon-circle-arrow-up:before {
+  content: "\f0aa";
+}
+
+/* line 446, sass/colorpicker/font-awesome.scss */
+.icon-circle-arrow-down:before {
+  content: "\f0ab";
+}
+
+/* line 447, sass/colorpicker/font-awesome.scss */
+.icon-globe:before {
+  content: "\f0ac";
+}
+
+/* line 448, sass/colorpicker/font-awesome.scss */
+.icon-wrench:before {
+  content: "\f0ad";
+}
+
+/* line 449, sass/colorpicker/font-awesome.scss */
+.icon-tasks:before {
+  content: "\f0ae";
+}
+
+/* line 451, sass/colorpicker/font-awesome.scss */
+.icon-filter:before {
+  content: "\f0b0";
+}
+
+/* line 452, sass/colorpicker/font-awesome.scss */
+.icon-briefcase:before {
+  content: "\f0b1";
+}
+
+/* line 453, sass/colorpicker/font-awesome.scss */
+.icon-fullscreen:before {
+  content: "\f0b2";
+}
+
+/* line 455, sass/colorpicker/font-awesome.scss */
+.icon-group:before {
+  content: "\f0c0";
+}
+
+/* line 456, sass/colorpicker/font-awesome.scss */
+.icon-link:before {
+  content: "\f0c1";
+}
+
+/* line 457, sass/colorpicker/font-awesome.scss */
+.icon-cloud:before {
+  content: "\f0c2";
+}
+
+/* line 458, sass/colorpicker/font-awesome.scss */
+.icon-beaker:before {
+  content: "\f0c3";
+}
+
+/* line 459, sass/colorpicker/font-awesome.scss */
+.icon-cut:before {
+  content: "\f0c4";
+}
+
+/* line 460, sass/colorpicker/font-awesome.scss */
+.icon-copy:before {
+  content: "\f0c5";
+}
+
+/* line 461, sass/colorpicker/font-awesome.scss */
+.icon-paper-clip:before {
+  content: "\f0c6";
+}
+
+/* line 462, sass/colorpicker/font-awesome.scss */
+.icon-save:before {
+  content: "\f0c7";
+}
+
+/* line 463, sass/colorpicker/font-awesome.scss */
+.icon-sign-blank:before {
+  content: "\f0c8";
+}
+
+/* line 464, sass/colorpicker/font-awesome.scss */
+.icon-reorder:before {
+  content: "\f0c9";
+}
+
+/* line 465, sass/colorpicker/font-awesome.scss */
+.icon-list-ul:before {
+  content: "\f0ca";
+}
+
+/* line 466, sass/colorpicker/font-awesome.scss */
+.icon-list-ol:before {
+  content: "\f0cb";
+}
+
+/* line 467, sass/colorpicker/font-awesome.scss */
+.icon-strikethrough:before {
+  content: "\f0cc";
+}
+
+/* line 468, sass/colorpicker/font-awesome.scss */
+.icon-underline:before {
+  content: "\f0cd";
+}
+
+/* line 469, sass/colorpicker/font-awesome.scss */
+.icon-table:before {
+  content: "\f0ce";
+}
+
+/* line 471, sass/colorpicker/font-awesome.scss */
+.icon-magic:before {
+  content: "\f0d0";
+}
+
+/* line 472, sass/colorpicker/font-awesome.scss */
+.icon-truck:before {
+  content: "\f0d1";
+}
+
+/* line 473, sass/colorpicker/font-awesome.scss */
+.icon-pinterest:before {
+  content: "\f0d2";
+}
+
+/* line 474, sass/colorpicker/font-awesome.scss */
+.icon-pinterest-sign:before {
+  content: "\f0d3";
+}
+
+/* line 475, sass/colorpicker/font-awesome.scss */
+.icon-google-plus-sign:before {
+  content: "\f0d4";
+}
+
+/* line 476, sass/colorpicker/font-awesome.scss */
+.icon-google-plus:before {
+  content: "\f0d5";
+}
+
+/* line 477, sass/colorpicker/font-awesome.scss */
+.icon-money:before {
+  content: "\f0d6";
+}
+
+/* line 478, sass/colorpicker/font-awesome.scss */
+.icon-caret-down:before {
+  content: "\f0d7";
+}
+
+/* line 479, sass/colorpicker/font-awesome.scss */
+.icon-caret-up:before {
+  content: "\f0d8";
+}
+
+/* line 480, sass/colorpicker/font-awesome.scss */
+.icon-caret-left:before {
+  content: "\f0d9";
+}
+
+/* line 481, sass/colorpicker/font-awesome.scss */
+.icon-caret-right:before {
+  content: "\f0da";
+}
+
+/* line 482, sass/colorpicker/font-awesome.scss */
+.icon-columns:before {
+  content: "\f0db";
+}
+
+/* line 483, sass/colorpicker/font-awesome.scss */
+.icon-sort:before {
+  content: "\f0dc";
+}
+
+/* line 484, sass/colorpicker/font-awesome.scss */
+.icon-sort-down:before {
+  content: "\f0dd";
+}
+
+/* line 485, sass/colorpicker/font-awesome.scss */
+.icon-sort-up:before {
+  content: "\f0de";
+}
+
+/* line 487, sass/colorpicker/font-awesome.scss */
+.icon-envelope-alt:before {
+  content: "\f0e0";
+}
+
+/* line 488, sass/colorpicker/font-awesome.scss */
+.icon-linkedin:before {
+  content: "\f0e1";
+}
+
+/* line 489, sass/colorpicker/font-awesome.scss */
+.icon-undo:before {
+  content: "\f0e2";
+}
+
+/* line 490, sass/colorpicker/font-awesome.scss */
+.icon-legal:before {
+  content: "\f0e3";
+}
+
+/* line 491, sass/colorpicker/font-awesome.scss */
+.icon-dashboard:before {
+  content: "\f0e4";
+}
+
+/* line 492, sass/colorpicker/font-awesome.scss */
+.icon-comment-alt:before {
+  content: "\f0e5";
+}
+
+/* line 493, sass/colorpicker/font-awesome.scss */
+.icon-comments-alt:before {
+  content: "\f0e6";
+}
+
+/* line 494, sass/colorpicker/font-awesome.scss */
+.icon-bolt:before {
+  content: "\f0e7";
+}
+
+/* line 495, sass/colorpicker/font-awesome.scss */
+.icon-sitemap:before {
+  content: "\f0e8";
+}
+
+/* line 496, sass/colorpicker/font-awesome.scss */
+.icon-umbrella:before {
+  content: "\f0e9";
+}
+
+/* line 497, sass/colorpicker/font-awesome.scss */
+.icon-paste:before {
+  content: "\f0ea";
+}
+
+/* line 498, sass/colorpicker/font-awesome.scss */
+.icon-lightbulb:before {
+  content: "\f0eb";
+}
+
+/* line 499, sass/colorpicker/font-awesome.scss */
+.icon-exchange:before {
+  content: "\f0ec";
+}
+
+/* line 500, sass/colorpicker/font-awesome.scss */
+.icon-cloud-download:before {
+  content: "\f0ed";
+}
+
+/* line 501, sass/colorpicker/font-awesome.scss */
+.icon-cloud-upload:before {
+  content: "\f0ee";
+}
+
+/* line 503, sass/colorpicker/font-awesome.scss */
+.icon-user-md:before {
+  content: "\f0f0";
+}
+
+/* line 504, sass/colorpicker/font-awesome.scss */
+.icon-stethoscope:before {
+  content: "\f0f1";
+}
+
+/* line 505, sass/colorpicker/font-awesome.scss */
+.icon-suitcase:before {
+  content: "\f0f2";
+}
+
+/* line 506, sass/colorpicker/font-awesome.scss */
+.icon-bell-alt:before {
+  content: "\f0f3";
+}
+
+/* line 507, sass/colorpicker/font-awesome.scss */
+.icon-coffee:before {
+  content: "\f0f4";
+}
+
+/* line 508, sass/colorpicker/font-awesome.scss */
+.icon-food:before {
+  content: "\f0f5";
+}
+
+/* line 509, sass/colorpicker/font-awesome.scss */
+.icon-file-alt:before {
+  content: "\f0f6";
+}
+
+/* line 510, sass/colorpicker/font-awesome.scss */
+.icon-building:before {
+  content: "\f0f7";
+}
+
+/* line 511, sass/colorpicker/font-awesome.scss */
+.icon-hospital:before {
+  content: "\f0f8";
+}
+
+/* line 512, sass/colorpicker/font-awesome.scss */
+.icon-ambulance:before {
+  content: "\f0f9";
+}
+
+/* line 513, sass/colorpicker/font-awesome.scss */
+.icon-medkit:before {
+  content: "\f0fa";
+}
+
+/* line 514, sass/colorpicker/font-awesome.scss */
+.icon-fighter-jet:before {
+  content: "\f0fb";
+}
+
+/* line 515, sass/colorpicker/font-awesome.scss */
+.icon-beer:before {
+  content: "\f0fc";
+}
+
+/* line 516, sass/colorpicker/font-awesome.scss */
+.icon-h-sign:before {
+  content: "\f0fd";
+}
+
+/* line 517, sass/colorpicker/font-awesome.scss */
+.icon-plus-sign-alt:before {
+  content: "\f0fe";
+}
+
+/* line 519, sass/colorpicker/font-awesome.scss */
+.icon-double-angle-left:before {
+  content: "\f100";
+}
+
+/* line 520, sass/colorpicker/font-awesome.scss */
+.icon-double-angle-right:before {
+  content: "\f101";
+}
+
+/* line 521, sass/colorpicker/font-awesome.scss */
+.icon-double-angle-up:before {
+  content: "\f102";
+}
+
+/* line 522, sass/colorpicker/font-awesome.scss */
+.icon-double-angle-down:before {
+  content: "\f103";
+}
+
+/* line 523, sass/colorpicker/font-awesome.scss */
+.icon-angle-left:before {
+  content: "\f104";
+}
+
+/* line 524, sass/colorpicker/font-awesome.scss */
+.icon-angle-right:before {
+  content: "\f105";
+}
+
+/* line 525, sass/colorpicker/font-awesome.scss */
+.icon-angle-up:before {
+  content: "\f106";
+}
+
+/* line 526, sass/colorpicker/font-awesome.scss */
+.icon-angle-down:before {
+  content: "\f107";
+}
+
+/* line 527, sass/colorpicker/font-awesome.scss */
+.icon-desktop:before {
+  content: "\f108";
+}
+
+/* line 528, sass/colorpicker/font-awesome.scss */
+.icon-laptop:before {
+  content: "\f109";
+}
+
+/* line 529, sass/colorpicker/font-awesome.scss */
+.icon-tablet:before {
+  content: "\f10a";
+}
+
+/* line 530, sass/colorpicker/font-awesome.scss */
+.icon-mobile-phone:before {
+  content: "\f10b";
+}
+
+/* line 531, sass/colorpicker/font-awesome.scss */
+.icon-circle-blank:before {
+  content: "\f10c";
+}
+
+/* line 532, sass/colorpicker/font-awesome.scss */
+.icon-quote-left:before {
+  content: "\f10d";
+}
+
+/* line 533, sass/colorpicker/font-awesome.scss */
+.icon-quote-right:before {
+  content: "\f10e";
+}
+
+/* line 535, sass/colorpicker/font-awesome.scss */
+.icon-spinner:before {
+  content: "\f110";
+}
+
+/* line 536, sass/colorpicker/font-awesome.scss */
+.icon-circle:before {
+  content: "\f111";
+}
+
+/* line 537, sass/colorpicker/font-awesome.scss */
+.icon-reply:before {
+  content: "\f112";
+}
+
+/* line 538, sass/colorpicker/font-awesome.scss */
+.icon-github-alt:before {
+  content: "\f113";
+}
+
+/* line 539, sass/colorpicker/font-awesome.scss */
+.icon-folder-close-alt:before {
+  content: "\f114";
+}
+
+/* line 540, sass/colorpicker/font-awesome.scss */
+.icon-folder-open-alt:before {
+  content: "\f115";
+}
+
+/**
+ * Main styles for colordot
+ */
+/*! normalize.css v1.1.0 | MIT License | git.io/normalize */
+/* ==========================================================================
+   HTML5 display definitions
+   ========================================================================== */
+/**
+ * Correct `block` display not defined in IE 6/7/8/9 and Firefox 3.
+ */
+/* line 11, sass/colorpicker/main.scss */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+  display: block;
+}
+
+/**
+ * Correct `inline-block` display not defined in IE 6/7/8/9 and Firefox 3.
+ */
+/* line 28, sass/colorpicker/main.scss */
+audio,
+canvas,
+video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+
+/**
+ * Prevent modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+/* line 39, sass/colorpicker/main.scss */
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+/**
+ * Address styling not present in IE 7/8/9, Firefox 3, and Safari 4.
+ * Known issue: no IE 6 support.
+ */
+/* line 47, sass/colorpicker/main.scss */
+[hidden] {
+  display: none;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+/**
+ * 1. Correct text resizing oddly in IE 6/7 when body `font-size` is set using
+ *    `em` units.
+ * 2. Prevent iOS text size adjust after orientation change, without disabling
+ *    user zoom.
+ */
+/* line 59, sass/colorpicker/main.scss */
+html {
+  font-size: 100%;
+  /* 1 */
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  /* 2 */
+}
+
+/**
+ * Address `font-family` inconsistency between `textarea` and other form
+ * elements.
+ */
+/* line 72, sass/colorpicker/main.scss */
+html,
+button,
+input,
+select,
+textarea {
+  font-family: sans-serif;
+}
+
+/**
+ * Address margins handled incorrectly in IE 6/7.
+ */
+/* line 82, sass/colorpicker/main.scss */
+body {
+  margin: 0;
+}
+
+/* ==========================================================================
+   Links
+   ========================================================================== */
+/**
+ * Address `outline` inconsistency between Chrome and other browsers.
+ */
+/* line 91, sass/colorpicker/main.scss */
+a:focus {
+  outline: thin dotted;
+}
+
+/**
+ * Improve readability when focused and also mouse hovered in all browsers.
+ */
+/* line 97, sass/colorpicker/main.scss */
+a:active,
+a:hover {
+  outline: 0;
+}
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+/**
+ * Address font sizes and margins set differently in IE 6/7.
+ * Address font sizes within `section` and `article` in Firefox 4+, Safari 5,
+ * and Chrome.
+ */
+/* line 109, sass/colorpicker/main.scss */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/* line 113, sass/colorpicker/main.scss */
+h2 {
+  font-size: 1.5em;
+  margin: 0.83em 0;
+}
+
+/* line 117, sass/colorpicker/main.scss */
+h3 {
+  font-size: 1.17em;
+  margin: 1em 0;
+}
+
+/* line 121, sass/colorpicker/main.scss */
+h4 {
+  font-size: 1em;
+  margin: 1.33em 0;
+}
+
+/* line 125, sass/colorpicker/main.scss */
+h5 {
+  font-size: 0.83em;
+  margin: 1.67em 0;
+}
+
+/* line 129, sass/colorpicker/main.scss */
+h6 {
+  font-size: 0.67em;
+  margin: 2.33em 0;
+}
+
+/**
+ * Address styling not present in IE 7/8/9, Safari 5, and Chrome.
+ */
+/* line 136, sass/colorpicker/main.scss */
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+/**
+ * Address style set to `bolder` in Firefox 3+, Safari 4/5, and Chrome.
+ */
+/* line 142, sass/colorpicker/main.scss */
+b,
+strong {
+  font-weight: bold;
+}
+
+/* line 146, sass/colorpicker/main.scss */
+blockquote {
+  margin: 1em 40px;
+}
+
+/**
+ * Address styling not present in Safari 5 and Chrome.
+ */
+/* line 152, sass/colorpicker/main.scss */
+dfn {
+  font-style: italic;
+}
+
+/**
+ * Address differences between Firefox and other browsers.
+ * Known issue: no IE 6/7 normalization.
+ */
+/* line 159, sass/colorpicker/main.scss */
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+}
+
+/**
+ * Address styling not present in IE 6/7/8/9.
+ */
+/* line 167, sass/colorpicker/main.scss */
+mark {
+  background: #ff0;
+  color: #000;
+}
+
+/**
+ * Address margins set differently in IE 6/7.
+ */
+/* line 174, sass/colorpicker/main.scss */
+p,
+pre {
+  margin: 1em 0;
+}
+
+/**
+ * Correct font family set oddly in IE 6, Safari 4/5, and Chrome.
+ */
+/* line 181, sass/colorpicker/main.scss */
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, serif;
+  _font-family: 'courier new', monospace;
+  font-size: 1em;
+}
+
+/**
+ * Improve readability of pre-formatted text in all browsers.
+ */
+/* line 192, sass/colorpicker/main.scss */
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/**
+ * Address CSS quotes not supported in IE 6/7.
+ */
+/* line 200, sass/colorpicker/main.scss */
+q {
+  quotes: none;
+}
+
+/**
+ * Address `quotes` property not supported in Safari 4.
+ */
+/* line 206, sass/colorpicker/main.scss */
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+/* line 214, sass/colorpicker/main.scss */
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+/* line 220, sass/colorpicker/main.scss */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+/* line 227, sass/colorpicker/main.scss */
+sup {
+  top: -0.5em;
+}
+
+/* line 230, sass/colorpicker/main.scss */
+sub {
+  bottom: -0.25em;
+}
+
+/* ==========================================================================
+   Lists
+   ========================================================================== */
+/**
+ * Address margins set differently in IE 6/7.
+ */
+/* line 239, sass/colorpicker/main.scss */
+dl,
+menu,
+ol,
+ul {
+  margin: 1em 0;
+}
+
+/* line 245, sass/colorpicker/main.scss */
+dd {
+  margin: 0 0 0 40px;
+}
+
+/**
+ * Address paddings set differently in IE 6/7.
+ */
+/* line 251, sass/colorpicker/main.scss */
+menu,
+ol,
+ul {
+  padding: 0 0 0 40px;
+}
+
+/**
+ * Correct list images handled incorrectly in IE 7.
+ */
+/* line 259, sass/colorpicker/main.scss */
+nav ul,
+nav ol {
+  list-style: none;
+  list-style-image: none;
+}
+
+/* ==========================================================================
+   Embedded content
+   ========================================================================== */
+/**
+ * 1. Remove border when inside `a` element in IE 6/7/8/9 and Firefox 3.
+ * 2. Improve image quality when scaled in IE 7.
+ */
+/* line 271, sass/colorpicker/main.scss */
+img {
+  border: 0;
+  /* 1 */
+  -ms-interpolation-mode: bicubic;
+  /* 2 */
+}
+
+/**
+ * Correct overflow displayed oddly in IE 9.
+ */
+/* line 282, sass/colorpicker/main.scss */
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   Figures
+   ========================================================================== */
+/**
+ * Address margin not present in IE 6/7/8/9, Safari 5, and Opera 11.
+ */
+/* line 291, sass/colorpicker/main.scss */
+figure {
+  margin: 0;
+}
+
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+/**
+ * Correct margin displayed oddly in IE 6/7.
+ */
+/* line 300, sass/colorpicker/main.scss */
+form {
+  margin: 0;
+}
+
+/**
+ * Define consistent border, margin, and padding.
+ */
+/* line 306, sass/colorpicker/main.scss */
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+/**
+ * 1. Correct color not being inherited in IE 6/7/8/9.
+ * 2. Correct text not wrapping in Firefox 3.
+ * 3. Correct alignment displayed oddly in IE 6/7.
+ */
+/* line 316, sass/colorpicker/main.scss */
+legend {
+  border: 0;
+  /* 1 */
+  padding: 0;
+  white-space: normal;
+  /* 2 */
+  *margin-left: -7px;
+  /* 3 */
+}
+
+/**
+ * 1. Correct font size not being inherited in all browsers.
+ * 2. Address margins set differently in IE 6/7, Firefox 3+, Safari 5,
+ *    and Chrome.
+ * 3. Improve appearance and consistency in all browsers.
+ */
+/* line 334, sass/colorpicker/main.scss */
+button,
+input,
+select,
+textarea {
+  font-size: 100%;
+  /* 1 */
+  margin: 0;
+  /* 2 */
+  vertical-align: baseline;
+  *vertical-align: middle;
+  /* 3 */
+}
+
+/**
+ * Address Firefox 3+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+/* line 353, sass/colorpicker/main.scss */
+button,
+input {
+  line-height: normal;
+}
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Chrome, Safari 5+, and IE 6+.
+ * Correct `select` style inheritance in Firefox 4+ and Opera.
+ */
+/* line 363, sass/colorpicker/main.scss */
+button,
+select {
+  text-transform: none;
+}
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ * 4. Remove inner spacing in IE 7 without affecting normal text inputs.
+ *    Known issue: inner spacing remains in IE 6.
+ */
+/* line 376, sass/colorpicker/main.scss */
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  /* 2 */
+  cursor: pointer;
+  /* 3 */
+  *overflow: visible;
+  /* 4 */
+}
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+/* line 393, sass/colorpicker/main.scss */
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+/**
+ * 1. Address box sizing set to content-box in IE 8/9.
+ * 2. Remove excess padding in IE 8/9.
+ * 3. Remove excess padding in IE 7.
+ *    Known issue: excess padding remains in IE 6.
+ */
+/* line 403, sass/colorpicker/main.scss */
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  /* 1 */
+  padding: 0;
+  /* 2 */
+  *height: 13px;
+  *width: 13px;
+  /* 3 */
+}
+
+/**
+ * 1. Address `appearance` set to `searchfield` in Safari 5 and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari 5 and Chrome
+ *    (include `-moz` to future-proof).
+ */
+/* line 421, sass/colorpicker/main.scss */
+input[type="search"] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  /* 2 */
+  box-sizing: content-box;
+}
+
+/**
+ * Remove inner padding and search cancel button in Safari 5 and Chrome
+ * on OS X.
+ */
+/* line 435, sass/colorpicker/main.scss */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * Remove inner padding and border in Firefox 3+.
+ */
+/* line 442, sass/colorpicker/main.scss */
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/**
+ * 1. Remove default vertical scrollbar in IE 6/7/8/9.
+ * 2. Improve readability and alignment in all browsers.
+ */
+/* line 451, sass/colorpicker/main.scss */
+textarea {
+  overflow: auto;
+  /* 1 */
+  vertical-align: top;
+  /* 2 */
+}
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+/**
+ * Remove most spacing between table cells.
+ */
+/* line 465, sass/colorpicker/main.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 469, sass/colorpicker/main.scss */
+.clearfix {
+  *zoom: 1;
+}
+
+/* line 472, sass/colorpicker/main.scss */
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+
+/* line 478, sass/colorpicker/main.scss */
+.clearfix:after {
+  clear: both;
+}
+
+/* line 481, sass/colorpicker/main.scss */
+.animating {
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+/* line 487, sass/colorpicker/main.scss */
+.animateTransforms {
+  -webkit-transition: -webkit-transform 0.2s ease;
+  -moz-transition: -webkit-transform 0.2s ease;
+  -o-transition: -webkit-transform 0.2s ease;
+  transition: -webkit-transform 0.2s ease;
+  -webkit-transition: -moz-transform 0.2s ease;
+  -moz-transition: -moz-transform 0.2s ease;
+  -o-transition: -moz-transform 0.2s ease;
+  transition: -moz-transform 0.2s ease;
+  -webkit-transition: -ms-transform 0.2s ease;
+  -moz-transition: -ms-transform 0.2s ease;
+  -o-transition: -ms-transform 0.2s ease;
+  transition: -ms-transform 0.2s ease;
+  -webkit-transition: -o-transform 0.2s ease;
+  -moz-transition: -o-transform 0.2s ease;
+  -o-transition: -o-transform 0.2s ease;
+  transition: -o-transform 0.2s ease;
+  -webkit-transition: transform 0.2s ease;
+  -moz-transition: transform 0.2s ease;
+  -o-transition: transform 0.2s ease;
+  transition: transform 0.2s ease;
+}
+
+/* ==========================================================================
+   Site Globals
+   ========================================================================== */
+/* line 512, sass/colorpicker/main.scss */
+body {
+  font-family: 'Lato', sans-serif;
+  letter-spacing: 1px;
+  font-size: 16px;
+  color: white;
+  background: #051924;
+}
+
+/* line 519, sass/colorpicker/main.scss */
+input {
+  font-family: 'Lato', sans-serif;
+}
+
+/* line 522, sass/colorpicker/main.scss */
+button {
+  font-family: 'Lato', sans-serif;
+  letter-spacing: 2px;
+}
+
+/* line 526, sass/colorpicker/main.scss */
+a {
+  color: white;
+}
+
+/* ==========================================================================
+   App
+   ========================================================================== */
+/* line 532, sass/colorpicker/main.scss */
+#appframe {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  -webkit-transition: -webkit-transform 0.2s ease;
+  -moz-transition: -webkit-transform 0.2s ease;
+  -o-transition: -webkit-transform 0.2s ease;
+  transition: -webkit-transform 0.2s ease;
+  -webkit-transition: -moz-transform 0.2s ease;
+  -moz-transition: -moz-transform 0.2s ease;
+  -o-transition: -moz-transform 0.2s ease;
+  transition: -moz-transform 0.2s ease;
+  -webkit-transition: -ms-transform 0.2s ease;
+  -moz-transition: -ms-transform 0.2s ease;
+  -o-transition: -ms-transform 0.2s ease;
+  transition: -ms-transform 0.2s ease;
+  -webkit-transition: -o-transform 0.2s ease;
+  -moz-transition: -o-transform 0.2s ease;
+  -o-transition: -o-transform 0.2s ease;
+  transition: -o-transform 0.2s ease;
+  -webkit-transition: transform 0.2s ease;
+  -moz-transition: transform 0.2s ease;
+  -o-transition: transform 0.2s ease;
+  transition: transform 0.2s ease;
+}
+
+/* line 561, sass/colorpicker/main.scss */
+#appframe.show-header {
+  -webkit-transform: translate3d(0, 325px, 0);
+  -moz-transform: translate3d(0, 325px, 0);
+  -o-transform: translate3d(0, 325px, 0);
+  transform: translate3d(0, 325px, 0);
+}
+
+/* line 567, sass/colorpicker/main.scss */
+#header {
+  *zoom: 1;
+  position: absolute;
+  bottom: 100%;
+  width: 100%;
+}
+
+/* line 573, sass/colorpicker/main.scss */
+#header:before,
+#header:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+
+/* line 579, sass/colorpicker/main.scss */
+#header:after {
+  clear: both;
+}
+
+/* line 582, sass/colorpicker/main.scss */
+#header .container {
+  *zoom: 1;
+  width: 600px;
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
+
+/* line 588, sass/colorpicker/main.scss */
+#header .container:before,
+#header .container:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+
+/* line 594, sass/colorpicker/main.scss */
+#header .container:after {
+  clear: both;
+}
+
+/* line 597, sass/colorpicker/main.scss */
+#header .panel {
+  float: left;
+  width: 250px;
+  padding: 0 25px;
+  text-align: center;
+}
+
+/* line 603, sass/colorpicker/main.scss */
+#header .logo {
+  text-align: center;
+}
+
+/* line 606, sass/colorpicker/main.scss */
+#header .logo h1,
+#header .logo h3 {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* line 611, sass/colorpicker/main.scss */
+#header h2 {
+  font-size: 14px;
+  line-height: 28px;
+  margin: 28px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* line 618, sass/colorpicker/main.scss */
+#header #instructions {
+  padding: 0;
+  list-style: none;
+}
+
+/* line 622, sass/colorpicker/main.scss */
+#header #instructions li {
+  margin: 28px 0;
+}
+
+/* line 625, sass/colorpicker/main.scss */
+#header #instructions p {
+  margin: 0;
+}
+
+/* line 628, sass/colorpicker/main.scss */
+#header .panel button {
+  display: block;
+  width: 100%;
+  margin: 8px auto;
+  height: 35px;
+}
+
+/* line 634, sass/colorpicker/main.scss */
+#header-tab {
+  position: absolute;
+  top: 100%;
+  left: 20px;
+  background: #051924;
+  -webkit-border-radius: 0 0 4px 4px;
+  -moz-border-radius: 0 0 4px 4px;
+  border-radius: 0 0 4px 4px;
+  z-index: 100;
+}
+
+/* line 644, sass/colorpicker/main.scss */
+#swatches {
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  overflow-y: hidden;
+  background: black;
+  list-style: none;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+/* line 656, sass/colorpicker/main.scss */
+#colors {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 660, sass/colorpicker/main.scss */
+#colors .swatch {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+/* line 669, sass/colorpicker/main.scss */
+#colors .swatch .color {
+  -webkit-transition: -webkit-transform 0.2s ease;
+  -moz-transition: -webkit-transform 0.2s ease;
+  -o-transition: -webkit-transform 0.2s ease;
+  transition: -webkit-transform 0.2s ease;
+  -webkit-transition: -moz-transform 0.2s ease;
+  -moz-transition: -moz-transform 0.2s ease;
+  -o-transition: -moz-transform 0.2s ease;
+  transition: -moz-transform 0.2s ease;
+  -webkit-transition: -ms-transform 0.2s ease;
+  -moz-transition: -ms-transform 0.2s ease;
+  -o-transition: -ms-transform 0.2s ease;
+  transition: -ms-transform 0.2s ease;
+  -webkit-transition: -o-transform 0.2s ease;
+  -moz-transition: -o-transform 0.2s ease;
+  -o-transition: -o-transform 0.2s ease;
+  transition: -o-transform 0.2s ease;
+  -webkit-transition: transform 0.2s ease;
+  -moz-transition: transform 0.2s ease;
+  -o-transition: transform 0.2s ease;
+  transition: transform 0.2s ease;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+}
+
+/* line 697, sass/colorpicker/main.scss */
+#colors .swatch .meta-controls {
+  position: absolute;
+  bottom: 40px;
+  text-align: center;
+  width: 100%;
+}
+
+/* line 703, sass/colorpicker/main.scss */
+#colors .swatch .info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0 auto;
+  padding: 20px 0;
+  width: 110px;
+  border-radius: 3px;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  -moz-transform: translate3d(-50%, -50%, 0);
+  -o-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+  background: rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+/* line 718, sass/colorpicker/main.scss */
+#colors .swatch .info h2 {
+  font-size: 14px;
+  line-height: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 724, sass/colorpicker/main.scss */
+#colors .swatch .info small {
+  font-size: 10px;
+}
+
+/* line 727, sass/colorpicker/main.scss */
+#colors .swatch .info .controls {
+  line-height: 20px;
+}
+
+/* line 730, sass/colorpicker/main.scss */
+#colors .swatch .details {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 50px 0;
+  min-width: 200px;
+  text-align: center;
+}
+
+/* line 738, sass/colorpicker/main.scss */
+#colors .swatch.light .color .btn {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* line 741, sass/colorpicker/main.scss */
+#colors .swatch.light .color .btn:hover {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+/* line 744, sass/colorpicker/main.scss */
+#colors .swatch.show-details .color {
+  -webkit-transform: translate3d(0, -260px, 0);
+  -moz-transform: translate3d(0, -260px, 0);
+  -o-transform: translate3d(0, -260px, 0);
+  transform: translate3d(0, -260px, 0);
+}
+
+/* line 750, sass/colorpicker/main.scss */
+#edit {
+  right: 0;
+  -webkit-transition: left .2s ease;
+  -moz-transition: left .2s ease;
+  -o-transition: left .2s ease;
+  transition: left .2s ease;
+}
+
+/* line 757, sass/colorpicker/main.scss */
+#constraints {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* line 765, sass/colorpicker/main.scss */
+#constraints div {
+  width: 100%;
+  height: 100%;
+  padding-bottom: 1000px;
+}
+
+/* ==========================================================================
+   Widgets
+   ========================================================================== */
+/* line 773, sass/colorpicker/main.scss */
+.color-input {
+  height: 80px;
+  line-height: 80px;
+}
+
+/* line 777, sass/colorpicker/main.scss */
+.number-widget {
+  position: relative;
+  display: inline-block;
+  height: 80px;
+  line-height: 80px;
+}
+
+/* line 783, sass/colorpicker/main.scss */
+.number-widget [type="text"] {
+  display: inline-block;
+  width: 40px;
+  line-height: 20px;
+  text-align: center;
+  color: white;
+  outline: 0;
+  border: none;
+  background: transparent;
+}
+
+/* line 793, sass/colorpicker/main.scss */
+.number-widget .stepper {
+  display: block;
+  position: absolute;
+  left: 0;
+  width: 40px;
+  padding: 0;
+  margin: 0;
+  line-height: 30px;
+  height: 30px;
+  text-align: center;
+}
+
+/* line 804, sass/colorpicker/main.scss */
+.number-widget .stepper.up {
+  top: 0;
+}
+
+/* line 807, sass/colorpicker/main.scss */
+.number-widget .stepper.down {
+  bottom: 0;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+/* line 813, sass/colorpicker/main.scss */
+.btn {
+  background: none;
+  border: none;
+  outline: none;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 10px;
+}
+
+/* line 820, sass/colorpicker/main.scss */
+.btn:hover {
+  color: #ffffff;
+}
+
+/* Email form */
+/* line 824, sass/colorpicker/main.scss */
+#mc_embed_signup {
+  padding: 0 10px;
+  line-height: 2em;
+}
+
+/* line 828, sass/colorpicker/main.scss */
+#mc_embed_signup form {
+  text-align: center;
+}
+
+/* line 831, sass/colorpicker/main.scss */
+#mc_embed_signup input {
+  font-family: 'Lato', sans-serif;
+  background: #fff;
+  outline: none;
+  border: 1px solid #eee;
+  padding: 10px;
+}
+
+/* line 838, sass/colorpicker/main.scss */
+#mc_embed_signup input[type="email"] {
+  width: 110px;
+  border-right: 1px solid #D94726;
+  -webkit-border-radius: 3px 0 0 3px;
+  -moz-border-radius: 3px 0 0 3px;
+  border-radius: 3px 0 0 3px;
+}
+
+/* line 845, sass/colorpicker/main.scss */
+#mc_embed_signup input[type="submit"] {
+  color: #fff;
+  background: #C9695E;
+  border: 1px solid #C9695E;
+  -webkit-border-radius: 0 3px 3px 0;
+  -moz-border-radius: 0 3px 3px 0;
+  border-radius: 0 3px 3px 0;
+  padding: 10px 0;
+  width: 90px;
+}

@@ -4,21 +4,56 @@ logger    = require './logger'
 FS        = require 'fs'
 express   = require 'express'
 path      = require 'path'
-beagles   = []
-backbones = []
+exphbs    = require 'express3-handlebars'
 
 class Server
-  # set up the express application, including routes and middlewares
+  beagles:   []
+  backbones: []
+
+  # set up the express application, including assets, routes and middlewares
   #
   constructor: (@host, @port, @options = {}) ->
     @url = "https://#{ @host }:#{ @port }/"
     @app = express()
 
-    # use basic HTTP auth and serve the /public dir as /
+    # use basic HTTP auth if production
     if process.env.NODE_ENV == 'production'
-      auth = express.basicAuth(process.env.USERNAME, process.env.PASSWORD)
+      auth = express.basicAuth(process.env.USERNAME || 'foo', process.env.PASSWORD || 'bar')
       @app.use('/', auth)
-    @app.use('/', express.static(__dirname + '/../public'))
+
+      # Set the default layout and locate layouts and partials
+      @app.engine('handlebars', exphbs(
+        defaultLayout: 'main',
+        layoutsDir: 'dist/views/layouts/',
+        partialsDir: 'dist/views/partials/'
+      ))
+
+      # Locate the views
+      @app.set('views', __dirname + '/../dist/views')
+
+      # Locate the assets
+      @app.use(express.static(__dirname + '/../dist/assets'))
+    else
+      # Default Layout and locate layouts and partials
+      @app.engine('handlebars', exphbs(
+        defaultLayout: 'main',
+        layoutsDir: 'views/layouts/',
+        partialsDir: 'views/partials/'
+      ))
+
+      # Locate the views
+      @app.set('views', __dirname + '/../views')
+
+      # Locate the assets
+      @app.use(express.static(__dirname + '/../assets'))
+
+    # Set Handlebars
+    @app.set 'view engine', 'handlebars'
+
+    # routes
+    @app.get '/', (request, response, next) ->
+      response.render 'index'
+
 
   # stop the server, firing callback upon success
   #
@@ -40,44 +75,46 @@ class Server
   #   5x1 color, or 5 individual colors
   #
   _sio_configure_listener: (app) ->
+    logger.info "Configuring socket.io listener"
     sio = Socket.listen app,
       'logger'   : logger,
       'log level': logger.level
 
+    # for testing
     # sio.configure ->
     #   sio.set "transports", ["xhr-polling", "jsonp-polling", "htmlfile"]
 
-    logger.info "Configuring socket.io listener"
+    @_sio_listen_to_backbone sio
+    @_sio_listen_to_beaglebone sio
 
+  _sio_listen_to_backbone: (sio) ->
     # when backbone.js Client runs `io.connect('http://localhost:1337/backbone')`
-    sio.of('/backbone').on('connection', (socket) ->
-      logger.info "/backbone CLIENT CONNECTED"
-      backbones.push socket
+    sio.of('/backbone').on 'connection', (socket) =>
+      logger.info "/backbone client connected"
+      @backbones.push socket
 
       # when Client is live-previewing color
-      socket.on 'colorChanged', (data) ->
+      socket.on 'colorChanged', (data) =>
         # send colorChanged data to all beagles
-        # logger.info "emitting colorChanged to #{beagles.length} beagles"
-        beagle.emit('colorChanged', { color: data.color }) for beagle in beagles # where beagle is connected
+        logger.info "emitting colorChanged to #{@beagles.length} beagles"
+        beagle.emit('colorChanged', { color: data.color }) for beagle in @beagles # where beagle is connected
 
       # when Client picks a new color
-      socket.on 'colorSet', (data) ->
-        # send colorSet data to all beagles
-        beagle.emit('colorSet', { color: data.color }) for beagle in beagles
-    )
+      socket.on 'colorSet', (data) =>
+        # send colorSet data to all @beagles
+        beagle.emit('colorSet', { color: data.color }) for beagle in @beagles
 
+  _sio_listen_to_beaglebone: (sio) ->
     # when beaglebone Client runs `io.connect('http://localhost:1337/beaglebone')`
-    # push them into the beagles array
-    sio.of('/beaglebone').on('connection', (socket) ->
-      logger.info "/beaglebone CLIENT CONNECTED"
-      beagles.push socket
+    # push them into the @beagles array
+    sio.of('/beaglebone').on 'connection', (socket) =>
+      logger.info "/beaglebone client connected"
+      @beagles.push socket
 
-      # remove beaglebone client from beagles array
+      # remove beaglebone client from @beagles array
       # if disconnection event occurs
-      socket.on('disconnect', (socket) ->
-        logger.info "/beaglebone CLIENT DISCONNECTED"
-        beagles.pop socket
-      )
-    )
+      socket.on 'disconnect', (socket) =>
+        logger.info "/beaglebone client disconnected"
+        @beagles.pop socket
 
 module.exports = Server
