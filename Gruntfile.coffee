@@ -301,8 +301,10 @@ module.exports = (grunt) ->
 
       fonts:
         expand: true
-        src: ['assets/font/**']
-        dest: 'dist/'
+        flatten: true
+        filter: 'isFile'
+        src: ['assets/bower_components/components-font-awesome/font/**']
+        dest: 'dist/assets/font'
 
 
   # Register Tasks
