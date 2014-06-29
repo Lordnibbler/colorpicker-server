@@ -342,7 +342,4 @@ module.exports = (grunt) ->
     "usemin"
   ]
 
-  grunt.registerTask "heroku:production", "", [
-    "build"
-  ]
   return
