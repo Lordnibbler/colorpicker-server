@@ -1,7 +1,6 @@
 Server     = require '../../src/server'
 config     = require '../../src/config'
 logger     = require '../../src/logger'
-# sinon      = require 'sinon'
 testServer = require '../support/test_server'
 
 describe 'Server', ->

@@ -2,9 +2,10 @@ Http      = require 'http'
 Socket    = require 'socket.io'
 logger    = require './logger'
 FS        = require 'fs'
-express   = require 'express'
-path      = require 'path'
-exphbs    = require 'express3-handlebars'
+express = require 'express'
+path    = require 'path'
+exphbs  = require 'express3-handlebars'
+colors  = require '../routes/colors'
 
 class Server
   beagles:   []
@@ -53,6 +54,11 @@ class Server
     # routes
     @app.get '/', (request, response, next) ->
       response.render 'index'
+
+    @app.post "#{@options['api_namespace']}/colors", colors.create
+    # @app.get "#{@options['api_namespace']}/colors", colors.index
+    # @app.patch "#{@options['api_namespace']}/colors", colors.update
+    # @app.delete "#{@options['api_namespace']}/colors", colors.destroy
 
 
   # stop the server, firing callback upon success

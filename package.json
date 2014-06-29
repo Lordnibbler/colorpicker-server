@@ -25,7 +25,9 @@
     "express3-handlebars": "0.4.x",
     "redis": "*",
     "bower": "*",
-    "grunt-sass": "~0.14.0"
+    "grunt-sass": "~0.14.0",
+    "q": "~1.0.1",
+    "node-uuid": "~1.4.1"
   },
   "devDependencies": {
     "mocha": "*",
