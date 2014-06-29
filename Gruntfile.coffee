@@ -150,6 +150,8 @@ module.exports = (grunt) ->
     #     ]
 
     sass:                            # task
+      options:
+        bundleExec: true
       dev:                           # another target
         # options:                     # dictionary of render options
           # sourceMap: true
@@ -338,5 +340,9 @@ module.exports = (grunt) ->
     "copy:dist"
     "rev"
     "usemin"
+  ]
+
+  grunt.registerTask "heroku:production", "", [
+    "build"
   ]
   return
