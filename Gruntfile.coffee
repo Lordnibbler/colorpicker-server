@@ -18,6 +18,7 @@ module.exports = (grunt) ->
         options:
           logConcurrentOutput: true
       dist: [
+        "sass:dev"
         "copy:styles"
         "copy:fonts"
         "svgmin"
@@ -131,22 +132,17 @@ module.exports = (grunt) ->
         "test/spec/**/*.js"
       ]
 
-    sass:
+    sass:                            # task
       options:
-        cacheLocation: ".tmp/.sass-cache"
-
-      dev:
-        options:
-          style: "expanded"
-          lineComments: true
-
-        files: [
-          expand: true
-          cwd: "assets/styles/sass"
-          dest: "assets/styles"
-          src: ["screen.scss"]
-          ext: ".css"
-        ]
+        bundleExec: true
+      dev:                           # another target
+        # options:                     # dictionary of render options
+          # sourceMap: true
+        files:
+          'assets/styles/screen.css': 'assets/styles/sass/screen.scss'
+      # dist:                          # target
+        # files:                       # dictionary of files
+          # 'assets/styles/screen.css': 'assets/styles/screen.scss'    # 'destination': 'source'
 
     express:
       options:
@@ -328,4 +324,5 @@ module.exports = (grunt) ->
     "rev"
     "usemin"
   ]
+
   return

@@ -3,6 +3,8 @@ node_modules
 .sass-cache
 assets/bower_components
 assets/scripts/main.js
+assets/styles/screen.css
 colors.txt
 dist
 .rebooted
+.bundle
