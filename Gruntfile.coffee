@@ -132,23 +132,6 @@ module.exports = (grunt) ->
         "test/spec/**/*.js"
       ]
 
-    # sass:
-    #   options:
-    #     cacheLocation: ".tmp/.sass-cache"
-
-    #   dev:
-    #     options:
-    #       style: "expanded"
-    #       lineComments: true
-
-    #     files: [
-    #       expand: true
-    #       cwd: "assets/styles/sass"
-    #       dest: "assets/styles"
-    #       src: ["screen.scss"]
-    #       ext: ".css"
-    #     ]
-
     sass:                            # task
       options:
         bundleExec: true
