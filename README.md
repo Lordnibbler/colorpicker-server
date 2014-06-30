@@ -7,9 +7,7 @@ A Backbone.js GUI and Node.js server that emits `colorChanged` and `colorSet` ev
 # set up the GUI and server
 git clone git@github.com:Lordnibbler/colorpicker-server.git
 cd colorpicker-server
-npm install
-
-# ensure the `socket` var in `public/scripts/main.js` points to localhost
+npm install -d
 npm start
 
 # set up the client
@@ -19,3 +17,12 @@ npm install
 npm start
 ```
 Browse to <http://localhost:1337> to use the GUI.
+
+## Testing
+```sh
+# use the test watchers
+npm test
+
+# or run the tests once
+mocha -R dot test/src/*.coffee && karma start --single-run
+```
