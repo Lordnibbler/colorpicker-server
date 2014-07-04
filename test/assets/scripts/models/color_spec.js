@@ -58,7 +58,7 @@ describe('Color model', function() {
     });
   });
 
-  describe('colorChanged', function() {
+  describe('emitColorChanged', function() {
     beforeEach(function () {
       window.socket = {
         emit: function(event, object) {
@@ -70,7 +70,7 @@ describe('Color model', function() {
 
     it('emits a colorChanged event', function() {
       var color = new app.Color({color: new Color('#983897')});
-      color.colorChanged();
+      color.emitColorChanged();
       expect(window.socket.emit.callCount).to.eql(1);
       expect(window.socket.emit.getCall(0).args[0]).to.eql('colorChanged');
       expect(window.socket.emit.getCall(0).args[1]['color']).to.match(/152\,056\,151\,000\n/);

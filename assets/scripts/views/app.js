@@ -153,8 +153,8 @@ app.SwatchAppView = Backbone.View.extend({
     this.editModel.trigger("change");
 
     // send colors via socket
-    // TODO: hook into the editModel change event
-    this.editModel.colorChanged();
+    // TODO: bind to the editModel 'change' event
+    this.editModel.emitColorChanged();
   },
 
   scroll: function(event) {

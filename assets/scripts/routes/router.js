@@ -53,8 +53,8 @@ var Router = Backbone.Router.extend({
       return memo + color.hexCss().substr(1) + ',';
     }, "");
 
-    // emit `colorSet` event to node.js server
-    this.colorSet();
+    // emit `emitColorSet` event to node.js server
+    this.emitColorSet();
 
     // append to URL
     this.navigate(hash, {trigger: false, replace: true});
@@ -65,9 +65,9 @@ var Router = Backbone.Router.extend({
    * Emits a `colorSet` event to our Node.js server
    * Sends all current colors, in Halo `r,g,b,a\n` format
    */
-  colorSet: function(colors) {
+  emitColorSet: function(colors) {
     if(window.socket) {
-      window.socket.emit('colorSet', {
+      window.socket.emit('emitColorSet', {
         color: (colors || app.Colors.toRgbString())
       });
     }
@@ -78,7 +78,7 @@ var Router = Backbone.Router.extend({
    */
   clearColors: function(event) {
     this.setColors('');
-    this.colorSet('000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000');
+    this.emitColorSet('000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000');
     this.navigate('', {trigger: false, replace: true});
   },
 
@@ -87,7 +87,7 @@ var Router = Backbone.Router.extend({
    */
   setWhiteColors: function(event) {
     this.setColors('FFFFFF,FFFFFF,FFFFFF,FFFFFF,FFFFFF');
-    this.colorSet('255,255,255,255\n255,255,255,255\n255,255,255,255\n255,255,255,255\n255,255,255,255');
+    this.emitColorSet('255,255,255,255\n255,255,255,255\n255,255,255,255\n255,255,255,255\n255,255,255,255');
   }
 
 });

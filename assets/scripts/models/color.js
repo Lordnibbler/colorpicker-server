@@ -69,7 +69,7 @@ app.Color = (function(Backbone, $) {
     /**
      * send our Node.js app the current live color data
      */
-    colorChanged: function() {
+    emitColorChanged: function() {
       window.socket.emit('colorChanged', {
         color: this.toRgbString()
       });
