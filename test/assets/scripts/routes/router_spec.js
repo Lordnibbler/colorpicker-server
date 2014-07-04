@@ -42,12 +42,11 @@ describe('Router', function() {
     });
 
     it('invokes the collection\'s setGradientColors() method', function() {
-      app.Router.setGradientColors('00adeb', 5);
+      app.Router.setGradientColors(5);
 
       // ensure method was called, and with correct color string as an arg
       expect(app.Colors.setGradientColors.calledOnce).to.eql(true);
-      expect(app.Colors.setGradientColors.getCall(0).args[0]).to.eql('00adeb');
-      expect(app.Colors.setGradientColors.getCall(0).args[1]).to.eql(5);
+      expect(app.Colors.setGradientColors.getCall(0).args[0]).to.eql('983897');
       });
 
     afterEach(function() {

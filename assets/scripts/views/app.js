@@ -222,7 +222,7 @@ app.SwatchAppView = Backbone.View.extend({
    * based on the first Color in our app.Colors collection
    */
   generateGradient: function(event) {
-    app.Router.setGradientColors(app.Colors.first().hexCss().substring(1), 5);
+    app.Router.setGradientColors(5);
     this.toggleheader();
   },
 

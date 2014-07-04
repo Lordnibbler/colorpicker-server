@@ -389,7 +389,7 @@ describe('views/app.js', function() {
       View.generateGradient();
       expect(View.toggleheader.calledOnce).to.eql(true);
       expect(app.Router.setGradientColors.callCount).to.eql(1);
-      expect(app.Router.setGradientColors.getCall(0).args[0]).to.eql('00ADEB');
+      expect(app.Router.setGradientColors.getCall(0).args[0]).to.eql(5);
     });
 
     afterEach(function() {

@@ -27,8 +27,9 @@ var Router = Backbone.Router.extend({
    * @param color a hex string with no #
    * @example setGradientColors('00adeb', 5);
    */
-  setGradientColors: function(color, length) {
-    if(color.length === 6 && app.Colors.length > 0) app.Colors.setGradientColors(color, length);
+  setGradientColors: function(length) {
+    if(app.Colors.length > 0)
+      app.Colors.setGradientColors(app.Colors.first().hexCss().substr(1), length);
   },
 
   /**
