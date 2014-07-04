@@ -1,7 +1,7 @@
 # Color API endpoints
 #
-Color = require '../src/color.coffee'
-Redis = require '../src/redis.coffee'
+Color = require '../src/color'
+Redis = require '../src/redis'
 
 # Creates a new color and inserts in redis
 #
@@ -10,7 +10,7 @@ Redis = require '../src/redis.coffee'
 # @example Sample request body
 #   { "color": "00adeb,983897" }
 #
-# @ example Sample response body
+# @example Sample response body
 #   { "success": true }
 #
 exports.create = (req, res) ->
