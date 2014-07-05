@@ -1,5 +1,6 @@
-Q    = require 'q'
-uuid = require 'node-uuid'
+Q     = require 'q'
+uuid  = require 'node-uuid'
+Redis = require './redis'
 
 class Color
   # All keys will be stored in redis beginning with this prefix
@@ -49,18 +50,17 @@ class Color
   @index: ->
     # build a Q promise in case redis lags
     deferred = Q.defer()
+    colors = {}
 
     # get all redis keys in array
-    @redis.keys '*', (err, res) =>
+    Redis.keys '*', (err, res) =>
       return deferred.reject(err) if err
 
       # get value of each key and append to object
-      colors = {}
       for key in res
-        @redis.get key, (err, res) =>
+        Redis.get key, (err, res) =>
           return deferred.reject(err) if err
           colors[key] = res
-
       return deferred.resolve(colors)
     return deferred.promise
 

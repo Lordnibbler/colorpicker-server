@@ -15,11 +15,19 @@ describe 'Color', ->
         color.key.should.not.be.undefined
 
     describe 'create', ->
-      it 'inserts a new key/value pair', ->
+      it 'inserts a new key/value pair', (done) ->
         # TODO create returns ID, so try fetching it after insert success
         color.create('00adeb,983897')
           .then (res) ->
             res.should.be.greaterThan 0
+          .done ->
+            done()
 
   describe 'class methods', ->
     describe 'index', ->
+      it 'retrieves all key value pairs in redis', (done) ->
+        Color.index()
+          .then (res) ->
+            console.log res
+          .done ->
+            done()
