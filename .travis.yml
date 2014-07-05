@@ -12,6 +12,5 @@ env:
 cache:
   directories:
     - node_modules
-# for the not so distant future
-# services:
-#   - redis
+services:
+  - redis
