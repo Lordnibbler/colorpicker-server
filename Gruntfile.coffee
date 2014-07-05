@@ -90,7 +90,7 @@ module.exports = (grunt) ->
       mocha:
         options:
           spawn: false # faster reloading
-        files: "test/src/**/*.coffee"
+        files: ['test/src/**/*.coffee', 'src/**/*.coffee']
         tasks: ['mochaTest:test']
 
     karma:
