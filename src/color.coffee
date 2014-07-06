@@ -1,46 +1,32 @@
 Q     = require 'q'
 uuid  = require 'node-uuid'
 Redis = require './redis'
+KEY_PREFIX = 'colorpicker:'
 
+# represents a Colors collection as a data model in Redis
+# @example { 0: '00adeb, 983897' }
+#
 class Color
-  # All keys will be stored in redis beginning with this prefix
-  KEY_PREFIX: 'colorpicker:'
-
-  # Creates a new Color, with a Redis object and the number of seconds until Redis keys expire.
-  #
-  constructor: (@redis, @key_expire_seconds) ->
-    @key = @_generate_key()
-
-  # generates a unique redis key in <key_prefix>:<uuid> = <key> syntax
-  #
-  # @return [String] a unique generated redis key
-  #
-  _generate_key: ->
-    return "#{@KEY_PREFIX}#{@_generate_uuid()}"
-
-  # Suggests a UUID
-  # @return [String] a UUID v4
-  #
-  _generate_uuid: ->
-    uuid.v4()
-
   # Creates a new color in the redis cache
   #
   # @param [String] color The comma-delimited hex string of the colors to save to redis
   #
-  create: (color) ->
+  @create: (color) ->
     # build a Q promise in case redis lags
     deferred = Q.defer()
     deferred.reject('color not provided') if !color
 
-    # insert new k,v pair
-    @redis.incr '0', (err, id) =>
-      @redis.set id, color, (err, res) =>
+    # generate auto incrementing unique ID
+    Redis.incr '0', (err, id) =>
+      key = "#{KEY_PREFIX}#{id}"
+
+      # insert new k,v pair
+      # TODO use list or set based on the KEY_PREFIX
+      Redis.set key, color, (err, res) =>
         return deferred.reject(err) if err
-        @redis.expire id, @key_expire_seconds
 
         # Successfully inserted new k/v pair
-        return deferred.resolve(id)
+        return deferred.resolve(key)
     return deferred.promise
 
   # Class method to return all colors (keys) in Redis
@@ -50,18 +36,49 @@ class Color
   @index: ->
     # build a Q promise in case redis lags
     deferred = Q.defer()
-    colors = {}
 
     # get all redis keys in array
-    Redis.keys '*', (err, res) =>
+    Redis.keys '*colorpicker*', (err, res) =>
       return deferred.reject(err) if err
 
       # get value of each key and append to object
+      colors = {}
       for key in res
-        Redis.get key, (err, res) =>
+        # preserve the scope of "key" and other bindings with a closure
+        do (key, colors) =>
+          v = @show(key).then (res) ->
+            colors[key] = res
+            return deferred.resolve(colors)
+
+    return deferred.promise
+
+  @show: (key) ->
+    # build a Q promise in case redis lags
+    deferred = Q.defer()
+
+    Redis.get key, (err, res) ->
+      return deferred.reject(err) if err
+      return deferred.resolve(res)
+    return deferred.promise
+
+  @destroy: (key) ->
+    # build a Q promise in case redis lags
+    deferred = Q.defer()
+
+    Redis.del key, (err, res) ->
+      return deferred.reject(err) if err
+      return deferred.resolve(res)
+    return deferred.promise
+
+  @destroy_all: ->
+    # build a Q promise in case redis lags
+    deferred = Q.defer()
+
+    Redis.keys '*', (err, res) ->
+      for key in res
+        Redis.del key, (err, res) ->
           return deferred.reject(err) if err
-          colors[key] = res
-      return deferred.resolve(colors)
+          return deferred.resolve(res)
     return deferred.promise
 
 module.exports = Color
