@@ -19,7 +19,6 @@ class Color
     # generate auto incrementing unique ID
     Redis.incr '0', (err, id) =>
       key = "#{KEY_PREFIX}#{id}"
-
       # insert new k,v pair
       # TODO use list or set based on the KEY_PREFIX
       Redis.set key, color, (err, res) =>
@@ -38,7 +37,7 @@ class Color
     deferred = Q.defer()
 
     # get all redis keys in array
-    Redis.keys '*colorpicker*', (err, res) =>
+    Redis.keys "*#{KEY_PREFIX}*", (err, res) =>
       return deferred.reject(err) if err
 
       # get value of each key and append to object
@@ -74,11 +73,10 @@ class Color
     # build a Q promise in case redis lags
     deferred = Q.defer()
 
-    Redis.keys '*', (err, res) ->
-      for key in res
-        Redis.del key, (err, res) ->
-          return deferred.reject(err) if err
-          return deferred.resolve(res)
+    Redis.keys "*#{KEY_PREFIX}*", (err, res) ->
+      Redis.del res, (err, res) ->
+        return deferred.reject(err) if err
+        return deferred.resolve(res)
     return deferred.promise
 
 module.exports = Color
