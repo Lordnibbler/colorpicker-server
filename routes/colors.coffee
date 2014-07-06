@@ -11,7 +11,7 @@ Redis = require '../src/redis'
 #   { "color": "00adeb,983897" }
 #
 # @example Sample response body
-#   { "success": true }
+#   { "id": "colorpicker:1" }
 #
 exports.create = (req, res) ->
   new Color(Redis, 0)
@@ -30,12 +30,31 @@ exports.create = (req, res) ->
 # GET /api/v1/colors
 #
 # @example Sample response body
-#   [ { 0: '00adeb, 983897' }, { 1: '00ffff, ff0000' } ]
+#   { 'colorpicker:424': '00ffff,ffff00',
+#     'colorpicker:423': '00adeb,983897' }
 #
 exports.index = (req, res) ->
   Color.index()
     .then (res) ->
       res.json res
+    .fail (message) ->
+      res.status 422
+      res.json error: message
+    .catch (err) =>
+      res.status 500
+      res.json error: err
+
+# Deletes an existing color from redis
+#
+# DELETE /api/v1/colors/:id
+#
+# @example Sample response body
+#   { "success": true }
+#
+exports.destroy = (req, res) ->
+  Color.destroy(req.param('id'))
+    .then (res) ->
+      res.json success: true
     .fail (message) ->
       res.status 422
       res.json error: message

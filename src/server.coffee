@@ -55,11 +55,9 @@ class Server
     @app.get '/', (request, response, next) ->
       response.render 'index'
 
-    @app.post   "#{@options['api_namespace']}/colors", colors.create
-    @app.get    "#{@options['api_namespace']}/colors", colors.index
-    # @app.patch  "#{@options['api_namespace']}/colors", colors.update
-    # @app.delete "#{@options['api_namespace']}/colors", colors.destroy
-
+    @app.post   "#{@options['api_namespace']}/colors",     colors.create
+    @app.get    "#{@options['api_namespace']}/colors",     colors.index
+    @app.delete "#{@options['api_namespace']}/colors/:id", colors.destroy
 
   # stop the server, firing callback upon success
   #

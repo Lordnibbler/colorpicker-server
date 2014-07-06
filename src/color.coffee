@@ -30,7 +30,8 @@ class Color
 
   # Class method to return all colors (keys) in Redis
   #
-  # @return [Object] all colors from the redis cache
+  # @return [Object] all colors from the redis cache as an object literal
+  #   with key being the redis key, and value being the hex string comma delimited
   #
   @index: ->
     # build a Q promise in case redis lags
