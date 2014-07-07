@@ -1,7 +1,8 @@
 # Color API endpoints
 #
-Color = require '../src/color'
-Redis = require '../src/redis'
+Color  = require '../src/color'
+Redis  = require '../src/redis'
+logger = require '../src/logger'
 
 # Creates a new color and inserts in redis
 #

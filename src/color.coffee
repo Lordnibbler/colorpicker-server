@@ -52,6 +52,10 @@ class Color
 
     return deferred.promise
 
+  # Class method to show a specific key in redis
+  #
+  # @return [String] the value of the key
+  #
   @show: (key) ->
     # build a Q promise in case redis lags
     deferred = Q.defer()
@@ -61,6 +65,10 @@ class Color
       return deferred.resolve(res)
     return deferred.promise
 
+  # Class method to destroy a specific key in redis
+  #
+  # @return [Integer] number of keys deleted
+  #
   @destroy: (key) ->
     # build a Q promise in case redis lags
     deferred = Q.defer()
@@ -70,6 +78,10 @@ class Color
       return deferred.resolve(res)
     return deferred.promise
 
+  # Class method to destroy all keys with the KEY_PREFIX in them
+  #
+  # @return [Integer] number of keys deleted
+  #
   @destroy_all: ->
     # build a Q promise in case redis lags
     deferred = Q.defer()

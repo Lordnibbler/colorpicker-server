@@ -3,6 +3,7 @@ var app = app || {};
 
 var Collection = Backbone.Collection.extend({
 
+  url: '/api/v1/colors',
   model: app.Color,
 
   /**
