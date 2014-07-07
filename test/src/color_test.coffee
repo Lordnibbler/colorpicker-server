@@ -7,12 +7,15 @@ describe 'Color', ->
       Color.destroy_all().then(done())
 
     it 'inserts a new key/value pair', (done) ->
-      # TODO create returns ID like 'colorpicker:41'
-      # so try fetching it after insert success
+      response = undefined
       Color.create('00adeb,983897')
         .then (res) ->
+          response = res
           res.should.match /colorpicker\:\d+/
-          done()
+          Color.show(response)
+            .then (res) ->
+              res.should.eql('00adeb,983897')
+              done()
 
   describe 'index', ->
     key = undefined
