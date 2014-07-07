@@ -5,7 +5,7 @@ before_install:
   - npm install -g bower
   - bower install
 script:
-  - "mocha -R dot test/src/*.coffee && karma start --single-run"
+  - "mocha -R dot test/src/**/*.coffee test/routes/**/*.coffee && karma start --single-run"
 
 env:
   - NODE_ENV=test
