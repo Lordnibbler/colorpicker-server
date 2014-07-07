@@ -90,7 +90,7 @@ module.exports = (grunt) ->
       mocha:
         options:
           spawn: false # faster reloading
-        files: ['test/src/**/*.coffee', 'src/**/*.coffee', 'routes/**/*.coffee']
+        files: ['test/src/**/*.coffee', 'test/routes/**/*.coffee', 'src/**/*.coffee', 'routes/**/*.coffee']
         tasks: ['mochaTest:test']
 
     karma:
@@ -106,7 +106,7 @@ module.exports = (grunt) ->
           require: ['coffee-script/register', 'test/test_helper.coffee']
           recursive: true
           timeout: 5000
-        src: ['test/src/**/*.coffee']
+        src: ['test/src/**/*.coffee', 'test/routes/**/*.coffee']
 
     clean:
       dist:
