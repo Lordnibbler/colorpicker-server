@@ -30,8 +30,7 @@ exports.create = (req, res) ->
 # GET /api/v1/colors
 #
 # @example Sample response body
-#   { 'colorpicker:424': '00ffff,ffff00',
-#     'colorpicker:423': '00adeb,983897' }
+#   [ { 'colorpicker:424': '00ffff,ffff00' }, 'colorpicker:423': '00adeb,983897' } ]
 #
 exports.index = (req, res) ->
   Color.index()

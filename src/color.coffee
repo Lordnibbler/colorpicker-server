@@ -42,15 +42,14 @@ class Color
 
       # get value of each key and append to object
       #
-      # TODO: convert this to be an array of objects
-      # [ { colorpicker:123: "00FFFF,FFFF00" }, { colorpicker:456: "CC0000,0000CC" } ]
-      #
-      colors = {}
+      colors = []
       for key in keys
         # preserve the scope of "key" and other bindings with a closure
         do (key, colors) =>
           v = @show(key).then (res) ->
-            colors[key] = res
+            color = { }
+            color[key] = res
+            colors.push color
             return deferred.resolve(colors)
     return deferred.promise
 

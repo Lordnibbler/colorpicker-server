@@ -38,11 +38,11 @@ describe 'Color', ->
     it 'retrieves all key value pairs in redis', (done) ->
       Color.index()
         .then (res) ->
-          # ensure we have > 1 color key in the response
-          Object.keys(res).length.should.be.greaterThan(1)
-          for k, v of res
-            k.should.match /colorpicker\:\d+/
-            v.should.match /[A-Fa-f0-9]{6}\,/
+          res.length.should.be.greaterThan(1)
+          for color in res
+            for k, v of color
+              k.should.match /colorpicker\:\d+/
+              v.should.match /[A-Fa-f0-9]{6}\,/
           done()
 
   describe 'show', ->

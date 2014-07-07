@@ -8,16 +8,15 @@ Redis   = require '../../src/redis'
 server  = undefined
 
 describe '/api/v1/colors Routes', ->
-  before (done) ->
+  beforeEach (done) ->
     server = new Server(config.server.host, config.server.port, api_namespace: '/api/v1')
     server.run(done())
 
-  after (done) ->
+  afterEach (done) ->
     server.close(done())
 
   afterEach (done) ->
-    Color.destroy_all()
-      .then(done())
+    Color.destroy_all().then(done())
 
   describe 'create', ->
     it 'creates a new color', (done) ->
@@ -50,8 +49,12 @@ describe '/api/v1/colors Routes', ->
         .get('/api/v1/colors')
         .expect(200)
         .end( (err, res) ->
+          # ensure we have more than one color in the response array
+          res.body.length.should.be.greaterThan(1)
           Object.keys(res.body).length.should.eql(2)
-          res.body[key].should.eql('ff0000,0000ff') for key in keys
+
+          # ensure values all equal our hex code
+          color[Object.keys(color)[0]].should.eql('ff0000,0000ff') for color in res.body
           done()
         )
 
