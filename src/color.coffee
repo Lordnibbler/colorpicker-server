@@ -4,7 +4,6 @@ Redis = require './redis'
 KEY_PREFIX = 'colorpicker:'
 
 # represents a Colors collection as a data model in Redis
-# @example { 0: '00adeb, 983897' }
 #
 class Color
   # Creates a new color in the redis cache
@@ -38,18 +37,21 @@ class Color
     deferred = Q.defer()
 
     # get all redis keys in array
-    Redis.keys "*#{KEY_PREFIX}*", (err, res) =>
+    Redis.keys "*#{KEY_PREFIX}*", (err, keys) =>
       return deferred.reject(err) if err
 
       # get value of each key and append to object
+      #
+      # TODO: convert this to be an array of objects
+      # [ { colorpicker:123: "00FFFF,FFFF00" }, { colorpicker:456: "CC0000,0000CC" } ]
+      #
       colors = {}
-      for key in res
+      for key in keys
         # preserve the scope of "key" and other bindings with a closure
         do (key, colors) =>
           v = @show(key).then (res) ->
             colors[key] = res
             return deferred.resolve(colors)
-
     return deferred.promise
 
   # Class method to show a specific key in redis
@@ -86,8 +88,8 @@ class Color
     # build a Q promise in case redis lags
     deferred = Q.defer()
 
-    Redis.keys "*#{KEY_PREFIX}*", (err, res) ->
-      Redis.del res, (err, res) ->
+    Redis.keys "*#{KEY_PREFIX}*", (err, keys) ->
+      Redis.del keys, (err, res) ->
         return deferred.reject(err) if err
         return deferred.resolve(res)
     return deferred.promise

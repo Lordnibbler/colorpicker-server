@@ -15,16 +15,15 @@ logger = require '../src/logger'
 #   { "id": "colorpicker:1" }
 #
 exports.create = (req, res) ->
-  new Color(Redis, 0)
-    .create(req.body['color'])
-      .then (res) ->
-        res.json id: res
-      .fail (message) ->
-        res.status 422
-        res.json error: message
-      .catch (err) =>
-        res.status 500
-        res.json error: err
+  Color.create(req.body['color'])
+    .then (response) ->
+      res.json id: response
+    .fail (err) ->
+      res.status 422
+      res.json error: err.toString()
+    .catch (err) =>
+      res.status 500
+      res.json error: err
 
 # Gets a list of all existing colors in redis
 #
@@ -36,11 +35,11 @@ exports.create = (req, res) ->
 #
 exports.index = (req, res) ->
   Color.index()
-    .then (res) ->
-      res.json res
-    .fail (message) ->
+    .then (response) ->
+      res.json response
+    .fail (err) ->
       res.status 422
-      res.json error: message
+      res.json error: err.toString()
     .catch (err) =>
       res.status 500
       res.json error: err
@@ -54,11 +53,11 @@ exports.index = (req, res) ->
 #
 exports.destroy = (req, res) ->
   Color.destroy(req.param('id'))
-    .then (res) ->
+    .then (response) ->
       res.json success: true
-    .fail (message) ->
+    .fail (err) ->
       res.status 422
-      res.json error: message
+      res.json error: err.toString()
     .catch (err) =>
       res.status 500
       res.json error: err
