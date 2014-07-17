@@ -43,6 +43,7 @@ class Color
       # get value of each key and append to object
       #
       colors = []
+      return deferred.resolve(colors) if keys.length == 0
       for key in keys
         # preserve the scope of "key" and other bindings with a closure
         do (key, colors) =>
