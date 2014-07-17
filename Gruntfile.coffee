@@ -13,7 +13,12 @@ module.exports = (grunt) ->
         tasks: [
           "nodemon"
           # "node-inspector" # might want to add this back
-          "watch"
+          # "watch"
+          'watch:server'
+          'watch:scripts'
+          'watch:css'
+          'watch:sass'
+          'watch:images'
         ]
         options:
           logConcurrentOutput: true
@@ -305,8 +310,8 @@ module.exports = (grunt) ->
 
   # Register Tasks
   grunt.registerTask "dev", "Start our development environment", [
-    "env:dev"
-    "preprocess:js"
+    "env:dev" # set ENV vars
+    "preprocess:js" # process main.js for ENV vars
     "concurrent:dev"
   ]
 
