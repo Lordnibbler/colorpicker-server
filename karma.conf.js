@@ -28,6 +28,8 @@ module.exports = function(config) {
       'assets/scripts/templates/color.js',
       'assets/scripts/views/color.js',
       'assets/scripts/routes/router.js',
+      'assets/scripts/views/savedColor.js',
+      'assets/scripts/views/savedColors.js',
       'assets/scripts/views/app.js',
       // 'assets/scripts/main.js',
       'test/assets/scripts/**/*.js'

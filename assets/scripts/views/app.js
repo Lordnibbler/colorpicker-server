@@ -11,6 +11,7 @@ app.SwatchAppView = Backbone.View.extend({
     var eventsHash = {
       // all events, regardless of mobile or not
       "click #header-tab": "toggleheader",
+      "click #saved-colors-tab": "toggleSavedColors",
       "click #gradient": "generateGradient",
       "click #clear": "clearColors",
       "click #complement": "generateComplementaryColors",
@@ -38,6 +39,8 @@ app.SwatchAppView = Backbone.View.extend({
   },
 
   initialize: function() {
+    app.SavedColorView = new app.SavedColorView();
+
     app.Colors.on("add",    this.addOne, this);
     app.Colors.on("reset",  this.addAll, this);
     app.Colors.on("remove", this.layout, this);
@@ -125,6 +128,10 @@ app.SwatchAppView = Backbone.View.extend({
    */
   toggleheader: function(event) {
     this.$el.toggleClass("show-header");
+  },
+
+  toggleSavedColors: function() {
+    this.$el.toggleClass('show-saved-colors');
   },
 
   /**
