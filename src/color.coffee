@@ -43,15 +43,18 @@ class Color
       # get value of each key and append to object
       #
       colors = []
-      return deferred.resolve(colors) if keys.length == 0
       for key in keys
         # preserve the scope of "key" and other bindings with a closure
         do (key, colors) =>
-          v = @show(key).then (res) ->
-            color = { }
-            color[key] = res
-            colors.push color
-            return deferred.resolve(colors)
+          @show(key)
+            .then (res) ->
+              color = {}
+              color[key] = res
+              colors.push color
+
+              # resolve our promise if we have no more keys left to fetch
+              keys.splice(keys.indexOf(key), 1)
+              deferred.resolve(colors) if keys.length == 0
     return deferred.promise
 
   # Class method to show a specific key in redis
