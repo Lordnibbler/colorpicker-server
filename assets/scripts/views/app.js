@@ -39,7 +39,7 @@ app.SwatchAppView = Backbone.View.extend({
   },
 
   initialize: function() {
-    app.SavedColorView = new app.SavedColorView();
+    this.SavedColorsView = new app.SavedColorsView();
 
     app.Colors.on("add",    this.addOne, this);
     app.Colors.on("reset",  this.addAll, this);

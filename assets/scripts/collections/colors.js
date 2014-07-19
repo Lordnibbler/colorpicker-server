@@ -148,5 +148,6 @@ var Collection = Backbone.Collection.extend({
 
 });
 
-// Global color collection
-app.Colors = new Collection();
+// Global color collections
+app.Colors      = new Collection();
+app.SavedColors = new Collection();

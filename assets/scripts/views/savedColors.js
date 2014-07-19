@@ -1,43 +1,49 @@
 "use strict";
 var app = app || {};
 
-app.SavedColorView = Backbone.View.extend({
+app.SavedColorsView = Backbone.View.extend({
 
   el: '#saved-colors',
+  events: {
+    "click li.saved-color": 'clicked'
+  },
 
   initialize: function() {
-    this.render();
-
     // make ajax call to /api/v1/colors
-    app.Colors.fetch({
+    var self = this;
+    app.SavedColors.fetch({
       remove: false,
+      silent: true,
 
       success: function(collection, response, options) {
         // addOne() for each color object
-        console.log(response);
         if(response.length > 0) {
-          response.each(function(color) {
-            this.addOne(color);
+          response.forEach(function(color, index, array) {
+            self.addOne(color);
           });
         }
 
       },
 
-      error: function() {
-
+      error: function(collection, response, options) {
+        console.log('Error!', response);
       }
     });
   },
 
-  render: function() {
-    // this.$el.html(this.template());
-    // this.$("#saved_colors").append(this.el);
 
-    console.log(this.$el.html());
+  /**
+   * Instantiate a new SavedColorView and append its rendered el to the ul#saved-colors
+   */
+  addOne: function(color) {
+    // grab only value in color object
+    for (var a in color) var c = color[a];
+    var savedColor = new app.SavedColorView({ color: c });
+    this.$el.append(savedColor.render());
   },
 
-  addOne: function(color) {
-    app.SavedColorView.initialize(color);
+  clicked: function(event) {
+    app.Router.setColors($(event.currentTarget).data('color'));
   }
 
 });
