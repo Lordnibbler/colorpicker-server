@@ -604,6 +604,7 @@ a {
   list-style: none;
 }
 #drawer .container li.saved-color {
+  position: relative;
   cursor: pointer;
   height: 100px;
   width: 100%;
@@ -613,7 +614,10 @@ a {
   display: block;
   float: left;
 }
-
+#drawer .container li.saved-color button.btn.destroy {
+  float: none;
+  position: absolute;
+}
 #header {
   *zoom: 1;
   position: absolute;

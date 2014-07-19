@@ -5,7 +5,8 @@ app.SavedColorsView = Backbone.View.extend({
 
   el: '#saved-colors',
   events: {
-    "click li.saved-color": 'clicked'
+    "click li.saved-color": 'clicked',
+    "click li.saved-color .destroy": 'destroyClicked'
   },
 
   initialize: function() {
@@ -37,13 +38,37 @@ app.SavedColorsView = Backbone.View.extend({
    */
   addOne: function(color) {
     // grab only value in color object
-    for (var a in color) var c = color[a];
-    var savedColor = new app.SavedColorView({ color: c });
+    for (var key in color) {
+      var key = key;
+      var c   = color[key];
+    }
+    var savedColor = new app.SavedColorView({ color: c, key: key });
     this.$el.append(savedColor.render());
   },
 
+  /**
+   * Delegate to router to set colors to the data attr on the clicked savedColorView
+   */
   clicked: function(event) {
     app.Router.setColors($(event.currentTarget).data('color'));
+  },
+
+  destroyClicked: function(event) {
+    var $el         = $(event.currentTarget);
+    var $savedColor = $el.parent();
+    var key         = $savedColor.data('key');
+    var color       = $savedColor.data('color');
+
+    var savedColor = new app.SavedColor({ color: color, key: key });
+    savedColor.destroy({
+      success: function(model, response, options) {
+        $savedColor.remove();
+      },
+
+      error: function(model, response, options) {
+        // console.log('destroy error', response);
+      }
+    });
   }
 
 });
