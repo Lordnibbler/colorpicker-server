@@ -1,5 +1,5 @@
 Redis  = require 'redis'
-config = require './config'
+config = require 'config'
 
 module.exports = do ->
   redis = Redis.createClient(config.redis.port, config.redis.host, config.redis.options)

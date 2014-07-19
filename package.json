@@ -27,7 +27,8 @@
     "bower": "*",
     "grunt-sass": "~0.14.0",
     "q": "~1.0.1",
-    "node-uuid": "~1.4.1"
+    "node-uuid": "~1.4.1",
+    "config": "~0.4.36"
   },
   "devDependencies": {
     "mocha": "*",

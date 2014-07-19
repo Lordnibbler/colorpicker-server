@@ -1,5 +1,5 @@
 ioClient = require 'socket.io-client'
-config   = require '../../src/config'
+config   = require 'config'
 io       = null
 
 class TestServer

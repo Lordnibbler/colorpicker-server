@@ -1,5 +1,5 @@
 Server     = require '../../src/server'
-config     = require '../../src/config'
+config     = require 'config'
 logger     = require '../../src/logger'
 testServer = require '../support/test_server'
 

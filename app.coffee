@@ -1,6 +1,6 @@
 Fs     = require 'fs'
+config = require 'config'
 Server = require './src/server'
-config = require './src/config'
 logger = require './src/logger'
 
 logger.debug "Loaded config file"

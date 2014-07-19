@@ -1,6 +1,6 @@
 request = require 'supertest'
 express = require 'express'
-config  = require '../../src/config'
+config  = require 'config'
 colors  = require '../../routes/colors'
 Server  = require '../../src/server'
 Color   = require '../../src/color'
