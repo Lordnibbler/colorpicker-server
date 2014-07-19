@@ -26,7 +26,7 @@ app.SavedColorsView = Backbone.View.extend({
       },
 
       error: function(collection, response, options) {
-        console.log('Error!', response);
+        // console.log('Error!', response);
       }
     });
   },

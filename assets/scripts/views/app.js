@@ -16,7 +16,8 @@ app.SwatchAppView = Backbone.View.extend({
       "click #clear": "clearColors",
       "click #complement": "generateComplementaryColors",
       "click #huecomplement": "generateHueShiftComplementaryColors",
-      "click #white": "generateWhiteColors"
+      "click #white": "generateWhiteColors",
+      "click #save-color": "saveColor"
     };
 
     // bind the following events to our local override methods (this.)
@@ -230,12 +231,10 @@ app.SwatchAppView = Backbone.View.extend({
    */
   generateGradient: function(event) {
     app.Router.setGradientColors(5);
-    this.toggleheader();
   },
 
   clearColors: function(event) {
     app.Router.clearColors();
-    this.toggleheader();
   },
 
   /**
@@ -251,7 +250,6 @@ app.SwatchAppView = Backbone.View.extend({
    */
   generateHueShiftComplementaryColors: function(event) {
     app.Router.setHueShiftComplementaryColors();
-    this.toggleheader();
   },
 
   /**
@@ -259,7 +257,26 @@ app.SwatchAppView = Backbone.View.extend({
    */
   generateWhiteColors: function(event) {
     app.Router.setWhiteColors();
-    this.toggleheader();
+  },
+
+  /**
+   * Instantiate a new SavedColor model, copy our app.Colors collection to it,
+   * and POST to API. Then add a new SavedColorView representation of it.
+   */
+  saveColor: function() {
+    var self  = this;
+    var color = new app.SavedColor({ color: app.Colors.hexString() });
+
+    color.save(null, {
+      success: function(model, response, options) {
+        var savedColor = {};
+        savedColor[response['id']] = color.get('color');
+        self.SavedColorsView.addOne(savedColor);
+      },
+      error: function(model, response, options) {
+        console.log("saveColor error");
+      }
+    });
   }
 
 });

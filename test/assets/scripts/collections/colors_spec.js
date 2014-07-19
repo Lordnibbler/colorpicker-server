@@ -80,4 +80,13 @@ describe('Colors collection', function() {
     });
   });
 
+  describe('hexString()', function() {
+    it('returns a hex string of all colors in collection', function() {
+      app.Colors.addFromHex('#00ADEB');
+      app.Colors.addFromHex('#983897');
+      app.Colors.addFromHex('#cc0000');
+      expect(app.Colors.hexString()).to.eql('00ADEB,983897,CC0000');
+    });
+  });
+
 });

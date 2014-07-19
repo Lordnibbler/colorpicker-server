@@ -144,6 +144,10 @@ var Collection = Backbone.Collection.extend({
     var BB = ((B.toString(16).length === 1) ? '0' + B.toString(16) : B.toString(16));
 
     return RR + GG + BB;
+  },
+
+  hexString: function() {
+    return _.reduce(this.models, function(memo, color) { return memo += color.hexCss().slice(1) + ","; }, "").slice(0, - 1);
   }
 
 });
