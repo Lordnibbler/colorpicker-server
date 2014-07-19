@@ -54,7 +54,7 @@ var Router = Backbone.Router.extend({
       return memo + color.hexCss().substr(1) + ',';
     }, "");
 
-    // emit `emitColorSet` event to node.js server
+    // emit `colorSet` event to node.js server
     this.emitColorSet();
 
     // append to URL
@@ -68,7 +68,7 @@ var Router = Backbone.Router.extend({
    */
   emitColorSet: function(colors) {
     if(window.socket) {
-      window.socket.emit('emitColorSet', {
+      window.socket.emit('colorSet', {
         color: (colors || app.Colors.toRgbString())
       });
     }
