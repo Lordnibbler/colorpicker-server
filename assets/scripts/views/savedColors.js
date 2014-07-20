@@ -53,6 +53,9 @@ app.SavedColorsView = Backbone.View.extend({
     app.Router.setColors($(event.currentTarget).data('color'));
   },
 
+  /**
+   * Instantiate a SavedColor model with key, destroy it, and remove from DOM.
+   */
   destroyClicked: function(event) {
     // prevent `clicked` event from being fired too!
     event.stopPropagation();
