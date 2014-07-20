@@ -23,7 +23,6 @@ app.SavedColorsView = Backbone.View.extend({
             self.addOne(color);
           });
         }
-
       },
 
       error: function(collection, response, options) {

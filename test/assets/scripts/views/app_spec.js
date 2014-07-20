@@ -454,4 +454,10 @@ describe('views/app.js', function() {
       app.Router.setWhiteColors.restore();
     });
   });
+
+  describe('saveColors', function() {
+    it('instantiates a new SavedColor model', function() {
+      // View.saveColors();
+    });
+  });
 });
