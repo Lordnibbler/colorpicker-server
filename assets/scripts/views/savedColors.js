@@ -54,6 +54,10 @@ app.SavedColorsView = Backbone.View.extend({
   },
 
   destroyClicked: function(event) {
+    // prevent `clicked` event from being fired too!
+    event.stopPropagation();
+    event.preventDefault();
+
     var $el         = $(event.currentTarget);
     var $savedColor = $el.parent();
     var key         = $savedColor.data('key');
