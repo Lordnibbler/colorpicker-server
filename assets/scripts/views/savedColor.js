@@ -6,7 +6,7 @@ var app = app || {};
  */
 app.SavedColorView = Backbone.View.extend({
 
-  template: _.template('<li class="saved-color" data-color="<%= color %>" data-key="<%= key %>"><button class="destroy btn"><i class="icon-remove icon-large"></i></button><%= spans %></li>'),
+  template: _.template('<li class="saved-color" data-color="<%= color %>" data-key="<%= key %>"><button class="destroy btn"><i class="fa fa-times fa-lg"></i></button><%= spans %></li>'),
   color: undefined,
 
   events: {
