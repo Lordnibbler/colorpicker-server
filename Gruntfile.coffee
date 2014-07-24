@@ -13,7 +13,6 @@ module.exports = (grunt) ->
         tasks: [
           "nodemon"
           # "node-inspector" # might want to add this back
-          # "watch"
           'watch:server'
           'watch:scripts'
           'watch:css'
