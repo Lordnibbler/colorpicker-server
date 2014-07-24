@@ -17,8 +17,8 @@
     "url": "https://github.com/Lordnibbler/colorpicker-server/issues"
   },
   "dependencies": {
-    "socket.io": "~0.9.16",
-    "socket.io-client": "0.9.x",
+    "socket.io": "~1.0.6",
+    "socket.io-client": "~1.0.6",
     "coffee-script": "~1.7",
     "log": "~1.4.0",
     "express": "~3.4.6",
