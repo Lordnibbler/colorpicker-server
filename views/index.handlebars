@@ -1,4 +1,9 @@
 <div id="appframe">
+  <div id="drawer">
+    <div class="container">
+      <ul id="saved-colors"></ul>
+    </div>
+  </div>
 
   <div id="header">
     <div class="container">
@@ -8,12 +13,6 @@
 
       <div class="panel">
         <h2>Options</h2>
-
-        <button id='huecomplement'>huecomplement</button>
-        <button id='complement'>complement</button>
-        <button id='gradient'>gradient</button>
-        <button id='white'>white</button>
-        <button id='clear'>clear</button>
       </div>
 
       <div class="panel">
@@ -21,21 +20,21 @@
 
         <ul id="instructions">
           <li>
-            <i class="icon-resize-horizontal icon-2x"></i>
+            <i class="fa fa-arrows-h fa-2x"></i>
             <p>
               Back &amp; Forth for Hue
             </p>
           </li>
 
           <li>
-            <i class="icon-resize-vertical icon-2x"></i>
+            <i class="fa fa-arrows-v fa-2x"></i>
             <p>
               Up &amp; Down for Lightness
             </p>
           </li>
 
           <li>
-            <i class="icon-sort icon-2x"></i>
+            <i class="fa fa-sort fa-2x"></i>
             <p>
               Scroll for Saturation
             </p>
@@ -44,7 +43,14 @@
       </div>
 
     </div>
-    <button id="header-tab" class="btn"><i class="icon-cog icon-large"></i> options</button>
+
+    <button id="saved-colors-tab" class="btn tab"><i class="fa fa-align-justify fa-lg"></i></button>
+    <button id="save-color"       class="btn tab"><i class="fa fa-save          fa-lg"></i></button>
+    <button id="huecomplement"    class="btn tab"><i class="fa fa-exchange      fa-lg"></i></button>
+    <button id="gradient"         class="btn tab"><i class="fa fa-signal        fa-lg"></i></button>
+    <button id="white"            class="btn tab"><i class="fa fa-lightbulb-o   fa-lg"></i></button>
+    <button id="clear"            class="btn tab"><i class="fa fa-ban           fa-lg"></i></button>
+    <button id="header-tab"       class="btn tab"><i class="fa fa-cog           fa-lg"></i></button>
   </div>
 
   <div id="swatches">

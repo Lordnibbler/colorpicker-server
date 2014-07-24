@@ -5,13 +5,12 @@ before_install:
   - npm install -g bower
   - bower install
 script:
-  - "mocha -R dot test/src/*.coffee && karma start --single-run"
+  - "mocha -R dot test/src/**/*.coffee test/routes/**/*.coffee && karma start --single-run"
 
 env:
   - NODE_ENV=test
 cache:
   directories:
     - node_modules
-# for the not so distant future
-# services:
-#   - redis
+services:
+  - redis

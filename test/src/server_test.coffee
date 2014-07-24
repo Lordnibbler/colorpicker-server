@@ -1,7 +1,6 @@
 Server     = require '../../src/server'
-config     = require '../../src/config'
+config     = require 'config'
 logger     = require '../../src/logger'
-# sinon      = require 'sinon'
 testServer = require '../support/test_server'
 
 describe 'Server', ->
@@ -18,30 +17,22 @@ describe 'Server', ->
       @server.url.should.eql("https://#{ config.server.host }:#{ config.server.port }/")
 
   describe 'run', ->
-    it 'creates an HTTPS server', ->
+    it 'creates an HTTPS server', (done) ->
       # run a new server, firing callback() when successful
       @server.run(->
         true.should.eql true
         @.close(->
           true.should.eql true
+          done()
         )
       )
 
   describe "close", ->
-    it "should close the HTTPS server", ->
-      # close server immediately after it starts
-      # on success, assert.ok
-      run_callback = ->
-        @server.close(close_callback())
-
-      # callback to call when server.close succeeds
-      close_callback = ->
-        assert.ok(true)
-
+    it "should close the HTTPS server", (done) ->
       # run server, fire the run callback
       # close the server immediately after it starts
       @server.run(->
-        @.close(->)
+        @.close(done())
       )
 
   describe '_sio_configure_listener', ->

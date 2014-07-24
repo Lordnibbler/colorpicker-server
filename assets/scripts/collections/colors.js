@@ -3,6 +3,7 @@ var app = app || {};
 
 var Collection = Backbone.Collection.extend({
 
+  url: '/api/v1/colors',
   model: app.Color,
 
   /**
@@ -143,9 +144,14 @@ var Collection = Backbone.Collection.extend({
     var BB = ((B.toString(16).length === 1) ? '0' + B.toString(16) : B.toString(16));
 
     return RR + GG + BB;
+  },
+
+  hexString: function() {
+    return _.reduce(this.models, function(memo, color) { return memo += color.hexCss().slice(1) + ","; }, "").slice(0, - 1);
   }
 
 });
 
-// Global color collection
-app.Colors = new Collection();
+// Global color collections
+app.Colors      = new Collection();
+app.SavedColors = new Collection();

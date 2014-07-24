@@ -27,8 +27,9 @@ var Router = Backbone.Router.extend({
    * @param color a hex string with no #
    * @example setGradientColors('00adeb', 5);
    */
-  setGradientColors: function(color, length) {
-    if(color.length === 6 && app.Colors.length > 0) app.Colors.setGradientColors(color, length);
+  setGradientColors: function(length) {
+    if(app.Colors.length > 0)
+      app.Colors.setGradientColors(app.Colors.first().hexCss().substr(1), length);
   },
 
   /**
@@ -54,7 +55,7 @@ var Router = Backbone.Router.extend({
     }, "");
 
     // emit `colorSet` event to node.js server
-    this.colorSet();
+    this.emitColorSet();
 
     // append to URL
     this.navigate(hash, {trigger: false, replace: true});
@@ -65,7 +66,7 @@ var Router = Backbone.Router.extend({
    * Emits a `colorSet` event to our Node.js server
    * Sends all current colors, in Halo `r,g,b,a\n` format
    */
-  colorSet: function(colors) {
+  emitColorSet: function(colors) {
     if(window.socket) {
       window.socket.emit('colorSet', {
         color: (colors || app.Colors.toRgbString())
@@ -78,7 +79,7 @@ var Router = Backbone.Router.extend({
    */
   clearColors: function(event) {
     this.setColors('');
-    this.colorSet('000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000');
+    this.emitColorSet('000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000');
     this.navigate('', {trigger: false, replace: true});
   },
 
@@ -87,7 +88,7 @@ var Router = Backbone.Router.extend({
    */
   setWhiteColors: function(event) {
     this.setColors('FFFFFF,FFFFFF,FFFFFF,FFFFFF,FFFFFF');
-    this.colorSet('255,255,255,255\n255,255,255,255\n255,255,255,255\n255,255,255,255\n255,255,255,255');
+    this.emitColorSet('255,255,255,255\n255,255,255,255\n255,255,255,255\n255,255,255,255\n255,255,255,255');
   }
 
 });

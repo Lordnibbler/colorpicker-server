@@ -2,9 +2,10 @@ Http      = require 'http'
 Socket    = require 'socket.io'
 logger    = require './logger'
 FS        = require 'fs'
-express   = require 'express'
-path      = require 'path'
-exphbs    = require 'express3-handlebars'
+express = require 'express'
+path    = require 'path'
+exphbs  = require 'express3-handlebars'
+colors  = require '../routes/colors'
 
 class Server
   beagles:   []
@@ -50,10 +51,20 @@ class Server
     # Set Handlebars
     @app.set 'view engine', 'handlebars'
 
+    # express middlewares
+    @app.use express.json()
+    @app.use express.urlencoded()
+    @app.use express.methodOverride()
+    @app.use @app.router
+    @app.use express.bodyParser()
+
     # routes
     @app.get '/', (request, response, next) ->
       response.render 'index'
 
+    @app.post   "#{@options['api_namespace']}/colors",     colors.create
+    @app.get    "#{@options['api_namespace']}/colors",     colors.index
+    @app.delete "#{@options['api_namespace']}/colors/:id", colors.destroy
 
   # stop the server, firing callback upon success
   #
@@ -96,7 +107,7 @@ class Server
       # when Client is live-previewing color
       socket.on 'colorChanged', (data) =>
         # send colorChanged data to all beagles
-        logger.info "emitting colorChanged to #{@beagles.length} beagles"
+        # logger.info "emitting colorChanged to #{@beagles.length} beagles"
         beagle.emit('colorChanged', { color: data.color }) for beagle in @beagles # where beagle is connected
 
       # when Client picks a new color

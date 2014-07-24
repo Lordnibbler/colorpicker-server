@@ -7,7 +7,7 @@
     "modernizr": "~2.6.2",
     "underscore": "~1.6.0",
     "backbone": "~1.1.2",
-    "components-font-awesome": "~3.0.1"
+    "components-font-awesome": "~4.1.0"
   },
   "devDependencies": {
     "chai-backbone": "~0.9.2"

@@ -1,5 +1,5 @@
-Log       = require 'log'
-config    = require './config'
+Log    = require 'log'
+config = require 'config'
 
 Log::warn = Log::warning # socket.io logger compatibility
 

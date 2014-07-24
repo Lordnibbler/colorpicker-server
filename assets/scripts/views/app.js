@@ -11,11 +11,13 @@ app.SwatchAppView = Backbone.View.extend({
     var eventsHash = {
       // all events, regardless of mobile or not
       "click #header-tab": "toggleheader",
+      "click #saved-colors-tab": "toggleSavedColors",
       "click #gradient": "generateGradient",
       "click #clear": "clearColors",
       "click #complement": "generateComplementaryColors",
       "click #huecomplement": "generateHueShiftComplementaryColors",
-      "click #white": "generateWhiteColors"
+      "click #white": "generateWhiteColors",
+      "click #save-color": "saveColor"
     };
 
     // bind the following events to our local override methods (this.)
@@ -38,6 +40,8 @@ app.SwatchAppView = Backbone.View.extend({
   },
 
   initialize: function() {
+    this.SavedColorsView = new app.SavedColorsView();
+
     app.Colors.on("add",    this.addOne, this);
     app.Colors.on("reset",  this.addAll, this);
     app.Colors.on("remove", this.layout, this);
@@ -127,6 +131,10 @@ app.SwatchAppView = Backbone.View.extend({
     this.$el.toggleClass("show-header");
   },
 
+  toggleSavedColors: function() {
+    this.$el.toggleClass('show-saved-colors');
+  },
+
   /**
    * Adds a color to the colors collection with the editModel's current rgb
    */
@@ -153,8 +161,8 @@ app.SwatchAppView = Backbone.View.extend({
     this.editModel.trigger("change");
 
     // send colors via socket
-    // TODO: hook into the editModel change event
-    this.editModel.colorChanged();
+    // TODO: bind to the editModel 'change' event
+    this.editModel.emitColorChanged();
   },
 
   scroll: function(event) {
@@ -222,13 +230,11 @@ app.SwatchAppView = Backbone.View.extend({
    * based on the first Color in our app.Colors collection
    */
   generateGradient: function(event) {
-    app.Router.setGradientColors(app.Colors.first().hexCss().substring(1), 5);
-    this.toggleheader();
+    app.Router.setGradientColors(5);
   },
 
   clearColors: function(event) {
     app.Router.clearColors();
-    this.toggleheader();
   },
 
   /**
@@ -244,7 +250,6 @@ app.SwatchAppView = Backbone.View.extend({
    */
   generateHueShiftComplementaryColors: function(event) {
     app.Router.setHueShiftComplementaryColors();
-    this.toggleheader();
   },
 
   /**
@@ -252,7 +257,26 @@ app.SwatchAppView = Backbone.View.extend({
    */
   generateWhiteColors: function(event) {
     app.Router.setWhiteColors();
-    this.toggleheader();
+  },
+
+  /**
+   * Instantiate a new SavedColor model, copy our app.Colors collection to it,
+   * and POST to API. Then add a new SavedColorView representation of it.
+   */
+  saveColor: function() {
+    var self  = this;
+    var color = new app.SavedColor({ color: app.Colors.hexString() });
+
+    color.save(null, {
+      success: function(model, response, options) {
+        var savedColor = {};
+        savedColor[response['id']] = color.get('color');
+        self.SavedColorsView.addOne(savedColor);
+      },
+      error: function(model, response, options) {
+        console.log("saveColor error");
+      }
+    });
   }
 
 });

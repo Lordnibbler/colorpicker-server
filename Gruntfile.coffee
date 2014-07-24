@@ -13,7 +13,11 @@ module.exports = (grunt) ->
         tasks: [
           "nodemon"
           # "node-inspector" # might want to add this back
-          "watch"
+          'watch:server'
+          'watch:scripts'
+          'watch:css'
+          'watch:sass'
+          'watch:images'
         ]
         options:
           logConcurrentOutput: true
@@ -90,7 +94,7 @@ module.exports = (grunt) ->
       mocha:
         options:
           spawn: false # faster reloading
-        files: "test/src/**/*.coffee"
+        files: ['test/src/**/*.coffee', 'test/routes/**/*.coffee', 'src/**/*.coffee', 'routes/**/*.coffee']
         tasks: ['mochaTest:test']
 
     karma:
@@ -106,7 +110,7 @@ module.exports = (grunt) ->
           require: ['coffee-script/register', 'test/test_helper.coffee']
           recursive: true
           timeout: 5000
-        src: ['test/src/**/*.coffee']
+        src: ['test/src/**/*.coffee', 'test/routes/**/*.coffee']
 
     clean:
       dist:
@@ -299,14 +303,14 @@ module.exports = (grunt) ->
         expand: true
         flatten: true
         filter: 'isFile'
-        src: ['assets/bower_components/components-font-awesome/font/**']
-        dest: 'dist/assets/font'
+        src: ['assets/bower_components/components-font-awesome/fonts/**']
+        dest: 'dist/assets/fonts'
 
 
   # Register Tasks
   grunt.registerTask "dev", "Start our development environment", [
-    "env:dev"
-    "preprocess:js"
+    "env:dev" # set ENV vars
+    "preprocess:js" # process main.js for ENV vars
     "concurrent:dev"
   ]
 

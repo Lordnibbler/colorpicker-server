@@ -23,8 +23,12 @@
     "log": "~1.4.0",
     "express": "~3.4.6",
     "express3-handlebars": "0.4.x",
+    "redis": "~0.10.3",
     "bower": "*",
-    "grunt-sass": "~0.14.0"
+    "grunt-sass": "~0.14.0",
+    "q": "~1.0.1",
+    "node-uuid": "~1.4.1",
+    "config": "~0.4.36"
   },
   "devDependencies": {
     "mocha": "*",
@@ -62,7 +66,8 @@
     "grunt-mocha-test": "~0.11.0",
     "grunt-env": "~0.4.1",
     "grunt-preprocess": "~4.0.0",
-    "grunt-sass": "~0.14.0"
+    "grunt-sass": "~0.14.0",
+    "supertest": "~0.13.0"
   },
   "engines": {
     "node": "0.10.29",

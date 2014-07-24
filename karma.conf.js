@@ -24,12 +24,14 @@ module.exports = function(config) {
       'http://localhost:9876/socket.io/socket.io.js',
 
       'assets/scripts/models/color.js',
+      'assets/scripts/models/savedColor.js',
       'assets/scripts/collections/colors.js',
       'assets/scripts/templates/color.js',
       'assets/scripts/views/color.js',
       'assets/scripts/routes/router.js',
+      'assets/scripts/views/savedColor.js',
+      'assets/scripts/views/savedColors.js',
       'assets/scripts/views/app.js',
-      // 'assets/scripts/main.js',
       'test/assets/scripts/**/*.js'
     ],
 
