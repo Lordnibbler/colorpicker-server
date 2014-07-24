@@ -456,8 +456,67 @@ describe('views/app.js', function() {
   });
 
   describe('saveColors', function() {
-    it('instantiates a new SavedColor model', function() {
-      // View.saveColors();
+    beforeEach(function() {
+      this.server = sinon.fakeServer.create();
+      this.responseBody = '{"colorpicker:123":"00ADEB,983897"}';
+      this.server.respondWith(
+        "POST",
+        "/api/v1/colors",
+        [
+          200,
+          {"Content-Type": "application/json"},
+          this.responseBody
+        ]
+      );
+      this.eventSpy = sinon.spy();
     });
+
+    afterEach(function() {
+      this.server.restore();
+    });
+
+    it('foos', function() {
+      // build new App View
+      var View = new app.SwatchAppView({
+        el: '<div id="appframe"><ul id="colors"><li id="edit" class="swatch"></li></ul></div>',
+      });
+      View.SavedColorsView = new app.SavedColorsView({ el: '<ul id="saved-colors"></ul>' });
+
+      // add colors to save
+      app.Colors.addFromHex('#00adeb');
+      app.Colors.addFromHex('#983897');
+
+      // save the colors!
+      View.saveColor();
+
+      // assert that we built the savedColor view for it
+      console.log(View.SavedColorsView.$el);
+      expect(View.SavedColorsView.$el.find('li.saved-color').length).to.eql(1);
+    });
+
+
+    // var View;
+    //
+    // beforeEach(function() {
+    //   // build new App View
+    //   var View = new app.SwatchAppView({
+    //     el: '<div id="appframe"><ul id="colors"><li id="edit" class="swatch"></li></ul></div>',
+    //   });
+    //
+    //   View.SavedColorsView = new app.SavedColorsView({ el: '<ul id="saved-colors"></ul>' });
+    //   sinon.stub(app.SavedColor, 'save').yieldsTo('success', [''], [ { "colorpicker:123": '00ADEB,983897' } ]);
+    //
+    //   app.Colors.addFromHex('#00adeb');
+    //   app.Colors.addFromHex('#983897');
+    // });
+    //
+    // it('adds a SavedColorView for the app.Colors collection we are saving', function() {
+    //   View.saveColor();
+    //   expect(View.SavedColorsView.$el.find('li.saved-color').length).to.eql(1);
+    // });
+    //
+    // after(function() {
+    //   app.SavedColor.save.restore();
+    // });
   });
 });

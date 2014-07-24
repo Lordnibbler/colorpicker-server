@@ -265,12 +265,13 @@ app.SwatchAppView = Backbone.View.extend({
    */
   saveColor: function() {
     var self  = this;
-    var color = new app.SavedColor({ color: app.Colors.hexString() });
-
-    color.save(null, {
+    this.SavedColor = new app.SavedColor({ color: app.Colors.hexString() });
+    console.log(this.SavedColor);
+    this.SavedColor.save(null, {
       success: function(model, response, options) {
+        console.log('saveColor success', model, response, options);
         var savedColor = {};
-        savedColor[response['id']] = color.get('color');
+        savedColor[response['id']] = self.SavedColor.get('color');
         self.SavedColorsView.addOne(savedColor);
       },
       error: function(model, response, options) {
