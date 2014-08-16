@@ -2,7 +2,6 @@ Http    = require 'http'
 Socket  = require 'socket.io'
 FS      = require 'fs'
 express = require 'express'
-path    = require 'path'
 exphbs  = require 'express3-handlebars'
 colors  = require '../routes/colors'
 logger  = require './logger'
@@ -59,9 +58,7 @@ class Server
     @app.use express.bodyParser()
 
     # routes
-    @app.get '/', (request, response, next) ->
-      response.render 'index'
-
+    @app.get '/', (request, response, next)             -> response.render 'index'
     @app.post   "#{@options['api_namespace']}/colors",     colors.create
     @app.get    "#{@options['api_namespace']}/colors",     colors.index
     @app.delete "#{@options['api_namespace']}/colors/:id", colors.destroy
