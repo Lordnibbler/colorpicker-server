@@ -1,6 +1,5 @@
 ioClient = require 'socket.io-client'
 config   = require 'config'
-io       = null
 
 class TestServer
   constructor: (@namespace, @cb) ->
@@ -9,18 +8,22 @@ class TestServer
     @start(@namespace, @cb)
 
   start: (namespace, cb) ->
-    # vars
-    socketURL = "#{config.server.host}:#{config.server.port}#{namespace}"
-    options =
-      transports: ['websockets']
-      'force new connection': true
+    socketURL = "http://#{config.server.host}:#{config.server.port}#{namespace}"
 
     # need to provide instance-level access to our
     # @socket so we can emit events to be tested
-    @socket = ioClient.connect(socketURL, options)
+    console.log 'test server connecting to socketUrl: ', socketURL
+    @socket = new ioClient(socketURL, {});
 
-    @socket.on "connect", (data) =>
+    @socket.on 'connect_error', (object) ->
+      console.error 'test server connect error: ', object
+
+    @socket.on 'connect', (data) =>
+      console.log 'test server connected'
       cb() if cb
+
+    @socket.on 'error', (obj) ->
+      console.error 'test server error: ', obj
 
   stop: (cb) ->
     @socket.disconnect()
