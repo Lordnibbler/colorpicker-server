@@ -72,7 +72,7 @@ class Server
     @httpServer.close(callback)
 
   run: (callback) ->
-    @port = process.env.PORT if process.env.PORT?
+    @port = process.env.PORT || @port
 
     logger.info "starting colorpicker server at #{ @host }:#{ @port }"
     @httpServer = Http.createServer(@app).listen(@port, @host, callback);
