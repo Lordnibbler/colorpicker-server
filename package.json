@@ -1,6 +1,6 @@
 {
   "name": "colorpicker-server",
-  "version": "0.9.6",
+  "version": "1.0.6",
   "description": "A Node.js server for socket.io events.",
   "scripts": {
     "start": "grunt dev",
