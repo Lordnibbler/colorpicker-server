@@ -16,7 +16,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'assets/bower_components/chai-backbone/chai-backbone.js',
-      'assets/bower_components/jquery/jquery.min.js',
+      'assets/bower_components/jquery/dist/jquery.js',
       'assets/bower_components/underscore/underscore.js',
       'assets/bower_components/backbone/backbone.js',
       'assets/scripts/vendor/color.min.js',
