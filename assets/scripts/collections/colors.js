@@ -11,24 +11,24 @@ var Collection = Backbone.Collection.extend({
    * based on the colors string
    * @param '00ADEB,00ED79,34EF00,EDF200,F43A00,'
    */
-  setColors: function(colors) {
+  setColors: function(colors, options) {
     colors = _.reject(colors, function(color) {
       return color.length == 0;
     });
 
     this.reset();
-    var _this = this;
-    _.each(colors, function(color) {
-      _this.addFromHex("#" + color);
-    });
+    _.each(colors, _.bind(function(color) {
+      this.addFromHex("#" + color, options);
+    }, this));
   },
 
   /**
    * add a new color object to the Colors collection
    */
-  addFromHex: function(hex, index) {
+  addFromHex: function(hex, options) {
     var c = Color(hex);
-    index ? this.add({ color: c }, { at: index }) : this.add({color: c});
+    options = options || {};
+    this.add({ color: c }, options)
   },
 
   /**
