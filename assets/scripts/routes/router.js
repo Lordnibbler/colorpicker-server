@@ -7,7 +7,7 @@ var Router = Backbone.Router.extend({
     "*colors": "setColors"
   },
 
-  initialize: function(ops) {
+  initialize: function(options) {
     app.Colors.on("add",    this.pushColorState, this);
     app.Colors.on("remove", this.pushColorState, this);
     app.Colors.on("reset",  this.pushColorState, this);
