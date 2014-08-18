@@ -79,7 +79,7 @@ var Router = Backbone.Router.extend({
    */
   clearColors: function(event) {
     this.setColors('');
-    this.emitColorSet('000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000');
+    this.emitColorSet('000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000\n');
     this.navigate('', {trigger: false, replace: true});
   },
 
@@ -88,7 +88,7 @@ var Router = Backbone.Router.extend({
    */
   setWhiteColors: function(event) {
     this.setColors('FFFFFF,FFFFFF,FFFFFF,FFFFFF,FFFFFF');
-    this.emitColorSet('255,255,255,255\n255,255,255,255\n255,255,255,255\n255,255,255,255\n255,255,255,255');
+    this.emitColorSet('255,255,255,255\n255,255,255,255\n255,255,255,255\n255,255,255,255\n255,255,255,255\n');
   }
 
 });
