@@ -9,17 +9,21 @@ var Collection = Backbone.Collection.extend({
   /**
    * builds a collection of Color models
    * based on the colors string
-   * @param '00ADEB,00ED79,34EF00,EDF200,F43A00,'
+   * @param [Array] colors ['00ADEB', '00ED79', '34EF00', 'EDF200', 'F43A00']
    */
   setColors: function(colors, options) {
+    // build colors array, reject any non-colors
+    var colors = (colors ? colors.split(",") : {})
     colors = _.reject(colors, function(color) {
       return color.length == 0;
     });
 
-    this.reset();
-    _.each(colors, _.bind(function(color) {
-      this.addFromHex("#" + color, options);
-    }, this));
+    // build our reset colors array for using Backbone.Collection.reset()
+    var resetColors = [];
+    for(var i in colors) {
+      resetColors.push({ color: Color("#" + colors[i]) });
+    }
+    app.Colors.reset(resetColors, options);
   },
 
   /**

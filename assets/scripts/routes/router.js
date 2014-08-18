@@ -8,8 +8,9 @@ var Router = Backbone.Router.extend({
   },
 
   initialize: function(ops) {
-    app.Colors.on("add", this.pushColorState, this);
+    app.Colors.on("add",    this.pushColorState, this);
     app.Colors.on("remove", this.pushColorState, this);
+    app.Colors.on("reset",  this.pushColorState, this);
   },
 
   /**
@@ -18,8 +19,7 @@ var Router = Backbone.Router.extend({
    * @param '00ADEB,00ED79,34EF00,EDF200,F43A00,'
    */
   setColors: function(param) {
-    var colors = (param ? param.split(",") : {})
-    app.Colors.setColors(colors);
+    app.Colors.setColors(param);
   },
 
   /**
