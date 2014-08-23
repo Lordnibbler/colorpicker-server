@@ -25,7 +25,7 @@ describe('Router', function() {
 
       // ensure method was called, and with correct color string as an arg
       expect(app.Colors.setColors.calledOnce).to.eql(true);
-      expect(app.Colors.setColors.getCall(0).args[0]).to.eql(colors.split(','));
+      expect(app.Colors.setColors.getCall(0).args[0]).to.eql(colors);
     });
 
     afterEach(function() {
@@ -148,37 +148,35 @@ describe('Router', function() {
       for(var i = 0; i < 3; i++) app.Colors.addFromHex('#00adeb');
 
       // spy on methods so we can ensure they're called
-      sinon.spy(app.Router, 'setColors');
       sinon.spy(app.Router, 'emitColorSet');
       sinon.spy(app.Router, 'navigate');
+      sinon.spy(app.Colors, 'reset');
     });
 
     it('invokes the clear methods, and navigates to no colors', function() {
       app.Router.clearColors();
 
-      expect(app.Router.setColors.calledOnce).to.eql(true);
-      expect(app.Router.setColors.getCall(0).args[0]).to.eql('');
+      expect(app.Colors.reset.calledOnce).to.be.true;
 
       expect(app.Router.navigate.calledOnce).to.eql(true);
       expect(app.Router.navigate.getCall(0).args[0]).to.eql('');
       expect(app.Router.navigate.getCall(0).args[1]).to.eql({trigger: false, replace: true});
 
-      expect(app.Router.emitColorSet.calledOnce).to.eql(true);
-      expect(app.Router.emitColorSet.getCall(0).args[0]).to
-        .eql('000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000');
+      expect(app.Router.emitColorSet.calledTwice).to.eql(true);
+      expect(app.Router.emitColorSet.getCall(1).args[0]).to
+        .eql('000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000\n');
     });
 
     afterEach(function() {
-      app.Router.setColors.restore();
       app.Router.emitColorSet.restore();
       app.Router.navigate.restore();
+      app.Colors.reset.restore();
     });
   });
 
   describe('setWhiteColors()', function() {
     beforeEach(function() {
       sinon.spy(app.Router, 'setColors');
-      sinon.spy(app.Router, 'emitColorSet')
 
       window.socket = {
         emit: function(key, object) {
@@ -193,16 +191,14 @@ describe('Router', function() {
       expect(app.Router.setColors.calledOnce).to.eql(true);
       expect(app.Router.setColors.getCall(0).args[0]).to.eql('FFFFFF,FFFFFF,FFFFFF,FFFFFF,FFFFFF');
 
-      expect(app.Router.emitColorSet.callCount).to.eql(6);
-      expect(app.Router.emitColorSet.getCall(5).args[0])
-        .to.eql('255,255,255,255\n255,255,255,255\n255,255,255,255\n255,255,255,255\n255,255,255,255');
-
-      expect(window.socket.emit.callCount).to.eql(6);
+      expect(window.socket.emit.calledOnce).to.be.true;
+      expect(window.socket.emit.getCall(0).args[0]).to.eql('colorSet');
+      expect(window.socket.emit.getCall(0).args[1].color)
+        .to.eql('255,255,255,000\n255,255,255,000\n255,255,255,000\n255,255,255,000\n255,255,255,000\n');
     });
 
     afterEach(function() {
       app.Router.setColors.restore();
-      app.Router.emitColorSet.restore();
       window.socket.emit.restore();
     });
   });

@@ -14,15 +14,6 @@ var Router = Backbone.Router.extend({
   },
 
   /**
-   * builds a collection of Color models
-   * based on the params in the url
-   * @param '00ADEB,00ED79,34EF00,EDF200,F43A00,'
-   */
-  setColors: function(param) {
-    app.Colors.setColors(param);
-  },
-
-  /**
    * generates and sets a gradient as the current colors
    * @param color a hex string with no #
    * @example setGradientColors('00adeb', 5);
@@ -61,10 +52,19 @@ var Router = Backbone.Router.extend({
     this.navigate(hash, {trigger: false, replace: true});
   },
 
+  /**
+   * builds a collection of Color models based on the params in the url
+   * @note performs a .reset() on the collection, triggering any event listeners
+   * @param '00ADEB,00ED79,34EF00,EDF200,F43A00,'
+   */
+  setColors: function(param) {
+    app.Colors.setColors(param);
+  },
 
   /**
    * Emits a `colorSet` event to our Node.js server
-   * Sends all current colors, in Halo `r,g,b,a\n` format
+   * If no argument is provided, invokes .toRgbString() on the collection
+   * @param [String] colors a string in Halo 'rrr,ggg,bbb,vvv\n' format
    */
   emitColorSet: function(colors) {
     if(window.socket) {
@@ -76,11 +76,16 @@ var Router = Backbone.Router.extend({
 
   /**
    * clears all colors and removes them from URL; issues a solid black to arduino
+   * @bug
+   *   .reset() triggers pushColorState, which invokes emitColorSet(''), which is unnecessary
+   *   since arduino doesnt recognize '' as off.
    */
   clearColors: function(event) {
-    this.setColors('');
+    // empty the collection, trigger this.pushColorState to ensure URL is empty
+    app.Colors.reset();
+
+    // set all lights on arduino to off/black
     this.emitColorSet('000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000\n');
-    this.navigate('', {trigger: false, replace: true});
   },
 
   /**
@@ -88,7 +93,6 @@ var Router = Backbone.Router.extend({
    */
   setWhiteColors: function(event) {
     this.setColors('FFFFFF,FFFFFF,FFFFFF,FFFFFF,FFFFFF');
-    this.emitColorSet('255,255,255,255\n255,255,255,255\n255,255,255,255\n255,255,255,255\n255,255,255,255\n');
   }
 
 });

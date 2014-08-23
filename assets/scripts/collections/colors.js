@@ -7,15 +7,15 @@ var Collection = Backbone.Collection.extend({
   model: app.Color,
 
   /**
-   * builds a collection of Color models
-   * based on the colors string
-   * @param [Array] colors ['00ADEB', '00ED79', '34EF00', 'EDF200', 'F43A00']
+   * resets app.Colors collection based on the colors param
+   * @param [String] colors '00ADEB,00ED79,34EF00,EDF200,F43A00'
+   * @param [Object] options any options to pass to the .reset() fn
    */
   setColors: function(colors, options) {
-    // build colors array, reject any non-colors
-    var colors = (colors ? colors.split(",") : {})
+    // build colors array from string, rejecting any non-colors
+    var colors = (colors ? colors.split(",") : {});
     colors = _.reject(colors, function(color) {
-      return color.length == 0;
+      return color.length === 0;
     });
 
     // build our reset colors array for using Backbone.Collection.reset()
@@ -23,11 +23,15 @@ var Collection = Backbone.Collection.extend({
     for(var i in colors) {
       resetColors.push({ color: Color("#" + colors[i]) });
     }
+
+    // perform the reset
     app.Colors.reset(resetColors, options);
   },
 
   /**
    * add a new color object to the Colors collection
+   * @param [String] hex a hex string representing a color to add to the collection
+   * @param [Object] options any options to pass to the .reset() fn
    */
   addFromHex: function(hex, options) {
     var c = Color(hex);
@@ -105,20 +109,19 @@ var Collection = Backbone.Collection.extend({
 
   /**
    * generates and sets a gradient as the current colors
-   * @param color a hex string with no #
+   * @param color a hex string, omitting the `#`
    * @example setGradientColors('00adeb', 5);
    */
   setGradientColors: function(color, length) {
-    // generate gradient array based on color and length vars
-    var modifier = (this.shadeColor(color, 20) == color ? -20 : 20);
-    var array = [color];
+    // generate gradient array based on color and length params
+    var modifier = (this.shadeColor(color, 20) === color ? -20 : 20);
+    var colors   = [color];
     for(var i = 0; i < (length-1); i++) {
-      array.push(this.shadeColor(array[i], modifier));
+      colors.push(this.shadeColor(colors[i], modifier));
     }
-    array.push('');
 
     // use existing setColors function to push colors to the router
-    this.setColors(array);
+    this.setColors(colors.join());
   },
 
   /**
