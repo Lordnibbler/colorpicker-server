@@ -53,8 +53,7 @@ var Collection = Backbone.Collection.extend({
   setComplementaryColors: function(length) {
     // only works if we have 1 color in the collection
     if (this.length > 0) {
-      // reset to just the first color
-      this.reset(this.first());
+      var colors = [this.first()];
 
       // build a rainbow spectrum based on the bitwise complement to the color in collection
       var rainbow = new Rainbow();
@@ -63,7 +62,7 @@ var Collection = Backbone.Collection.extend({
 
       // add new colors to collection
       for (var i = 1; i < (length); i++) {
-        this.addFromHex('#' + rainbow.colorAt(i+1));
+        colors.push({ color: Color('#' + rainbow.colorAt(i+1)) });
       }
     }
   },
@@ -75,9 +74,6 @@ var Collection = Backbone.Collection.extend({
   setHueShiftComplementaryColors: function(length) {
     // only works if we have at least 1 color in the collection
     if (this.length > 0) {
-      // reset to just the first color
-      this.reset(this.first());
-
       // generate and add the bitwise complement to the collection
       var color = this.first();
       var bitwiseColor = Color('#' + color.bitwiseComplement());
@@ -93,8 +89,9 @@ var Collection = Backbone.Collection.extend({
       if (color.color().hsl().l > bitwiseColor.hsl().l) lAmountToAdd = -lAmountToAdd;
 
       // for length of the ramp -1, add the next color at the respective index i
+      var colors = [this.first()];
       for (var i = 1; i < length; i++) {
-        this.add({
+        colors.push({
           color: Color({
             h: color.color().hsl().h + (hAmountToAdd * i),
             s: color.color().hsl().s + (lAmountToAdd * i),
@@ -102,6 +99,7 @@ var Collection = Backbone.Collection.extend({
           })
         });
       }
+      this.reset(colors, {});
     }
   },
 
