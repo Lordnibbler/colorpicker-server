@@ -13,7 +13,7 @@ describe('Colors collection', function() {
 
   describe('setColors()', function() {
     it('builds a collection of Color models based on the colors string', function() {
-      var colors = '00ADEB,00ED79,34EF00,EDF200,F43A00,'.split(",");
+      var colors = '00ADEB,00ED79,34EF00,EDF200,F43A00,';
       app.Colors.setColors(colors);
       expect(app.Colors.length).to.eql(5);
     });
@@ -29,7 +29,7 @@ describe('Colors collection', function() {
     it('adds a color model at a specific index from hex', function() {
       // add all white, and one blue at index: 1
       for (var i = 0; i < 3; i++) app.Colors.addFromHex('#ffffff');
-      app.Colors.addFromHex('#00adeb', 1);
+      app.Colors.addFromHex('#00adeb', { at: 1 });
 
       // assert that collection[0] is the blue color
       expect(app.Colors.at(1).hexCss()).to.match(/#00adeb/i);

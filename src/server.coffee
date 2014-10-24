@@ -104,13 +104,13 @@ class Server
       # when Client is live-previewing color
       socket.on 'colorChanged', (data) =>
         # send colorChanged data to all beagles
-        logger.info "emitting colorChanged to #{@beagles.length} beagles"
+        # logger.info "emitting colorChanged #{data.color} to #{@beagles.length} beagles"
         beagle.emit('colorChanged', { color: data.color }) for beagle in @beagles # where beagle is connected
 
       # when Client picks a new color
       socket.on 'colorSet', (data) =>
         # send colorSet data to all @beagles
-        logger.info "emitting colorSet to #{@beagles.length} beagles"
+        # logger.info "emitting colorSet #{data.color} to #{@beagles.length} beagles"
         beagle.emit('colorSet', { color: data.color }) for beagle in @beagles
 
   _sio_listen_to_beaglebone: (sio) ->

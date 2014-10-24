@@ -7,28 +7,36 @@ var Collection = Backbone.Collection.extend({
   model: app.Color,
 
   /**
-   * builds a collection of Color models
-   * based on the colors string
-   * @param '00ADEB,00ED79,34EF00,EDF200,F43A00,'
+   * resets app.Colors collection based on the colors param
+   * @param [String] colors '00ADEB,00ED79,34EF00,EDF200,F43A00'
+   * @param [Object] options any options to pass to the .reset() fn
    */
-  setColors: function(colors) {
+  setColors: function(colors, options) {
+    // build colors array from string, rejecting any non-colors
+    var colors = (colors ? colors.split(",") : {});
     colors = _.reject(colors, function(color) {
-      return color.length == 0;
+      return color.length === 0;
     });
 
-    this.reset();
-    var _this = this;
-    _.each(colors, function(color) {
-      _this.addFromHex("#" + color);
-    });
+    // build our reset colors array for using Backbone.Collection.reset()
+    var resetColors = [];
+    for(var i in colors) {
+      resetColors.push({ color: Color("#" + colors[i]) });
+    }
+
+    // perform the reset
+    app.Colors.reset(resetColors, options);
   },
 
   /**
    * add a new color object to the Colors collection
+   * @param [String] hex a hex string representing a color to add to the collection
+   * @param [Object] options any options to pass to the .reset() fn
    */
-  addFromHex: function(hex, index) {
+  addFromHex: function(hex, options) {
     var c = Color(hex);
-    index ? this.add({ color: c }, { at: index }) : this.add({color: c});
+    options = options || {};
+    this.add({ color: c }, options)
   },
 
   /**
@@ -49,8 +57,7 @@ var Collection = Backbone.Collection.extend({
   setComplementaryColors: function(length) {
     // only works if we have 1 color in the collection
     if (this.length > 0) {
-      // reset to just the first color
-      this.reset(this.first());
+      var colors = [this.first()];
 
       // build a rainbow spectrum based on the bitwise complement to the color in collection
       var rainbow = new Rainbow();
@@ -59,7 +66,7 @@ var Collection = Backbone.Collection.extend({
 
       // add new colors to collection
       for (var i = 1; i < (length); i++) {
-        this.addFromHex('#' + rainbow.colorAt(i+1));
+        colors.push({ color: Color('#' + rainbow.colorAt(i+1)) });
       }
     }
   },
@@ -71,9 +78,6 @@ var Collection = Backbone.Collection.extend({
   setHueShiftComplementaryColors: function(length) {
     // only works if we have at least 1 color in the collection
     if (this.length > 0) {
-      // reset to just the first color
-      this.reset(this.first());
-
       // generate and add the bitwise complement to the collection
       var color = this.first();
       var bitwiseColor = Color('#' + color.bitwiseComplement());
@@ -89,8 +93,9 @@ var Collection = Backbone.Collection.extend({
       if (color.color().hsl().l > bitwiseColor.hsl().l) lAmountToAdd = -lAmountToAdd;
 
       // for length of the ramp -1, add the next color at the respective index i
+      var colors = [this.first()];
       for (var i = 1; i < length; i++) {
-        this.add({
+        colors.push({
           color: Color({
             h: color.color().hsl().h + (hAmountToAdd * i),
             s: color.color().hsl().s + (lAmountToAdd * i),
@@ -98,25 +103,25 @@ var Collection = Backbone.Collection.extend({
           })
         });
       }
+      this.reset(colors, {});
     }
   },
 
   /**
    * generates and sets a gradient as the current colors
-   * @param color a hex string with no #
+   * @param color a hex string, omitting the `#`
    * @example setGradientColors('00adeb', 5);
    */
   setGradientColors: function(color, length) {
-    // generate gradient array based on color and length vars
-    var modifier = (this.shadeColor(color, 20) == color ? -20 : 20);
-    var array = [color];
+    // generate gradient array based on color and length params
+    var modifier = (this.shadeColor(color, 20) === color ? -20 : 20);
+    var colors   = [color];
     for(var i = 0; i < (length-1); i++) {
-      array.push(this.shadeColor(array[i], modifier));
+      colors.push(this.shadeColor(colors[i], modifier));
     }
-    array.push('');
 
     // use existing setColors function to push colors to the router
-    this.setColors(array);
+    this.setColors(colors.join());
   },
 
   /**
