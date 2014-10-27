@@ -36,18 +36,18 @@ var Collection = Backbone.Collection.extend({
   addFromHex: function(hex, options) {
     var c = Color(hex);
     options = options || {};
-    this.add({ color: c }, options)
+    this.add({ color: c }, options);
   },
 
   /**
-   * Converts colors to Halo's `r,g,b,a\n` format
+   * convert collection's colors to array of rgb objects
+   * @return [Array<Object>] array of colors objects with keys r,g,b
    */
-  toRgbString: function() {
-    var rgbColors = "";
-    this.each(function(color){
-      rgbColors += color.rgb().r + ',' + color.rgb().g + ',' + color.rgb().b + ',' + color.rgb().a + '\n';
-    });
-    return rgbColors;
+  toRgbObjects: function() {
+    return _.reduce(this.models, function(list, iteratee) {
+      list.push(iteratee.color().rgb());
+      return list;
+    }, []);
   },
 
   /**

@@ -15,7 +15,7 @@ describe('Color model', function() {
       expect(color.color().rgb()).to.eql({r: 0, g: 173, b: 235});
     });
   });
-  //
+
   describe('rgbCss()', function() {
     it('returns the same RGB code it was instantiated with', function() {
       var color = new app.Color({color: new Color({r: 100, g: 50, b: 75})});
@@ -51,13 +51,6 @@ describe('Color model', function() {
     });
   });
 
-  describe('toRgbString', function() {
-    it('returns the Halo r,g,b,a\n format', function() {
-      var color = new app.Color({color: new Color('#983897')});
-      expect(color.toRgbString()).to.eql('152,056,151,000\n152,056,151,000\n152,056,151,000\n152,056,151,000\n152,056,151,000\n');
-    });
-  });
-
   describe('emitColorChanged', function() {
     beforeEach(function () {
       window.socket = {
@@ -73,7 +66,16 @@ describe('Color model', function() {
       color.emitColorChanged();
       expect(window.socket.emit.callCount).to.eql(1);
       expect(window.socket.emit.getCall(0).args[0]).to.eql('colorChanged');
-      expect(window.socket.emit.getCall(0).args[1]['color']).to.match(/152\,056\,151\,000\n/);
+      console.log(window.socket.emit.getCall(0).args[1]['color']);
+      expect(window.socket.emit.getCall(0).args[1]['color']).to.eql(
+        [
+          color.color().rgb(),
+          color.color().rgb(),
+          color.color().rgb(),
+          color.color().rgb(),
+          color.color().rgb()
+        ]
+      )
     });
 
     afterEach(function() {

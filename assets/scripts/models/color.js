@@ -51,26 +51,12 @@ app.Color = Backbone.Model.extend({
   },
 
   /**
-   * Converts color to Halo's `r,g,b,a\n` format
-   * Sets all lights to same color for live-preview
-   */
-  toRgbString: function() {
-    var rgbColors =
-      this.rgb().r + ',' +
-      this.rgb().g + ',' +
-      this.rgb().b + ',' +
-      this.rgb().a + '\n';
-
-    // TODO: make this a prototype function called .repeat()
-    return rgbColors + rgbColors + rgbColors + rgbColors + rgbColors;
-  },
-
-  /**
    * send our Node.js app the current live color data
    */
   emitColorChanged: function() {
+    var color = this.color().rgb();
     window.socket.emit('colorChanged', {
-      color: this.toRgbString()
+      color: [color, color, color, color, color]
     });
   }
 });

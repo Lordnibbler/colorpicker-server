@@ -63,13 +63,13 @@ var Router = Backbone.Router.extend({
 
   /**
    * Emits a `colorSet` event to our Node.js server
-   * If no argument is provided, invokes .toRgbString() on the collection
-   * @param [String] colors a string in Halo 'rrr,ggg,bbb,vvv\n' format
+   * If no argument is provided, invokes .toRgbObjects() on the collection
+   * @param [Array<Object>] colors array of colors objects with keys r,g,b
    */
   emitColorSet: function(colors) {
     if(window.socket) {
       window.socket.emit('colorSet', {
-        color: (colors || app.Colors.toRgbString())
+        color: (colors || app.Colors.toRgbObjects())
       });
     }
   },
@@ -85,7 +85,8 @@ var Router = Backbone.Router.extend({
     app.Colors.reset();
 
     // set all lights on arduino to off/black
-    this.emitColorSet('000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000\n');
+    var black = {r: 0, g: 0, b: 0};
+    this.emitColorSet([black, black, black, black, black]);
   },
 
   /**

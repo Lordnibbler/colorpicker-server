@@ -36,11 +36,13 @@ describe('Colors collection', function() {
     });
   });
 
-  describe('toRgbString()', function () {
-    it('returns a string in Halo.pl expected rgba format', function() {
+  describe('toRgbObjects()', function () {
+    it('returns array of rgba objects', function() {
       app.Colors.addFromHex('#00adeb');
       app.Colors.addFromHex('#983897');
-      expect(app.Colors.toRgbString()).to.eql('000,173,235,000\n152,056,151,000\n');
+      expect(app.Colors.toRgbObjects()).to.eql(
+        [app.Colors.models[0].color().rgb(), app.Colors.models[1].color().rgb()]
+      );
     });
   });
 
