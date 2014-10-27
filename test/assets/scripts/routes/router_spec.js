@@ -151,6 +151,8 @@ describe('Router', function() {
       sinon.spy(app.Router, 'emitColorSet');
       sinon.spy(app.Router, 'navigate');
       sinon.spy(app.Colors, 'reset');
+      var black = {r: 0, g: 0, b: 0};
+      this.expected = [black, black, black, black, black];
     });
 
     it('invokes the clear methods, and navigates to no colors', function() {
@@ -163,8 +165,7 @@ describe('Router', function() {
       expect(app.Router.navigate.getCall(0).args[1]).to.eql({trigger: false, replace: true});
 
       expect(app.Router.emitColorSet.calledTwice).to.eql(true);
-      expect(app.Router.emitColorSet.getCall(1).args[0]).to
-        .eql('000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000\n000,000,000,000\n');
+      expect(app.Router.emitColorSet.getCall(1).args[0]).to.eql(this.expected);
     });
 
     afterEach(function() {
@@ -184,6 +185,8 @@ describe('Router', function() {
         }
       };
       sinon.spy(window.socket, 'emit');
+      var white = {r: 255, g: 255, b: 255};
+      this.expected = [white, white, white, white, white];
     });
 
     it('invokes the clear methods, and navigates to no colors', function() {
@@ -193,8 +196,7 @@ describe('Router', function() {
 
       expect(window.socket.emit.calledOnce).to.be.true;
       expect(window.socket.emit.getCall(0).args[0]).to.eql('colorSet');
-      expect(window.socket.emit.getCall(0).args[1].color)
-        .to.eql('255,255,255,000\n255,255,255,000\n255,255,255,000\n255,255,255,000\n255,255,255,000\n');
+      expect(window.socket.emit.getCall(0).args[1].color).to.eql(this.expected);
     });
 
     afterEach(function() {
