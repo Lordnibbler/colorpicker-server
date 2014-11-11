@@ -3,15 +3,16 @@ uuid  = require 'node-uuid'
 Redis = require './redis'
 KEY_PREFIX = 'colorpicker:'
 
+#
 # represents a Colors collection as a data model in Redis
 #
 class Color
+  #
   # Creates a new color in the redis cache
   #
   # @param [String] color The comma-delimited hex string of the colors to save to redis
   #
   @create: (color) ->
-    # build a Q promise in case redis lags
     deferred = Q.defer()
     deferred.reject('color not provided') if !color
 
@@ -27,13 +28,13 @@ class Color
         return deferred.resolve(key)
     return deferred.promise
 
+  #
   # Class method to return all colors (keys) in Redis
   #
   # @return [Object] all colors from the redis cache as an object literal
   #   with key being the redis key, and value being the hex string comma delimited
   #
   @index: ->
-    # build a Q promise in case redis lags
     deferred = Q.defer()
 
     # get all redis keys in array
@@ -41,7 +42,6 @@ class Color
       return deferred.reject(err) if err
 
       # get value of each key and append to object
-      #
       colors = []
       for key in keys
         # preserve the scope of "key" and other bindings with a closure
@@ -57,12 +57,12 @@ class Color
               deferred.resolve(colors) if keys.length == 0
     return deferred.promise
 
+  #
   # Class method to show a specific key in redis
   #
   # @return [String] the value of the key
   #
   @show: (key) ->
-    # build a Q promise in case redis lags
     deferred = Q.defer()
 
     Redis.get key, (err, res) ->
@@ -70,12 +70,12 @@ class Color
       return deferred.resolve(res)
     return deferred.promise
 
+  #
   # Class method to destroy a specific key in redis
   #
   # @return [Integer] number of keys deleted
   #
   @destroy: (key) ->
-    # build a Q promise in case redis lags
     deferred = Q.defer()
 
     Redis.del key, (err, res) ->
@@ -83,12 +83,12 @@ class Color
       return deferred.resolve(res)
     return deferred.promise
 
+  #
   # Class method to destroy all keys with the KEY_PREFIX in them
   #
   # @return [Integer] number of keys deleted
   #
   @destroy_all: ->
-    # build a Q promise in case redis lags
     deferred = Q.defer()
 
     Redis.keys "*#{KEY_PREFIX}*", (err, keys) ->

@@ -10,6 +10,7 @@ class Server
   beagles:   []
   backbones: []
 
+  #
   # set up the express application, including assets, routes and middlewares
   #
   constructor: (@host, @port, @options = {}) ->
@@ -63,6 +64,7 @@ class Server
     @app.get    "#{@options['api_namespace']}/colors",     colors.index
     @app.delete "#{@options['api_namespace']}/colors/:id", colors.destroy
 
+  #
   # stop the server, firing callback upon success
   #
   close: (callback) ->
@@ -72,10 +74,11 @@ class Server
     @port = process.env.PORT || @port
 
     logger.info "starting colorpicker server at #{ @host }:#{ @port }"
-    @httpServer = Http.createServer(@app).listen(@port, @host, callback);
+    @httpServer = Http.createServer(@app).listen(@port, @host, callback)
     @_sio_configure_listener(@httpServer)
     return @httpServer
 
+  #
   # sets up the socket.io sockets and namespaces
   # @note
   #   colorChanged and colorSet both writeColorDataToFile in our
@@ -120,8 +123,7 @@ class Server
       logger.info "/beaglebone client connected"
       @beagles.push socket
 
-      # remove beaglebone client from @beagles array
-      # if disconnection event occurs
+      # remove beaglebone client from @beagles array when disconnection event occurs
       socket.on 'disconnect', (socket) =>
         logger.info "/beaglebone client disconnected"
         @beagles.pop socket
