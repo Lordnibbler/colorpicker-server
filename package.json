@@ -1,6 +1,6 @@
 {
   "name": "colorpicker-server",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A Node.js server for socket.io events.",
   "scripts": {
     "start": "grunt dev",
@@ -17,8 +17,8 @@
     "url": "https://github.com/Lordnibbler/colorpicker-server/issues"
   },
   "dependencies": {
-    "socket.io": "~1.2.0",
-    "socket.io-client": "~1.2.0",
+    "socket.io": "~1.2.1",
+    "socket.io-client": "~1.2.1",
     "coffee-script": "~1.7",
     "log": "~1.4.0",
     "express": "~3.4.6",
