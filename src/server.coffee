@@ -1,17 +1,17 @@
-Http    = require 'http'
-Socket  = require 'socket.io'
-FS      = require 'fs'
-express = require 'express'
-exphbs  = require 'express3-handlebars'
-colors  = require '../routes/colors'
-logger  = require './logger'
+Http      = require 'http'
+Socket    = require 'socket.io'
+FS        = require 'fs'
+express   = require 'express'
+exphbs    = require 'express3-handlebars'
+colors    = require '../routes/colors'
+scheduler = require '../routes/scheduler'
+logger    = require './logger'
 
 class Server
   beagles:   []
   backbones: []
 
   # set up the express application, including assets, routes and middlewares
-  #
   constructor: (@host, @port, @options = {}) ->
     @url = "https://#{ @host }:#{ @port }/"
     @app = express()
@@ -58,13 +58,16 @@ class Server
     @app.use express.bodyParser()
 
     # routes
-    @app.get '/', (request, response, next)             -> response.render 'index'
+    @app.get '/', (request, response, next) -> response.render 'index'
+
     @app.post   "#{@options['api_namespace']}/colors",     colors.create
     @app.get    "#{@options['api_namespace']}/colors",     colors.index
     @app.delete "#{@options['api_namespace']}/colors/:id", colors.destroy
 
+    @app.get "#{@options['api_namespace']}/scheduler/off", scheduler.off.bind(null, @beagles)
+    @app.get "#{@options['api_namespace']}/scheduler/on",  scheduler.on.bind(null, @beagles)
+
   # stop the server, firing callback upon success
-  #
   close: (callback) ->
     @httpServer.close(callback)
 
@@ -81,16 +84,11 @@ class Server
   #   colorChanged and colorSet both writeColorDataToFile in our
   #   beaglebone client node app. backbone.js takes care of sending
   #   5x1 color, or 5 individual colors
-  #
   _sio_configure_listener: (app) ->
     logger.info "Configuring socket.io listener"
     sio = Socket.listen app,
       'logger'   : logger,
       'log level': logger.level
-
-    # for testing
-    # sio.configure ->
-    #   sio.set "transports", ["xhr-polling", "jsonp-polling", "htmlfile"]
 
     @_sio_listen_to_backbone sio
     @_sio_listen_to_beaglebone sio
@@ -104,13 +102,11 @@ class Server
       # when Client is live-previewing color
       socket.on 'colorChanged', (data) =>
         # send colorChanged data to all beagles
-        # logger.info "emitting colorChanged #{data.color} to #{@beagles.length} beagles"
         beagle.emit('colorChanged', { color: data.color }) for beagle in @beagles # where beagle is connected
 
       # when Client picks a new color
       socket.on 'colorSet', (data) =>
         # send colorSet data to all @beagles
-        # logger.info "emitting colorSet #{data.color} to #{@beagles.length} beagles"
         beagle.emit('colorSet', { color: data.color }) for beagle in @beagles
 
   _sio_listen_to_beaglebone: (sio) ->

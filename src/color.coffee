@@ -9,7 +9,6 @@ class Color
   # Creates a new color in the redis cache
   #
   # @param [String] color The comma-delimited hex string of the colors to save to redis
-  #
   @create: (color) ->
     # build a Q promise in case redis lags
     deferred = Q.defer()
@@ -31,7 +30,6 @@ class Color
   #
   # @return [Object] all colors from the redis cache as an object literal
   #   with key being the redis key, and value being the hex string comma delimited
-  #
   @index: ->
     # build a Q promise in case redis lags
     deferred = Q.defer()
@@ -60,7 +58,6 @@ class Color
   # Class method to show a specific key in redis
   #
   # @return [String] the value of the key
-  #
   @show: (key) ->
     # build a Q promise in case redis lags
     deferred = Q.defer()
@@ -73,7 +70,6 @@ class Color
   # Class method to destroy a specific key in redis
   #
   # @return [Integer] number of keys deleted
-  #
   @destroy: (key) ->
     # build a Q promise in case redis lags
     deferred = Q.defer()
@@ -86,11 +82,12 @@ class Color
   # Class method to destroy all keys with the KEY_PREFIX in them
   #
   # @return [Integer] number of keys deleted
-  #
   @destroy_all: ->
     # build a Q promise in case redis lags
     deferred = Q.defer()
 
+    # @see http://redis.io/commands/KEYS
+    # @warning this is a O(n) lookup, where n = number of keys in redis
     Redis.keys "*#{KEY_PREFIX}*", (err, keys) ->
       Redis.del keys, (err, res) ->
         return deferred.reject(err) if err
