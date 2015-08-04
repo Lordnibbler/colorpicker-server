@@ -1,0 +1,23 @@
+#!/usr/bin/env ./node_modules/.bin/coffee
+
+request = require 'request'
+config  = require 'config'
+logger  = require '../src/logger'
+
+# ugly munging to build fully qualified prod/dev API URL
+domain = config.server.domain
+if process.env['NODE_ENV'] != 'production'
+  domain = "#{domain}:#{config.server.port}"
+else
+  domain = "#{process.env['USERNAME']}:#{process.env['PASSWORD']}@#{domain}"
+
+url = "http://#{domain}/api/v1/scheduler/off"
+logger.info 'url: ', url
+
+# request to turn off LEDs
+request(url, (error, response, body) ->
+  logger.info 'response: ', response.body
+  if response.statusCode == 200
+    process.exit
+    logger.info 'turned LEDs off'
+)

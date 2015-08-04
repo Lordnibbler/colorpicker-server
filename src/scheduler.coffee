@@ -1,28 +1,44 @@
-SunCalc = require 'suncalc'
-Redis   = require './redis'
+Q = require 'q'
+request = require 'request'
 
-LONGITUDE_SAN_FRANCISCO = 37.7749295
-LATITUDE_SAN_FRANCISCO  = -122.4194155
+# checks time and sets lights via HTTP API calls
+# if sunrise, turns off lights. if sunset turns on lights.
+# manager allows turning lights on and off
+# @note this might be better named Manager, as scheduler pertains to the Heroku worker
+#   scheduled task
+class Scheduler
+  # scheduler job entrypoint, which checks if sunset or sunrise
+  # and accordingly turns the lights on or off
+  # @run:  ->
+    # @off()
+    # return if @_check_sunrise()
+    # return if @_check_sunset()
 
-#
-# @example
-#   get_time(LONGITUDE_SAN_FRANCISCO, LATITUDE_SAN_FRANCISCO, 'sunrise')
-#   # => Fri Mar 27 2015 07:03:55 GMT-0700 (PDT)
-#
-get_time: (longitude, latitude, time_key) ->
-  times = SunCalc.getTimes new Date(), longitude, latitude
-  times[time_key]
+  # @_check_sunset: ->
 
-#
-# @return [Boolean] if its currently the same hour as the {time_key}
-# @example check if its the same hour as the 'sunrise' {time_key}
-#   is_hour_in_sf('sunrise')
-#   # => true
-#
-is_hour_in_sf: (time_key) ->
-  now = new Date()
-  times = get_time(LONGITUDE_SAN_FRANCISCO, LATITUDE_SAN_FRANCISCO, time_key)
-  now.getHours() == times.getHours()
+  # emits solid black over all connected beagle sockets
+  @off: (sockets) ->
+    # console.log 'scheduler off'
+    deferred = Q.defer()
+    for socket in sockets
+      socket.emit('colorSet', {
+        color:  [
+          { r: 0, g: 0, b: 0 },
+          { r: 0, g: 0, b: 0 },
+          { r: 0, g: 0, b: 0 },
+          { r: 0, g: 0, b: 0 },
+          { r: 0, g: 0, b: 0 }
+        ]
+      })
+    deferred.resolve({ off: true })
+    return deferred.promise
 
-date = new Date()
-console.log(date.getHours())
+  # picks a random color from redis and emits over socket
+  @on: (sockets) ->
+    deferred = Q.defer()
+    return deferred.promise
+
+module.exports = Scheduler
+
+# if process.ENV['scheduler'] == 'true'
+  # Scheduler.run()
