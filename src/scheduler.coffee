@@ -8,15 +8,6 @@ Redis = require './redis'
 # @note this might be better named Manager, as scheduler pertains to the Heroku worker
 #   scheduled task
 class Scheduler
-  # scheduler job entrypoint, which checks if sunset or sunrise
-  # and accordingly turns the lights on or off
-  # @run:  ->
-    # @off()
-    # return if @_check_sunrise()
-    # return if @_check_sunset()
-
-  # @_check_sunset: ->
-
   # emits solid black over all connected beagle sockets
   @off: (sockets) ->
     # console.log 'scheduler off'
@@ -59,8 +50,4 @@ class Scheduler
     b = bigint & 255
     return { r: r , g: g, b: b }
 
-
 module.exports = Scheduler
-
-# if process.ENV['scheduler'] == 'true'
-  # Scheduler.run()
