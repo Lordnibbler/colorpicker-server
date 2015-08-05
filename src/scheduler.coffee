@@ -1,5 +1,6 @@
 Q = require 'q'
 request = require 'request'
+Redis = require './redis'
 
 # checks time and sets lights via HTTP API calls
 # if sunrise, turns off lights. if sunset turns on lights.
@@ -36,7 +37,28 @@ class Scheduler
   # picks a random color from redis and emits over socket
   @on: (sockets) ->
     deferred = Q.defer()
+    Redis.randomkey (result, key) =>
+      console.log "got randomKey #{key}"
+      Redis.get key, (err, res) =>
+        console.log "got key #{key} with value #{res}"
+
+        colors = []
+        res.split(',').forEach (el) =>
+          colors.push @hexToRgb(el)
+
+        socket.emit('colorSet', color: colors) for socket in sockets
+
+        return deferred.resolve(colors)
     return deferred.promise
+
+  # @param hex [String] 'fffccc'
+  @hexToRgb: (hex) ->
+    bigint = parseInt(hex, 16)
+    r = (bigint >> 16) & 255
+    g = (bigint >> 8) & 255
+    b = bigint & 255
+    return { r: r , g: g, b: b }
+
 
 module.exports = Scheduler
 
