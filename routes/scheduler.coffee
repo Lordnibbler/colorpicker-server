@@ -1,12 +1,11 @@
 # Scheduler API endpoints
-#
 Scheduler = require '../src/scheduler'
 logger    = require '../src/logger'
 io        = require 'socket.io'
 
 # turns colorpicker off
 #
-# POST /api/v1/scheduler/off
+# GET /api/v1/scheduler/off
 exports.off = (sockets, req, res) ->
   Scheduler.off(sockets)
     .then (response) ->
@@ -20,11 +19,11 @@ exports.off = (sockets, req, res) ->
 
 # turns colorpicker on to a random color
 #
-# POST /api/v1/scheduler/on
+# GET /api/v1/scheduler/on
 exports.on = (sockets, req, res) ->
   Scheduler.on(sockets)
     .then (response) ->
-      console.log response
+      res.json response
     .fail (err) ->
       res.status 422
       res.json error: err.toString()

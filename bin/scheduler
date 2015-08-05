@@ -11,13 +11,21 @@ if process.env['NODE_ENV'] != 'production'
 else
   domain = "#{process.env['USERNAME']}:#{process.env['PASSWORD']}@#{domain}"
 
-url = "http://#{domain}/api/v1/scheduler/off"
-logger.info 'url: ', url
+off_url = "http://#{domain}/api/v1/scheduler/off"
+on_url  = "http://#{domain}/api/v1/scheduler/on"
+logger.info 'off_url: ', off_url
+logger.info 'on_url: ', on_url
 
 # request to turn off LEDs
-request(url, (error, response, body) ->
+# request off_url, (error, response, body) ->
+#   logger.info 'response: ', response.body
+#   if response.statusCode == 200
+#     logger.info 'turned LEDs off'
+#     process.exit
+
+# request to turn on LEDs
+request on_url, (error, response, body) ->
   logger.info 'response: ', response.body
   if response.statusCode == 200
+    logger.info 'turned LEDs on'
     process.exit
-    logger.info 'turned LEDs off'
-)
