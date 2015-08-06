@@ -1,11 +1,11 @@
-Http      = require 'http'
-Socket    = require 'socket.io'
-FS        = require 'fs'
-express   = require 'express'
-exphbs    = require 'express3-handlebars'
-colors    = require '../routes/colors'
-scheduler = require '../routes/scheduler'
-logger    = require './logger'
+Http    = require 'http'
+Socket  = require 'socket.io'
+FS      = require 'fs'
+express = require 'express'
+exphbs  = require 'express3-handlebars'
+colors  = require '../routes/colors'
+manager = require '../routes/manager'
+logger  = require './logger'
 
 class Server
   beagles:   []
@@ -64,8 +64,8 @@ class Server
     @app.get    "#{@options['api_namespace']}/colors",     colors.index
     @app.delete "#{@options['api_namespace']}/colors/:id", colors.destroy
 
-    @app.get "#{@options['api_namespace']}/scheduler/off", scheduler.off.bind(null, @beagles)
-    @app.get "#{@options['api_namespace']}/scheduler/on",  scheduler.on.bind(null, @beagles)
+    @app.get "#{@options['api_namespace']}/manager/off", manager.off.bind(null, @beagles)
+    @app.get "#{@options['api_namespace']}/manager/random",  manager.random.bind(null, @beagles)
 
   # stop the server, firing callback upon success
   close: (callback) ->
