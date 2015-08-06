@@ -2,15 +2,10 @@ Q = require 'q'
 request = require 'request'
 Redis = require './redis'
 
-# checks time and sets lights via HTTP API calls
-# if sunrise, turns off lights. if sunset turns on lights.
-# manager allows turning lights on and off
-# @note this might be better named Manager, as scheduler pertains to the Heroku worker
-#   scheduled task
-class Scheduler
-  # emits solid black over all connected beagle sockets
+# allows turning lights to random color or off
+class LightManager
+  # emits solid black over all sockets
   @off: (sockets) ->
-    # console.log 'scheduler off'
     deferred = Q.defer()
     for socket in sockets
       socket.emit('colorSet', {
@@ -25,8 +20,8 @@ class Scheduler
     deferred.resolve({ off: true })
     return deferred.promise
 
-  # picks a random color from redis and emits over socket
-  @on: (sockets) ->
+  # picks a random color from redis and emits over all sockets
+  @random: (sockets) ->
     deferred = Q.defer()
     Redis.randomkey (result, key) =>
       console.log "got randomKey #{key}"
@@ -42,7 +37,7 @@ class Scheduler
         return deferred.resolve(colors)
     return deferred.promise
 
-  # @param hex [String] 'fffccc'
+  # @param hex [String] a hex color string like '00adeb'
   @hexToRgb: (hex) ->
     bigint = parseInt(hex, 16)
     r = (bigint >> 16) & 255
@@ -50,4 +45,4 @@ class Scheduler
     b = bigint & 255
     return { r: r , g: g, b: b }
 
-module.exports = Scheduler
+module.exports = LightManager

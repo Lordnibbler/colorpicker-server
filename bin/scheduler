@@ -1,5 +1,9 @@
 #!/usr/bin/env ./node_modules/.bin/coffee
 
+# Scheduler binary checks time and sets lights via HTTP API calls
+# if COLORPICKER_ON time, turns off lights. if COLORPICKER_OFF time, turns on lights.
+# @note intended to be run by cron (hourly)
+
 request = require 'request'
 config  = require 'config'
 moment  = require 'moment'
@@ -15,7 +19,7 @@ domain = ->
 
 # request to turn off LEDs
 turn_off = ->
-  off_url = "http://#{domain()}/api/v1/scheduler/off"
+  off_url = "http://#{domain()}/api/v1/manager/off"
   request off_url, (error, response, body) ->
     logger.info 'response: ', response.body
     if response.statusCode == 200
@@ -23,9 +27,9 @@ turn_off = ->
       process.exit
 
 # request to turn on LEDs
-turn_on = ->
-  on_url  = "http://#{domain()}/api/v1/scheduler/on"
-  request on_url, (error, response, body) ->
+random = ->
+  random_url  = "http://#{domain()}/api/v1/manager/random"
+  request random_url, (error, response, body) ->
     logger.info 'response: ', response.body
     if response.statusCode == 200
       logger.info 'turned LEDs on'
