@@ -6,17 +6,16 @@ moment  = require 'moment'
 logger  = require '../src/logger'
 
 # ugly munging to build fully qualified prod/dev API URL
-domain = config.server.domain
-if process.env['NODE_ENV'] != 'production'
-  domain = "#{domain}:#{config.server.port}"
-else
-  domain = "#{process.env['USERNAME']}:#{process.env['PASSWORD']}@#{domain}"
-
-off_url = "http://#{domain}/api/v1/scheduler/off"
-on_url  = "http://#{domain}/api/v1/scheduler/on"
+domain = ->
+  domain = config.server.domain
+  if process.env.NODE_ENV != 'production'
+    domain = "#{domain}:#{config.server.port}"
+  else
+    domain = "#{process.env.USERNAME}:#{process.env.PASSWORD}@#{domain}"
 
 # request to turn off LEDs
 turn_off = ->
+  off_url = "http://#{domain()}/api/v1/scheduler/off"
   request off_url, (error, response, body) ->
     logger.info 'response: ', response.body
     if response.statusCode == 200
@@ -25,13 +24,16 @@ turn_off = ->
 
 # request to turn on LEDs
 turn_on = ->
+  on_url  = "http://#{domain()}/api/v1/scheduler/on"
   request on_url, (error, response, body) ->
     logger.info 'response: ', response.body
     if response.statusCode == 200
       logger.info 'turned LEDs on'
       process.exit
 
-now = moment()
-logger.info "now.hour(): #{now.hour()}"
-turn_off() if now.hour() == 1  # 1am
-turn_on()  if now.hour() == 18 # 6pm
+# scheduler business logic
+do run = ->
+  now = moment()
+  logger.info "now.hour(): #{now.hour()}, COLORPICKER_ON: #{process.env.COLORPICKER_ON}"
+  turn_off() if now.hour() == parseInt(process.env.COLORPICKER_OFF)
+  turn_on()  if now.hour() == parseInt(process.env.COLORPICKER_ON)
