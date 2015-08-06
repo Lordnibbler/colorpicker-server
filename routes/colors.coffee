@@ -1,5 +1,4 @@
 # Color API endpoints
-#
 Color  = require '../src/color'
 Redis  = require '../src/redis'
 logger = require '../src/logger'

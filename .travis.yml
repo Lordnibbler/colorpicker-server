@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "0.10.34"
+  - "0.10.36"
 before_install:
   - npm install -g bower
   - bower install
@@ -14,3 +14,4 @@ cache:
     - node_modules
 services:
   - redis
+sudo: false
