@@ -1,8 +1,8 @@
 # colorpicker-server
 
-A Backbone.js GUI, Node.js and Socket.io server that emits `colorChanged` and `colorSet` events to a [colorpicker-beaglebone client](https://github.com/Lordnibbler/colorpicker-beaglebone).
+A Backbone.js GUI, Node.js and Socket.io server that emits `colorChanged` and `colorSet` events to a [colorpicker-client](https://github.com/Lordnibbler/colorpicker-client).
 
-There are in-depth setup instructions for running the *colorpicker-beaglebone* client on a Beaglebone Black with angstrom distro of linux at the above URL.
+There are in-depth setup instructions for running the *colorpicker-client* on a Beaglebone Black with angstrom distro of linux at the above URL.
 
 ## Setup
 ```sh
@@ -13,8 +13,8 @@ npm install -d
 npm start
 
 # set up the client
-git clone git@github.com:Lordnibbler/colorpicker-beaglebone.git
-cd colorpicker-beaglebone
+git clone git@github.com:Lordnibbler/colorpicker-client.git
+cd colorpicker-client
 npm install
 npm start
 ```
