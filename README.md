@@ -28,3 +28,10 @@ npm test
 # or run the tests once
 mocha -R dot test/src/*.coffee && karma start --single-run
 ```
+
+## About this Project
+You can read [the original blog post](http://benradler.com/blog/2014/05/10/diy-philips-hue-style-led-lights-with-node-js-backbone) and [an updated post here](http://benradler.com/blog/2015/08/06/updated-diy-led-lights-with-node-and-backbone)
+
+Watch the video here: 
+
+[![Colorpicker](http://img.youtube.com/vi/92aIxuRP2jo/0.jpg)](http://www.youtube.com/watch?v=92aIxuRP2jo)
