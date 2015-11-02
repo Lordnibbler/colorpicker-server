@@ -1,84 +1,66 @@
-// Karma configuration
-// Generated on Sun Jun 08 2014 21:42:38 GMT-0700 (PDT)
+var webpack = require('webpack');
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
 
-    // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
-
-
-    // frameworks to use
-    // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha', 'chai', 'sinon-chai'],
-
-
-    // list of files / patterns to load in the browser
-    files: [
-      'assets/bower_components/chai-backbone/chai-backbone.js',
-      'assets/bower_components/jquery/dist/jquery.js',
-      'assets/bower_components/underscore/underscore.js',
-      'assets/bower_components/backbone/backbone.js',
-      'assets/scripts/vendor/color.min.js',
-      'assets/scripts/vendor/rainbowvis.js',
-      'http://localhost:9876/socket.io/socket.io.js',
-
-      'assets/scripts/models/color.js',
-      'assets/scripts/models/savedColor.js',
-      'assets/scripts/collections/colors.js',
-      'assets/scripts/templates/color.js',
-      'assets/scripts/views/color.js',
-      'assets/scripts/routes/router.js',
-      'assets/scripts/views/savedColor.js',
-      'assets/scripts/views/savedColors.js',
-      'assets/scripts/views/app.js',
-      'test/assets/scripts/**/*.js'
-    ],
-
-
-    // list of files to exclude
-    exclude: [
-
-    ],
-
-
-    // preprocess matching files before serving them to the browser
-    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {
-      'templates/**/*.hbs': [] // prevent preprocessing on the templates
-    },
-
-
-    // test results reporter to use
-    // possible values: 'dots', 'progress'
-    // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
-
-
-    // web server port
-    port: 9876,
-
-
-    // enable / disable colors in the output (reporters and logs)
-    colors: true,
-
-
-    // level of logging
-    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_INFO,
-
-
-    // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: true,
-
-
-    // start these browsers
-    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: ['PhantomJS'],
 
+    singleRun: !!process.env.CONTINUOUS_INTEGRATION,
 
-    // Continuous Integration mode
-    // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false
+    frameworks: [ 'mocha' ],
+
+    files: [
+      './node_modules/phantomjs-polyfill/bind-polyfill.js',
+      'tests.webpack.js'
+    ],
+
+    preprocessors: {
+      'tests.webpack.js': [ 'webpack', 'sourcemap' ]
+    },
+
+    reporters: [ 'mocha' ],
+
+    plugins: [
+      require("karma-webpack"),
+      require("karma-mocha"),
+      require("karma-mocha-reporter"),
+      require("karma-phantomjs-launcher"),
+      require("karma-sourcemap-loader")
+    ],
+
+    webpack: {
+      devtool: 'inline-source-map',
+      module: {
+        loaders: [
+          { test: /\.(jpe?g|png|gif|svg)$/, loader: 'url', query: {limit: 10240} },
+          { test: /\.js$/, exclude: /node_modules/, loaders: ['babel']},
+          { test: /\.json$/, loader: 'json-loader' },
+          { test: /\.less$/, loader: 'style!css!less' },
+          { test: /\.scss$/, loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap' }
+        ]
+      },
+      resolve: {
+        modulesDirectories: [
+          'src',
+          'node_modules'
+        ],
+        extensions: ['', '.json', '.js']
+      },
+      plugins: [
+        new webpack.IgnorePlugin(/\.json$/),
+        new webpack.NoErrorsPlugin(),
+        new webpack.DefinePlugin({
+          __CLIENT__: true,
+          __SERVER__: false,
+          __DEVELOPMENT__: true,
+          __DEVTOOLS__: false  // <-------- DISABLE redux-devtools HERE
+        })
+      ]
+    },
+
+    webpackServer: {
+      noInfo: true
+    }
+
   });
 };
